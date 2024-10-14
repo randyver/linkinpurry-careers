@@ -1,9 +1,7 @@
 <?php
 
-class DatabaseController
-{
-    public function checkConnection()
-    {
+class DatabaseController {
+    public function checkConnection() {
         require_once __DIR__ . '/../config/db.php';
         
         try {

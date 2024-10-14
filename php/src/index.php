@@ -11,4 +11,7 @@ $router->get('/check-connection', 'DatabaseController@checkConnection');
 // $router->get('/user/login', 'UserController@login');
 // $router->post('/user/login', 'UserController@authenticate');
 
+$router->get('/test-db', 'TestDbController@index');
+$router->post('/test-db', 'TestDbController@index');
+
 $router->dispatch($_SERVER['REQUEST_URI']);
