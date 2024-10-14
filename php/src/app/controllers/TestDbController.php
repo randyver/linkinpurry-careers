@@ -11,10 +11,7 @@ class TestDbController {
             $query = trim($_POST['query']);
 
             try {
-                $pdo = new PDO($dsn, $user, $pass, [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                ]);
+                $pdo = Database::getConnection();
                 $stmt = $pdo->query($query);
                 $results = $stmt->fetchAll();
 
