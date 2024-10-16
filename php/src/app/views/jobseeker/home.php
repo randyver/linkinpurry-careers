@@ -60,7 +60,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
             <?php else: ?>
                 <div class="nav-login-section">
-                    <a href="/login" class="login-button">Login</a>
+                    <a href="/login" class="login-button">Sign In</a>
                 </div>
                 <div class="nav-profile-section hide">
                     <img src="../../../public/images/profile-pic.png" alt="Profile" class="nav-profile-pic">
