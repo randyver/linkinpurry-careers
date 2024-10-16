@@ -16,6 +16,9 @@ $router->post('/register-job-seeker', 'RegisterController@register_form_job_seek
 $router->get('/register-company', 'RegisterController@register_form_company');
 $router->post('/register-company', 'RegisterController@register_form_company');
 
+// login
+$router->get('/login', 'LoginController@login_index');
+
 
 // testing db
 $router->get('/test-db', 'TestDbController@index');
