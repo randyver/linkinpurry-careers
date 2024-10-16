@@ -41,6 +41,6 @@ class RegisterController {
     }
 
     public function register_page() {
-        View::render('register/job-seeker');
+        View::render('register/company');
     }
 }
