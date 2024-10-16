@@ -27,9 +27,26 @@ document.getElementById("posted-year").addEventListener("change", function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
+  fetchRecentJobs();
+
+  function fetchRecentJobs() {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', '/get-recommendation-jobs', true);
+      xhr.onload = function () {
+          if (xhr.status === 200) {
+              const recommendationsContainer = document.getElementById('recommendation-response');
+              recommendationsContainer.innerHTML = xhr.responseText;
+          }
+      };
+      xhr.send();
+  }
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
   const filters = document.querySelectorAll('.filter select, .filter input[type="checkbox"]');
   const sortSelect = document.querySelector('.sort-options select');
-  const jobListingsContainer = document.querySelector('.job-listings-response');
+  const jobListingsContainer = document.getElementById('job-listings-response');
   const searchInput = document.querySelector('.search-input');
   let debounceTimeout;
   let page = 1;
@@ -98,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // Reset page to 1 if filters or sorting is updated
       if (resetPage) {
           page = 1;
-          jobListingsContainer.innerHTML = ''; // Clear existing listings
+          jobListingsContainer.innerHTML = '';
       }
 
       params.set('page', page);

@@ -168,10 +168,34 @@ body {
     transition: background-color 0.3s ease;
 }
 
-/* Hover effect for dropdown items */
 .dropdown-item:hover {
     background-color: #F1F1F1;
     border-radius: 4px;
+}
+
+/* Login button */
+.hide {
+    display: none;
+}
+
+.nav-login-section {
+    margin-left: 20px;
+    color: white;
+}
+
+.login-button {
+    padding: 10px 15px;
+    background-color: #3A4A3F;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #2F3633;
 }
 
 /* Main Container */
@@ -470,6 +494,25 @@ body {
     width: 100%;
     border-radius: 4px;
     object-fit: cover;
+}
+
+.no-jobs {
+    background-color: #FFF;
+    text-align: center;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.no-jobs h4 {
+    color: #3A4A3F;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.no-jobs p {
+    color: #7A7A7A;
+    font-size: 12px;
 }
 
 /* Recommendation Section */

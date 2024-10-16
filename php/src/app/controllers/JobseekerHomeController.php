@@ -7,6 +7,32 @@ class JobseekerHomeController
         View::render('jobseeker/home');
     }
 
+    public function getRecommendationJobs()
+    {
+        require_once __DIR__ . '/../config/db.php';
+        $pdo = Database::getConnection();
+
+        // Recommendation criteria: 2 most recent jobs
+        $query = 'SELECT jv.position, u.name AS company_name
+              FROM JobVacancy jv
+              JOIN Users u ON jv.company_id = u.user_id
+              WHERE jv.is_open = TRUE
+              ORDER BY jv.created_at DESC
+              LIMIT 2';
+
+        $statement = $pdo->prepare($query);
+        $statement->execute();
+        $jobs = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        ob_start();
+        include __DIR__ . '/../views/templates/recommendation-jobs-template.php';
+        $htmlResponse = ob_get_clean();
+
+        header('Content-Type: text/html');
+        echo $htmlResponse;
+        exit;
+    }
+
     public function getJobListings()
     {
         require_once __DIR__ . '/../config/db.php';

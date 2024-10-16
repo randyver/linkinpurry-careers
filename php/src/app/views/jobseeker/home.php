@@ -1,13 +1,28 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    $name = 'Not Signed In';
+    $isLoggedIn = false;
+} else {
+    $user_id = $_SESSION['user_id'];
+    $role = $_SESSION['role'];
+    $name = $_SESSION['name'];
+    $isLoggedIn = true;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jobseeker Dashboard</title>
+    <title>Jobseeker - Home</title>
     <link rel="stylesheet" href="../../../public/css/jobseeker/home-jobseeker.css">
 </head>
-<?php $username = 'test username'; ?>
+
 <body>
     <nav class="navbar">
         <div class="navbar-left">
@@ -18,32 +33,48 @@
             </button>
         </div>
         <div class="navbar-right">
+            <?php if ($isLoggedIn): ?>
+                <a href="#" class="nav-item-link">
+                    <div class="nav-item selected">
+                        <img src="../../../public/images/jobs-icon.svg" alt="Jobs Icon" class="nav-icon">
+                        <span class="nav-link">Jobs</span>
+                    </div>
+                </a>
 
-            <a href="#" class="nav-item-link">
-                <div class="nav-item selected">
-                    <img src="../../../public/images/jobs-icon.svg" alt="Jobs Icon" class="nav-icon">
-                    <span class="nav-link">Jobs</span>
+                <a href="#" class="nav-item-link">
+                    <div class="nav-item">
+                        <img src="../../../public/images/applications-icon.svg" alt="Applications Icon" class="nav-icon">
+                        <span class="nav-link">Applications</span>
+                    </div>
+                </a>
+
+                <div class="nav-profile-section">
+                    <img src="../../../public/images/profile-pic.png" alt="Profile" class="nav-profile-pic">
+                    <span class="profile-name"><?php echo htmlspecialchars($name); ?></span>
+                    <img src="../../../public/images/arrow-down.svg" alt="Dropdown Arrow" class="dropdown-arrow" id="dropdown-arrow">
                 </div>
-            </a>
 
-            <a href="#" class="nav-item-link">
-                <div class="nav-item">
-                    <img src="../../../public/images/applications-icon.svg" alt="Applications Icon" class="nav-icon">
-                    <span class="nav-link">Applications</span>
+                <div class="dropdown-menu" id="dropdown-menu">
+                    <a href="#" class="dropdown-item">View Profile</a>
+                    <a href="/logout" class="dropdown-item">Sign Out</a>
                 </div>
-            </a>
+            <?php else: ?>
+                <div class="nav-login-section">
+                    <a href="/login" class="login-button">Login</a>
+                </div>
+                <div class="nav-profile-section hide">
+                    <img src="../../../public/images/profile-pic.png" alt="Profile" class="nav-profile-pic">
+                    <span class="profile-name"><?php echo htmlspecialchars($name); ?></span>
+                    <img src="../../../public/images/arrow-down.svg" alt="Dropdown Arrow" class="dropdown-arrow" id="dropdown-arrow">
+                </div>
 
-            <div class="nav-profile-section">
-                <img src="../../../public/images/profile-pic.png" alt="Profile" class="nav-profile-pic">
-                <span class="profile-name"><?php echo $username; ?></span>
-                <img src="../../../public/images/arrow-down.svg" alt="Dropdown Arrow" class="dropdown-arrow" id="dropdown-arrow">
-            </div>
-
-            <div class="dropdown-menu" id="dropdown-menu">
-                <a href="#" class="dropdown-item">View Profile</a>
-                <a href="#" class="dropdown-item">Sign Out</a>
-            </div>
+                <div class="dropdown-menu hide" id="dropdown-menu">
+                    <a href="#" class="dropdown-item">View Profile</a>
+                    <a href="/logout" class="dropdown-item">Sign Out</a>
+                </div>
+            <?php endif; ?>
         </div>
+
 
     </nav>
 
@@ -60,8 +91,8 @@
                 </div>
 
                 <div class="profile-info">
-                    <h2><?php echo $username; ?></h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <h2><?php echo $name; ?></h2>
+                    <p>Welcome to LinkinPurry. Search for your dream job here!</p>
                 </div>
             </div>
 
@@ -87,6 +118,7 @@
                     </select>
                     <select id="posted-year">
                         <option value="" disabled selected>Select year</option>
+                        <option value="2023">2023</option>
                         <option value="2024">2024</option>
                         <option value="2025">2025</option>
                         <option value="2026">2026</option>
@@ -122,7 +154,7 @@
                     </select>
                 </div>
             </div>
-            <div class="job-listings-response">
+            <div id="job-listings-response"></div>
 
         </section>
 
@@ -130,35 +162,37 @@
             <div class="recommendation-card">
                 <h3>Jobs you may be interested in</h3>
 
-                <a href="#" class="recommendation-item-link">
+                <div id="recommendation-response"></div>
+
+                <!-- <a href=" #" class="recommendation-item-link">
                     <div class="recommendation-item">
                         <div class="recommendation-details">
                             <strong>Web Developer</strong>
                             <p>WBD Media Co.</p>
                         </div>
                     </div>
-                </a>
+                    </a>
 
-                <a href="#" class="recommendation-item-link">
-                    <div class="recommendation-item">
-                        <div class="recommendation-details">
-                            <strong>Junior Software Engineer</strong>
-                            <p>WBD Corp</p>
+                    <a href="#" class="recommendation-item-link">
+                        <div class="recommendation-item">
+                            <div class="recommendation-details">
+                                <strong>Junior Software Engineer</strong>
+                                <p>WBD Corp</p>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
+                    </a> -->
+                </div>
 
-            <footer class="footer">
-                <div class="footer-links">
-                    <a href="#">About</a>
-                    <a href="#">More</a>
-                </div>
-                <div class="footer-logo">
-                    <img src="../../../public/images/logo-icon-text.svg" alt="LinkedInPurry Logo">
-                    <span>LinkinPurry © 2024</span>
-                </div>
-            </footer>
+                <footer class="footer">
+                    <div class="footer-links">
+                        <a href="#">About</a>
+                        <a href="#">More</a>
+                    </div>
+                    <div class="footer-logo">
+                        <img src="../../../public/images/logo-icon-text.svg" alt="LinkedInPurry Logo">
+                        <span>LinkinPurry © 2024</span>
+                    </div>
+                </footer>
         </aside>
     </div>
 
