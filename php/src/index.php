@@ -8,6 +8,8 @@ $router = new Router();
 $router->get('/', 'HomeController@index');
 $router->get('/home', 'HomeController@index');
 $router->get('/check-connection', 'DatabaseController@checkConnection');
+$router->post('/register', 'RegisterController@register_form');
+$router->get('/register', 'RegisterController@register_page');
 // $router->get('/user/login', 'UserController@login');
 // $router->post('/user/login', 'UserController@authenticate');
 
