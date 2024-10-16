@@ -10,6 +10,18 @@ EXCEPTION
     WHEN duplicate_object THEN NULL;
 END $$;
 
+DO $$ BEGIN
+    CREATE TYPE job_type_enum AS ENUM ('Internship', 'Part-time', 'Full-time');
+EXCEPTION
+    WHEN duplicate_object THEN NULL;
+END $$;
+
+DO $$ BEGIN
+    CREATE TYPE location_type_enum AS ENUM ('Remote', 'Hybrid', 'On-site');
+EXCEPTION
+    WHEN duplicate_object THEN NULL;
+END $$;
+
 CREATE TABLE Users (
     user_id SERIAL PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -30,8 +42,8 @@ CREATE TABLE JobVacancy (
     company_id INT NOT NULL,
     position VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
-    job_type VARCHAR(100) NOT NULL,
-    location_type VARCHAR(100) NOT NULL,
+    job_type job_type_enum NOT NULL,
+    location_type location_type_enum NOT NULL,
     is_open BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -73,15 +85,20 @@ INSERT INTO JobVacancy (company_id, position, description, job_type, location_ty
 (3, 'Software Engineer', 'Develop and maintain web applications.', 'Full-time', 'On-site'),
 (3, 'DevOps Engineer', 'Manage cloud infrastructure and CI/CD pipelines.', 'Full-time', 'Remote'),
 (4, 'Financial Analyst', 'Analyze financial data and market trends.', 'Full-time', 'On-site'),
-(4, 'Accountant', 'Manage financial accounts and tax filings.', 'Part-time', 'Hybrid');
+(4, 'Accountant', 'Manage financial accounts and tax filings.', 'Part-time', 'Hybrid'),
+(3, 'Intern Developer', 'Work with senior engineers on small-scale projects.', 'Internship', 'Remote'),
+(4, 'Junior Accountant', 'Assist the accounting team in managing daily transactions.', 'Part-time', 'On-site');
 
 INSERT INTO JobVacancyAttachment (job_vacancy_id, file_path) VALUES
 (1, '/attachments/job_vacancy_1/file1.pdf'),
 (2, '/attachments/job_vacancy_2/file2.pdf'),
-(3, '/attachments/job_vacancy_3/file3.pdf');
+(3, '/attachments/job_vacancy_3/file3.pdf'),
+(5, '/attachments/job_vacancy_5/file5.pdf');
 
 INSERT INTO Application (user_id, job_vacancy_id, cv_path, video_path) VALUES
 (1, 1, '/cv/jobseeker1_cv.pdf', NULL),
 (1, 2, '/cv/jobseeker1_cv.pdf', '/videos/jobseeker1_video.mp4'),
 (2, 3, '/cv/jobseeker2_cv.pdf', NULL),
-(2, 4, '/cv/jobseeker2_cv.pdf', '/videos/jobseeker2_video.mp4');
+(2, 4, '/cv/jobseeker2_cv.pdf', '/videos/jobseeker2_video.mp4'),
+(1, 5, '/cv/jobseeker1_cv.pdf', NULL),
+(2, 6, '/cv/jobseeker2_cv.pdf', NULL);

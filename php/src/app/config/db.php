@@ -1,9 +1,7 @@
 <?php
 
-class Database
-{
-    public static function getConnection()
-    {
+class Database {
+    public static function getConnection() {
         $host = getenv('POSTGRES_HOST') ?: 'localhost';
         $db = getenv('POSTGRES_DB') ?: 'app_database';
         $user = getenv('POSTGRES_USER') ?: 'my_user';
