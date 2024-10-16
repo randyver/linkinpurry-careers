@@ -7,7 +7,6 @@ $router = new Router();
 
 $router->get('/', 'HomeController@index');
 $router->get('/home', 'HomeController@index');
-$router->get('/check-connection', 'DatabaseController@checkConnection');
 
 // register
 $router->get('/register', 'RegisterController@register_index');

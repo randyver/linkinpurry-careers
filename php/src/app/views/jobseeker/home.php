@@ -21,6 +21,7 @@ if (!isset($_SESSION['user_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jobseeker - Home</title>
     <link rel="stylesheet" href="../../../public/css/jobseeker/home-jobseeker.css">
+    <link rel="icon" href="../../../public/images/logo-icon.svg" type="image/x-icon">
 </head>
 
 <body>
