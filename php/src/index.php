@@ -16,9 +16,18 @@ $router->post('/register-job-seeker', 'RegisterController@register_form_job_seek
 $router->get('/register-company', 'RegisterController@register_form_company');
 $router->post('/register-company', 'RegisterController@register_form_company');
 
+// login
+$router->get('/login', 'LoginController@login_index');
+$router->post('/login', 'LoginController@login_index');
+
+// logout
+$router->post('/logout', 'LoginController@logout');
+
+// dashboard
+$router->get('/dashboard', 'DashboardController@index');
+
 // jobseeker
 $router->get('/home-jobseeker', 'JobseekerHomeController@index');
-
 
 // testing db
 $router->get('/test-db', 'TestDbController@index');
