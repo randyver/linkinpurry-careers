@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Job Seeker</title>
     <link rel="stylesheet" href="../../../public/css/register/job-seeker.css">
+    <style>
+        .error-message {
+            color: red;
+        }
+        .success-message {
+            color: green;
+        }
+    </style>
 </head>
 <body>
     <!-- logo -->
@@ -22,7 +30,14 @@
             </div>
 
             <!-- message div for displaying errors or success -->
-            <div id="message" style="display:none;"></div>
+            <?php if (!empty($message)): ?>
+                <?php
+                $messageClass = strpos($message, 'Success') === 0 ? 'success-message' : 'error-message';
+                ?>
+                <div class="<?php echo $messageClass; ?>">
+                    <?php echo htmlspecialchars($message); ?>
+                </div>
+            <?php endif; ?>
             
             <form id="register-job-seeker" method="POST">
                 <div>
