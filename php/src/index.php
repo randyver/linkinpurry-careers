@@ -28,6 +28,7 @@ $router->get('/dashboard', 'DashboardController@index');
 
 // jobseeker
 $router->get('/home-jobseeker', 'JobseekerHomeController@index');
+$router->get('/get-job-listings', 'JobseekerHomeController@getJobListings');
 
 // testing db
 $router->get('/test-db', 'TestDbController@index');

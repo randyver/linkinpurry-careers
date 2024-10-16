@@ -7,11 +7,8 @@
     <title>Jobseeker Dashboard</title>
     <link rel="stylesheet" href="../../../public/css/jobseeker/home-jobseeker.css">
 </head>
-
-<?php $username = 'username test'; ?>
-
+<?php $username = 'test username'; ?>
 <body>
-    
     <nav class="navbar">
         <div class="navbar-left">
             <img src="../../../public/images/logo-icon.svg" alt="Logo" class="logo">
@@ -71,45 +68,45 @@
             <div class="filter-text">Filter</div>
             <div class="filter">
                 <div class="filter-group">
-                    <div for="deadline" class="filter-type">Deadline</div>
-                    <select id="deadline-month">
+                    <div for="posted" class="filter-type">Posted</div>
+                    <select id="posted-month">
                         <option value="" disabled selected>Select month</option>
-                        <option>January</option>
-                        <option>Febuary</option>
-                        <option>March</option>
-                        <option>April</option>
-                        <option>May</option>
-                        <option>June</option>
-                        <option>July</option>
-                        <option>August</option>
-                        <option>September</option>
-                        <option>October</option>
-                        <option>November</option>
-                        <option>December</option>
+                        <option value="1">January</option>
+                        <option value="2">Febuary</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
                         <option value="clear">Clear Selection</option>
                     </select>
-                    <select id="deadline-year">
+                    <select id="posted-year">
                         <option value="" disabled selected>Select year</option>
-                        <option>2024</option>
-                        <option>2025</option>
-                        <option>2026</option>
-                        <option>2027</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
                         <option value="clear">Clear Selection</option>
                     </select>
                 </div>
 
                 <div class="filter-group">
                     <div class="filter-type">Location</div>
-                    <label><input type="checkbox"> On-site</label>
-                    <label><input type="checkbox"> Remote</label>
-                    <label><input type="checkbox"> Hybrid</label>
+                    <label><input type="checkbox" value="on-site" id='filter-location'> On-site</label>
+                    <label><input type="checkbox" value="remote" id='filter-location'> Remote</label>
+                    <label><input type="checkbox" value="hybrid" id='filter-location'> Hybrid</label>
                 </div>
 
                 <div class="filter-group">
                     <div for="type" class="filter-type">Type</div>
-                    <label><input type="checkbox"> Full-time</label>
-                    <label><input type="checkbox"> Part-time</label>
-                    <label><input type="checkbox"> Internship</label>
+                    <label><input type="checkbox" value="full-time" id='filter-jobtype'> Full-time</label>
+                    <label><input type="checkbox" value="part-time" id='filter-jobtype'> Part-time</label>
+                    <label><input type="checkbox" value="internship" id='filter-jobtype'> Internship</label>
                 </div>
             </div>
         </aside>
@@ -120,51 +117,12 @@
                 <div class="sort-options">
                     <span>Sort by:</span>
                     <select>
-                        <option>Recent</option>
-                        <option>Oldest</option>
+                        <option value="recent">Recent</option>
+                        <option value="oldest">Oldest</option>
                     </select>
                 </div>
             </div>
-
-
-            <div class="job-card">
-                <div class="job-header">
-                    <div class="company-info">
-                        <img src="../../../public/images/company-pic.png" alt="Company Logo" class="company-logo">
-                        <div class="company-details">
-                            <h3>WBD Corp</h3>
-                            <p>Technology, Information and Media</p>
-                        </div>
-                    </div>
-
-                    <div class="job-view">
-                        <button>View</button>
-                    </div>
-                </div>
-
-                <div class="job-details">
-                    <h4>Junior Software Engineer</h4>
-                    <div class="job-meta">
-                        <p>
-                            <img src="../../../public/images/clock-icon.svg" alt="Clock Icon"> Application opened: 15th October 2024
-                        </p>
-                        <p>
-                            <img src="../../../public/images/clock-icon.svg" alt="Clock Icon"> Application closed: 15th November 2024
-                        </p>
-                        <p>
-                            <img src="../../../public/images/location-icon.svg" alt="Location Icon"> Location: Jakarta
-                        </p>
-                        <p>
-                            <img src="../../../public/images/type-icon.svg" alt="Type Icon"> Type: Full-time
-                        </p>
-                    </div>
-                    <p>WBD Corp is seeking a motivated Junior Software Engineer to join our dynamic team. You will work closely with senior engineers on modern technologies...</p>
-                </div>
-
-                <div class="job-image">
-                    <img src="../../../public/images/job-vacancy.png" alt="Job Image">
-                </div>
-            </div>
+            <div class="job-listings-response">
 
         </section>
 
