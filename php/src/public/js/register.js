@@ -23,7 +23,7 @@ function makeXHRRequest(method, url, params, onSuccess, onError) {
 }
 
 // Event listener untuk form registrasi
-document.getElementById('registerForm').addEventListener('submit', function(event) {
+document.getElementById('register-job-seeker').addEventListener('submit', function(event) {
     event.preventDefault();
 
     const name = document.getElementById('name').value;
@@ -37,13 +37,13 @@ document.getElementById('registerForm').addEventListener('submit', function(even
         return;
     }
 
-    // Mengirim data registrasi menggunakan makeXHRRequest
+    // Jika validasi berhasil, kirim data registrasi menggunakan makeXHRRequest
     const params = `name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&confirm_password=${encodeURIComponent(confirmPassword)}`;
 
-    makeXHRRequest('POST', '/register', params, function(response) {
+    makeXHRRequest('POST', '/register_form_job_seeker', params, function(response) {
         if (response.success) {
             showMessage('Registration successful!', 'success');
-            document.getElementById('registerForm').reset();
+            document.getElementById('register-job-seeker').reset();
         } else {
             showMessage(response.error, 'error');
         }
@@ -51,6 +51,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
         showMessage(errorMessage, 'error');
     });
 });
+
 
 // Function untuk menampilkan pesan
 function showMessage(message, type) {

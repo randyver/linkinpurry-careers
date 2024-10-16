@@ -12,45 +12,43 @@
 
     <main>
         <!-- image -->
-         <img src="../../../public/images/job-seeker-register.png" alt="job-seeker-register">
+        <img src="../../../public/images/job-seeker-register.png" alt="job-seeker-register">
          
         <!-- form -->
-         <div>
+        <div>
             <div class="title">
                 <h1>Sign Up</h1>
                 <p>Let&apos;s get you all set up!</p>
             </div>
-            <form action="register/job-seeker" method="POST">
+
+            <!-- message div for displaying errors or success -->
+            <div id="message" style="display:none;"></div>
+            
+            <form id="register-job-seeker" method="POST">
                 <div>
                     <p>Name</p>
-                    <input type="text" name="name" placeholder="Name">
+                    <input type="text" id="name" name="name" placeholder="Name" required>
                 </div>
-                    <p>Email</p>
-                    <input type="email" name="email" placeholder="Email">
                 <div>
+                    <p>Email</p>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
                 </div>
                 <div>
                     <p>Password</p>
-                    <input type="password" name="password" placeholder="Password">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
                 </div>
                 <div>
                     <p>Confirm Password</p>
-                    <input type="password" name="confirmPassword" placeholder="Confirm Password">
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
                 </div>
-            
-            <!-- check box -->
-            <div>
-                <input type="checkbox" name="terms" id="terms">
-                <label for="terms">I agree to all the Terms and Privacy Policies</label>
-            </div>
 
-            <!-- button -->
-            <div class="sign-up">
-                <button type="submit">Create account</button>
-                <p>Already have an account? <a href="login">Login</a></p>
-            </div>
+                <!-- button -->
+                <div class="sign-up">
+                    <button type="submit">Create account</button>
+                    <p>Already have an account? <a href="login">Login</a></p>
+                </div>
             </form>
-         </div>
+        </div>
     </main>
 </body>
 </html>

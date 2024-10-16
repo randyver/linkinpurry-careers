@@ -48,12 +48,6 @@
                     <p>Confirm Password</p>
                     <input type="password" name="confirmPassword" placeholder="Confirm Password">
                 </div>
-            
-                <!-- check box -->
-                <div>
-                    <input type="checkbox" name="terms" id="terms">
-                    <label for="terms">I agree to all the Terms and Privacy Policies</label>
-                </div>
 
                 <!-- button -->
                 <div class="sign-up">

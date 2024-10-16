@@ -78,7 +78,7 @@ textarea {
 }
 
 textarea {
-    resize: vertical; /* Makes the text area resizable */
+    resize: vertical;
 }
 
 input[type="checkbox"] {

@@ -8,11 +8,15 @@ $router = new Router();
 $router->get('/', 'HomeController@index');
 $router->get('/home', 'HomeController@index');
 $router->get('/check-connection', 'DatabaseController@checkConnection');
-$router->post('/register', 'RegisterController@register_form');
-$router->get('/register', 'RegisterController@register_page');
-// $router->get('/user/login', 'UserController@login');
-// $router->post('/user/login', 'UserController@authenticate');
 
+// register
+$router->get('/register', 'RegisterController@register_index');
+$router->get('/register-job-seeker', 'RegisterController@register_page_job_seeker');
+$router->get('/register-company', 'RegisterController@register_page_company');
+$router->post('/register-job-seeker', 'RegisterController@register_form_job_seeker');
+
+
+// testing db
 $router->get('/test-db', 'TestDbController@index');
 $router->post('/test-db', 'TestDbController@index');
 
