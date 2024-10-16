@@ -26,6 +26,10 @@ $router->post('/logout', 'LoginController@logout');
 // dashboard
 $router->get('/dashboard', 'DashboardController@index');
 
+// jobseeker
+$router->get('/home-jobseeker', 'JobseekerHomeController@index');
+$router->get('/get-job-listings', 'JobseekerHomeController@getJobListings');
+$router->get('/get-recommendation-jobs', 'JobseekerHomeController@getRecommendationJobs');
 
 // testing db
 $router->get('/test-db', 'TestDbController@index');
