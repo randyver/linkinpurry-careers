@@ -56,14 +56,33 @@ form div p {
     margin-bottom: 4px;
 }
 
+.name-email-form {
+    display: flex;
+    gap: 20px;
+}
+
+.input-group {
+    flex: 1;
+}
+
+
 input[type="text"],
 input[type="email"],
-input[type="password"] {
-    width: 400px;
+input[type="password"],
+textarea {
+    width: 100%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
 }
 
 label {
@@ -94,7 +113,6 @@ a {
     margin-left: 5px;
 }
 
-
 div {
     margin-bottom: 20px;
 }
@@ -103,15 +121,7 @@ p a {
     color: #826644;
 }
 
-
 .sign-up p {
     margin-top: 20px;
     text-align: center;
-}
-
-.error-message {
-    color: red;
-}
-.success-message {
-    color: green;
 }

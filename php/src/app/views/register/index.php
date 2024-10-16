@@ -17,9 +17,10 @@
             <h1>Connect with <span>5 millions+ </span>Opportunities</h1>
             <p>Pick your role to get started!</p>
             <div>
-                <button>Company</button>
-                <button>Job Seeker</button>
+                <a href="/register-company" class="button">Company</a>
+                <a href="/register-job-seeker" class="button">Job Seeker</a>
             </div>
+
          </div>
         <!-- image -->
         <img src="../../../public/images/three-people.png" alt="three-people" class="image">

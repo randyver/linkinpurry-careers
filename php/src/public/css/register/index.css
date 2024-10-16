@@ -52,7 +52,7 @@ p {
     margin-bottom: 40px;
 }
 
-button {
+.button {
     padding: 15px 30px;
     font-size: 18px;
     border: 2px solid #2d2d2d;
@@ -60,21 +60,25 @@ button {
     cursor: pointer;
     margin-right: 15px;
     transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+    color: #2d2d2d;
+    display: inline-block;
 }
 
-button:hover {
+.button:hover {
     background-color: #2d2d2d;
     color: #fff;
 }
 
-button:last-child {
+.button:last-child {
     background-color: #2d2d2d;
     color: #fff;
 }
 
-button:last-child:hover {
+.button:last-child:hover {
     background-color: #444;
 }
+
 
 .image {
     width: 400px;
