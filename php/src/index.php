@@ -18,6 +18,13 @@ $router->post('/register-company', 'RegisterController@register_form_company');
 
 // login
 $router->get('/login', 'LoginController@login_index');
+$router->post('/login', 'LoginController@login_index');
+
+// logout
+$router->post('/logout', 'LoginController@logout');
+
+// dashboard
+$router->get('/dashboard', 'DashboardController@index');
 
 
 // testing db

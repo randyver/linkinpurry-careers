@@ -7,6 +7,6 @@ class HomeController {
         //     'message' => 'Welcome to the Home Page!',
         // ];
 
-        View::render('home/index');
+        View::render('dashboard/index');
     }
 }
