@@ -20,6 +20,7 @@ if (!isset($_SESSION['user_id'])) {
     <title>Job Detail</title>
     <link rel="stylesheet" href="../../../public/css/navbar/style.css">
     <link rel="stylesheet" href="../../../public/css/job-detail/index.css">
+    <link rel="stylesheet" href="../../../public/css/footer/style.css">
     <link rel="icon" href="../../../public/images/logo-icon.svg" type="image/x-icon">
 </head>
 <body>
@@ -63,6 +64,6 @@ if (!isset($_SESSION['user_id'])) {
             </div>
         </div>
     </main>
-
+    <?php include __DIR__ . '/../templates/footer.php'; ?>
 </body>
 </html>
