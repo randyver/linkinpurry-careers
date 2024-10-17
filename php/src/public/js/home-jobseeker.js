@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function () {
   function updateFiltersAndFetchJobs(resetPage = false) {
       let params = new URLSearchParams(window.location.search);
 
-      // Add the search term
       const searchTerm = searchInput.value.trim();
       if (searchTerm) {
           params.set('search', searchTerm);
@@ -63,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
           params.delete('search');
       }
 
-      // Handle posted month
       const postedMonth = document.getElementById('posted-month').value;
       if (postedMonth && postedMonth !== "Select month") {
           params.set('posted-month', postedMonth);
@@ -78,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
           params.delete('posted-year');
       }
 
-      // Handle location filters
       const locations = [];
       document.querySelectorAll('.filter-group input[id="filter-location"]').forEach(checkbox => {
           if (checkbox.checked) {
@@ -91,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function () {
           params.delete('location');
       }
 
-      // Handle job type filters
       const types = [];
       document.querySelectorAll('.filter-group input[id="filter-jobtype"]').forEach(checkbox => {
           if (checkbox.checked) {
@@ -104,7 +100,6 @@ document.addEventListener('DOMContentLoaded', function () {
           params.delete('type');
       }
 
-      // Handle sorting
       const sort = sortSelect.value;
       if (sort) {
           params.set('sort', sort);
@@ -112,7 +107,6 @@ document.addEventListener('DOMContentLoaded', function () {
           params.delete('sort');
       }
 
-      // Reset page to 1 if filters or sorting is updated
       if (resetPage) {
           page = 1;
           jobListingsContainer.innerHTML = '';
@@ -139,34 +133,29 @@ document.addEventListener('DOMContentLoaded', function () {
       xhr.send();
   }
 
-  // Add event listener to search input with debounce
   searchInput.addEventListener('input', function () {
       clearTimeout(debounceTimeout);
       debounceTimeout = setTimeout(() => {
-          updateFiltersAndFetchJobs(true); // Reset page and fetch new results
-      }, 500); // 500ms debounce delay
+          updateFiltersAndFetchJobs(true);
+      }, 500);
   });
 
-  // Event listener for filters and sort options
   filters.forEach(filter => {
       filter.addEventListener('change', function () {
-          updateFiltersAndFetchJobs(true);  // Reset page when filter changes
+          updateFiltersAndFetchJobs(true);
       });
   });
 
   sortSelect.addEventListener('change', function () {
-      updateFiltersAndFetchJobs(true);  // Reset page when sorting changes
+      updateFiltersAndFetchJobs(true);
   });
 
-  // Infinite scroll implementation
   window.addEventListener('scroll', function () {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && !isFetching) {
-          // Near the bottom of the page, load the next page
           page++;
           updateFiltersAndFetchJobs();
       }
   });
 
-  // Initial fetch of job listings
   updateFiltersAndFetchJobs();
 });

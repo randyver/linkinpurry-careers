@@ -116,7 +116,11 @@ class JobseekerHomeController
 
         // Render using template
         ob_start();
-        include __DIR__ . '/../views/templates/job-listings-template.php';
+        if ($page === 1 && empty($jobs)) {
+            echo '<div>No job listings found.</div>';
+        } else {
+            include __DIR__ . '/../views/templates/job-listings-template.php';
+        }
         $jobListingsHTML = ob_get_clean();
 
         echo $jobListingsHTML;
