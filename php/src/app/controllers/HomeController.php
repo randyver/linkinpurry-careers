@@ -7,6 +7,6 @@ class HomeController {
         //     'message' => 'Welcome to the Home Page!',
         // ];
 
-        View::render('dashboard/index');
+        View::render('jobseeker/home');
     }
 }

@@ -13,6 +13,7 @@
             color: green;
         }
     </style>
+    <link rel="icon" href="../../../public/images/logo-icon.svg" type="image/x-icon">
 </head>
 <body>
     <!-- logo -->

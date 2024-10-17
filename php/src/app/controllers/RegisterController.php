@@ -45,7 +45,8 @@ class RegisterController {
                         ':password' => $hashedPassword,
                     ]);
                     
-                    $message = "Success: User registered.";
+                    header('Location: /login');
+                    exit;
                     }
                 } catch (PDOException $e) {
                     $message = "Error: " . htmlspecialchars($e->getMessage());

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Company</title>
     <link rel="stylesheet" href="../../../public/css/register/company.css">
+    <link rel="icon" href="../../../public/images/logo-icon.svg" type="image/x-icon">
 </head>
 <body>
     <!-- logo -->
