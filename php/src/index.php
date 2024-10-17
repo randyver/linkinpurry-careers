@@ -3,6 +3,10 @@
 require_once __DIR__ . '/app/core/Router.php';
 require_once __DIR__ . '/app/core/View.php';
 
+if (!session_id()) {
+    session_start();
+}
+
 $router = new Router();
 
 $router->get('/', 'HomeController@index');
@@ -32,6 +36,12 @@ $router->get('/get-recommendation-jobs', 'JobseekerHomeController@getRecommendat
 
 // detail job
 $router->get('/job/{id}', 'JobController@show');
+
+// company
+$router->get('/home-company', 'CompanyHomeController@index');
+$router->get('/get-company-description', 'CompanyHomeController@getCompanyDescription');
+$router->get('/get-company-job-listings', 'CompanyHomeController@getJobListings');
+$router->post('/delete-job', 'CompanyJobController@deleteJob');
 
 // testing db
 $router->get('/test-db', 'TestDbController@index');
