@@ -57,7 +57,10 @@ if (!isset($_SESSION['user_id'])) {
 
                 <div class="dropdown-menu" id="dropdown-menu">
                     <a href="#" class="dropdown-item">View Profile</a>
-                    <a href="/logout" class="dropdown-item">Sign Out</a>
+                     <!-- Form untuk logout -->
+                    <form action="/logout" method="POST" class="dropdown-item">
+                        <button type="submit" style="background: none; border: none; padding: 0; color: red; font-size: 14px; cursor: pointer;">Sign Out</button>
+                    </form>
                 </div>
             <?php else: ?>
                 <div class="nav-login-section">
@@ -71,7 +74,9 @@ if (!isset($_SESSION['user_id'])) {
 
                 <div class="dropdown-menu hide" id="dropdown-menu">
                     <a href="#" class="dropdown-item">View Profile</a>
-                    <a href="/logout" class="dropdown-item">Sign Out</a>
+                    <form action="/logout" method="POST" class="dropdown-item">
+                        <button type="submit" style="background: none; border: none; padding: 0; color: red; font-size: 14px; cursor: pointer;">Sign Out</button>
+                    </form>
                 </div>
             <?php endif; ?>
         </div>

@@ -29,9 +29,14 @@ class LoginController {
                             // Jika login berhasil, simpan user_id dan role ke session
                             $_SESSION['user_id'] = $user['user_id'];
                             $_SESSION['role'] = $user['role'];
+                            $_SESSION['name'] = $user['name'];
 
-                            // Redirect ke halaman dashboard atau halaman yang sesuai
-                            header('Location: /dashboard');
+                            // Redirect berdasarkan role
+                            if ($user['role'] === 'jobseeker') {
+                                header('Location: /home-jobseeker');
+                            } elseif ($user['role'] === 'company') {
+                                header('Location: /home-company');
+                            }
                             exit;
                         } else {
                             $message = "Error: Invalid password.";
