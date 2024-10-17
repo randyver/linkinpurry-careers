@@ -1,11 +1,21 @@
 <?php
 
 class JobController {
-    // Menampilkan halaman detail job berdasarkan job_vacancy_id
     public function show($jobId) {
         require_once __DIR__ . '/../config/db.php';
         
         try {
+            // Pastikan session sudah dimulai
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+
+            // Jika user belum login, redirect ke halaman login
+            if (!isset($_SESSION['user_id'])) {
+                header('Location: /login');
+                exit;
+            }
+
             $pdo = Database::getConnection();
 
             // Ambil detail pekerjaan berdasarkan job_vacancy_id
@@ -23,11 +33,6 @@ class JobController {
                 throw new Exception('Job not found');
             }
 
-            // Cek apakah job seeker sudah melamar pekerjaan ini
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
-            }
-            
             $jobSeekerId = $_SESSION['user_id']; // Ambil user_id dari session
             $stmt = $pdo->prepare("
                 SELECT * 
@@ -44,7 +49,7 @@ class JobController {
             // Render view job detail
             View::render('job-detail/index', [
                 'job' => $job,
-                'application' => $application ?? null,  // Pastikan variabel application selalu ada
+                'application' => $application ?? null,
             ]);
 
         } catch (PDOException $e) {
