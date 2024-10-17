@@ -9,10 +9,13 @@
                 </div>
             </div>
 
-            <div class="job-view">
-                <button>View</button>
+                <div class="job-view">
+                    <a href="/job/<?php echo $job['job_vacancy_id']; ?>">
+                        <button>View</button>
+                    </a>
+                </div>
+
             </div>
-        </div>
 
         <div class="job-details">
             <h4><?php echo htmlspecialchars($job['position']); ?></h4>

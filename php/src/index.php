@@ -29,14 +29,19 @@ $router->post('/logout', 'LoginController@logout');
 // dashboard
 $router->get('/dashboard', 'DashboardController@index');
 
-// jobseeker
+// home job seeker
 $router->get('/home-jobseeker', 'JobseekerHomeController@index');
 $router->get('/get-job-listings', 'JobseekerHomeController@getJobListings');
 $router->get('/get-recommendation-jobs', 'JobseekerHomeController@getRecommendationJobs');
 
+// detail job
+$router->get('/job/{id}', 'JobController@show');
+
 // company
 $router->get('/home-company', 'CompanyHomeController@index');
+$router->get('/get-company-description', 'CompanyHomeController@getCompanyDescription');
 $router->get('/get-company-job-listings', 'CompanyHomeController@getJobListings');
+$router->post('/delete-job', 'CompanyJobController@deleteJob');
 
 // testing db
 $router->get('/test-db', 'TestDbController@index');
