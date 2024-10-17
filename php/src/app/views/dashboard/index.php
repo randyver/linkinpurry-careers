@@ -1,19 +1,16 @@
 <?php
-// Mulai session untuk mendapatkan informasi user_id
 session_start();
 
-// Cek apakah pengguna sudah login dengan memeriksa session user_id
 if (!isset($_SESSION['user_id'])) {
-    // Jika pengguna belum login, arahkan ke halaman login
     header('Location: /login');
     exit;
 }
 
-// Ambil user_id dan role dari session
 $user_id = $_SESSION['user_id'];
 $role = $_SESSION['role'];
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
