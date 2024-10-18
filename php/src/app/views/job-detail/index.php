@@ -29,7 +29,7 @@ if (!isset($_SESSION['user_id'])) {
     <main>
         <div class="back-arrow">
             <a href="/home-jobseeker" class="back-link">
-                <img src="../../../public/images/arrow-left.png" alt="Back Icon">
+                <img src="../../../public/images/arrow-left.svg" alt="Back Icon">
                 <span>Jobs</span>
             </a>
         </div>
