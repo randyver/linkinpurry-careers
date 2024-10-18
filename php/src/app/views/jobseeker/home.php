@@ -10,6 +10,8 @@ if (!isset($_SESSION['user_id'])) {
     $isLoggedIn = true;
 }
 
+$home = true;
+
 ?>
 
 <!DOCTYPE html>

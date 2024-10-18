@@ -24,7 +24,7 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="icon" href="../../../public/images/logo-icon.svg" type="image/x-icon">
 </head>
 <body>
-    <?php include __DIR__ . '/../templates/navbar.php'; ?>
+    <?php include __DIR__ . '/../templates/navbar-jobseeker.php'; ?>
 
     <main>
         <div class="back-arrow">
