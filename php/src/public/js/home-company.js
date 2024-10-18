@@ -26,6 +26,52 @@ document.getElementById("posted-year").addEventListener("change", function () {
   }
 });
 
+function deleteJob(jobId) {
+    if (confirm('Are you sure you want to delete this job?')) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/delete-job', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const jobCard = document.querySelector(`.job-card[data-job-id='${jobId}']`);
+                if (jobCard) {
+                    jobCard.remove();
+                    alert('Job deleted successfully');
+                }
+            } else if (xhr.status === 403) {
+                alert('You are not authorized to delete this job.');
+            } else {
+                alert('Failed to delete job. Please try again.');
+            }
+        };
+        xhr.send(`job_id=${jobId}`);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('click', function(e) {
+        const deleteButton = e.target.closest('.widget-icon-button');
+        if (deleteButton) {
+            const jobId = deleteButton.closest('.job-card').dataset.jobId;
+            deleteJob(jobId);
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const companyDescriptionContainer = document.getElementById('company-description');
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '/get-company-description', true);
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            companyDescriptionContainer.innerHTML = `<p>${xhr.responseText}</p>`;
+        } else {
+            companyDescriptionContainer.innerHTML = '<p>Failed to load company description.</p>';
+        }
+    };
+    xhr.send();
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     let page = 1;
     const limit = 20;

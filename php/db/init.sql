@@ -74,8 +74,8 @@ CREATE TABLE Application (
 INSERT INTO Users (email, password, role, name) VALUES
 ('jobseeker1@example.com', 'password123', 'jobseeker', 'John Doe'),
 ('jobseeker2@example.com', 'password123', 'jobseeker', 'Jane Doe'),
-('company1@example.com', 'password123', 'company', 'Tech Corp'),
-('company2@example.com', 'password123', 'company', 'Finance Inc.');
+('x@x.com', '$2y$10$zTfFL80t0Wjt8uH42xmntu6oktyv2p..sl9Mzq/sALZNefWm1iYzS', 'company', 'X Tech Corp'),
+('y@y.com', '$2y$10$0CBpjGJcZXDOmO2XisuPZeLpnn.5sDPROee7lspntpAJRF0tmpCq2', 'company', 'Y Finance Inc.');
 
 INSERT INTO CompanyDetail (user_id, location, about) VALUES
 (3, 'Jakarta, Indonesia', 'We are a leading tech company specializing in software solutions.'),

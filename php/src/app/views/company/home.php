@@ -1,24 +1,13 @@
 <?php
-// session_start();
 
-// if (!isset($_SESSION['user_id'])) {
-//     header('Location: /login');
-//     exit;
-// }
-// $user_id = $_SESSION['user_id'];
-// $role = $_SESSION['role'];
-// $name = $_SESSION['name'];
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'company') {
+    header('Location: /login');
+    exit;
+}
 
-// if ($role != 'company') {
-//     header('Location: /login');
-//     exit;
-// }
-
-$user_id = 3;
-$name = "company name";
-
-$_SESSION['user_id'] = $user_id;
-
+$user_id = $_SESSION['user_id'];
+$role = $_SESSION['role'];
+$name = $_SESSION['name'];
 
 $home = true;
 ?>
@@ -51,7 +40,9 @@ $home = true;
 
                 <div class="profile-info">
                     <h2><?php echo $name; ?></h2>
-                    <p>Company description</p>
+                    <div id="company-description">
+                        <p>Company description</p>
+                    </div>
                 </div>
             </div>
 

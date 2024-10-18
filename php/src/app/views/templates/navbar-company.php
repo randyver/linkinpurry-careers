@@ -4,7 +4,7 @@
     </div>
     <div class="navbar-right">
 
-        <a href="#" class="nav-item-link">
+        <a href="/home-company" class="nav-item-link">
             <?php if (isset($home) && $home == true) { ?>
                 <div class="nav-item selected">
                 <?php } else { ?>
