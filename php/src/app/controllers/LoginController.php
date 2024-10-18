@@ -2,7 +2,6 @@
 
 class LoginController {
     public function login_index() {
-        session_start();
         require_once __DIR__ . '/../config/db.php';
         $message = '';
 
@@ -60,7 +59,6 @@ class LoginController {
 
     // Fungsi untuk logout dan menghapus session
     public function logout() {
-        session_start();
         session_destroy(); // Hapus semua session
         header('Location: /login'); // Redirect ke halaman login
         exit;
