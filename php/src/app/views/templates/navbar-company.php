@@ -1,6 +1,6 @@
 <nav class="navbar">
     <div class="navbar-left">
-        <img src="../../../public/images/logo-icon.svg" alt="Logo" class="logo">
+        <img src="../../../public/images/logo-icon-text.svg" alt="Logo" class="logo">
     </div>
     <div class="navbar-right">
 
