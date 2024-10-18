@@ -1,17 +1,3 @@
-<?php
-
-if (!isset($_SESSION['user_id'])) {
-    $name = 'Not Signed In';
-    $isLoggedIn = false;
-} else {
-    $user_id = $_SESSION['user_id'];
-    $role = $_SESSION['role'];
-    $name = $_SESSION['name'];
-    $isLoggedIn = true;
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

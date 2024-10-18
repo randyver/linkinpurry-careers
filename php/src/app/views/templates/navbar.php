@@ -1,3 +1,17 @@
+<?php
+
+if (!isset($_SESSION['user_id'])) {
+    $name = 'Not Signed In';
+    $isLoggedIn = false;
+} else {
+    $user_id = $_SESSION['user_id'];
+    $role = $_SESSION['role'];
+    $name = $_SESSION['name'];
+    $isLoggedIn = true;
+}
+
+?>
+
 <nav class="navbar">
     <div class="navbar-left">
         <img src="../../../public/images/logo-icon.svg" alt="Logo" class="logo">
