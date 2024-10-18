@@ -1,10 +1,6 @@
 <nav class="navbar">
     <div class="navbar-left">
         <img src="../../../public/images/logo-icon.svg" alt="Logo" class="logo">
-        <input type="text" class="search-input" placeholder="Discover jobs...">
-        <button class="search-button">
-            <img src="../../../public/images/search-icon.svg" alt="Search">
-        </button>
     </div>
     <div class="navbar-right">
         <?php if ($isLoggedIn): ?>
@@ -38,18 +34,6 @@
         <?php else: ?>
             <div class="nav-login-section">
                 <a href="/login" class="login-button">Sign In</a>
-            </div>
-            <div class="nav-profile-section hide">
-                <img src="../../../public/images/profile-pic.png" alt="Profile" class="nav-profile-pic">
-                <span class="profile-name"><?php echo htmlspecialchars($name); ?></span>
-                <img src="../../../public/images/arrow-down.svg" alt="Dropdown Arrow" class="dropdown-arrow" id="dropdown-arrow">
-            </div>
-
-            <div class="dropdown-menu hide" id="dropdown-menu">
-                <a href="#" class="dropdown-item">View Profile</a>
-                <form action="/logout" method="POST" class="dropdown-item">
-                    <button type="submit" style="background: none; border: none; padding: 0; color: red; font-size: 14px; cursor: pointer;">Sign Out</button>
-                </form>
             </div>
         <?php endif; ?>
     </div>
