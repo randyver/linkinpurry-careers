@@ -5,10 +5,6 @@ class JobController {
         require_once __DIR__ . '/../config/db.php';
         
         try {
-            // Pastikan session sudah dimulai
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
-            }
 
             // Jika user belum login, redirect ke halaman login
             if (!isset($_SESSION['user_id'])) {

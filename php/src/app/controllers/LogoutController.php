@@ -2,9 +2,6 @@
 
 class LogoutController {
     public function logout() {
-        // Mulai session
-        session_start();
-
         // Hapus semua session
         session_unset();
 
