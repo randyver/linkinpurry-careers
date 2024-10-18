@@ -1,8 +1,7 @@
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-logo">
-            <img src="../../../public/images/logo-icon.svg" alt="LinkinPurry Logo" class="footer-logo-img">
-            <span class="footer-brand">LinkinPurry</span>
+            <img src="../../../public/images/logo-icon-text.svg" alt="LinkinPurry Logo" class="footer-logo-img">
         </div>
         <nav class="footer-nav">
             <div class="footer-nav-section">

@@ -7,6 +7,31 @@ class CompanyHomeController
         View::render('company/home');
     }
 
+    public function getCompanyDescription() {
+        if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'company') {
+            header('HTTP/1.1 403 Forbidden');
+            echo 'Unauthorized access.';
+            exit;
+        }
+
+        $userId = $_SESSION['user_id'];
+
+        require_once __DIR__ . '/../config/db.php';
+        $pdo = Database::getConnection();
+
+        $query = 'SELECT about FROM CompanyDetail WHERE user_id = :user_id';
+        $statement = $pdo->prepare($query);
+        $statement->execute(['user_id' => $userId]);
+        $company = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($company) {
+            echo htmlspecialchars($company['about']);
+        } else {
+            echo 'No description available.';
+        }
+        exit;
+    }
+
     public function getJobListings()
     {
         require_once __DIR__ . '/../config/db.php';
@@ -15,7 +40,7 @@ class CompanyHomeController
         $userId = $_SESSION['user_id'];
 
         // Base query
-        $query = 'SELECT position, created_at, location_type, job_type 
+        $query = 'SELECT job_vacancy_id, position, created_at, location_type, job_type 
                   FROM JobVacancy 
                   WHERE company_id = :company_id';
         $params = ['company_id' => $userId];

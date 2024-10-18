@@ -1,3 +1,19 @@
+<?php
+
+if (!isset($_SESSION['user_id'])) {
+    $name = 'Not Signed In';
+    $isLoggedIn = false;
+} else {
+    $user_id = $_SESSION['user_id'];
+    $role = $_SESSION['role'];
+    $name = $_SESSION['name'];
+    $isLoggedIn = true;
+}
+
+$home = true;
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +25,7 @@
     <link rel="icon" href="../../../public/images/logo-icon.svg" type="image/x-icon">
 </head>
 <body>
-    <?php include __DIR__ . '/../templates/navbar.php'; ?>
+    <?php include __DIR__ . '/../templates/navbar-jobseeker.php'; ?>
 
     <main class="application-container">
         <!-- content -->

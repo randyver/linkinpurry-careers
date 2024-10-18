@@ -1,5 +1,5 @@
 <?php foreach ($jobs as $job): ?>
-    <div class="job-card">
+    <div class="job-card" data-job-id="<?php echo htmlspecialchars($job['job_vacancy_id']); ?>">
         <div class="job-title"><?php echo htmlspecialchars($job['position']); ?></div>
 
         <div class="job-info">
@@ -13,11 +13,11 @@
                 <img src="../../../public/images/trash-icon.svg" alt="Trash Icon" class="widget-icon">
             </button>
 
-            <a href="#" class="widget-icon-link">
+            <a href="/edit-job/<?php echo htmlspecialchars($job['job_vacancy_id']); ?>" class="widget-icon-link">
                 <img src="../../../public/images/edit-icon.svg" alt="Edit Icon" class="widget-icon">
             </a>
 
-            <a href="#" class="widget-icon-link">
+            <a href="#" class="widget-icon-link" onclick="expandJob(<?php echo htmlspecialchars($job['job_vacancy_id']); ?>)">
                 <img src="../../../public/images/expand-icon.svg" alt="Expand Icon" class="widget-icon">
             </a>
         </div>

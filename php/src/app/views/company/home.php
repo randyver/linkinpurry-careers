@@ -1,24 +1,15 @@
 <?php
-// session_start();
 
-// if (!isset($_SESSION['user_id'])) {
-//     header('Location: /login');
-//     exit;
-// }
-// $user_id = $_SESSION['user_id'];
-// $role = $_SESSION['role'];
-// $name = $_SESSION['name'];
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'company') {
+    header('Location: /login');
+    exit;
+}
 
-// if ($role != 'company') {
-//     header('Location: /login');
-//     exit;
-// }
+$user_id = $_SESSION['user_id'];
+$role = $_SESSION['role'];
+$name = $_SESSION['name'];
 
-$user_id = 3;
-$name = "company name";
-
-$_SESSION['user_id'] = $user_id;
-
+$home = true;
 ?>
 
 <!DOCTYPE html>
@@ -28,36 +19,13 @@ $_SESSION['user_id'] = $user_id;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company - Home</title>
+    <link rel="stylesheet" href="../../../public/css/navbar/style.css">
     <link rel="stylesheet" href="../../../public/css/company/home-company.css">
     <link rel="icon" href="../../../public/images/logo-icon.svg" type="image/x-icon">
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="navbar-left">
-            <img src="../../../public/images/logo-icon.svg" alt="Logo" class="logo">
-            <input type="text" class="search-input" placeholder="Search jobs...">
-            <button class="search-button">
-                <img src="../../../public/images/search-icon.svg" alt="Search">
-            </button>
-        </div>
-        <div class="navbar-right">
-
-            <div class="nav-profile-section">
-                <img src="../../../public/images/profile-pic.png" alt="Profile" class="nav-profile-pic">
-                <span class="profile-name"><?php echo htmlspecialchars($name); ?></span>
-                <img src="../../../public/images/arrow-down.svg" alt="Dropdown Arrow" class="dropdown-arrow" id="dropdown-arrow">
-            </div>
-
-            <div class="dropdown-menu" id="dropdown-menu">
-                <a href="#" class="dropdown-item">View Profile</a>
-                <!-- Form untuk logout -->
-                <form action="/logout" method="POST" class="dropdown-item">
-                    <button type="submit" style="background: none; border: none; padding: 0; color: red; font-size: 14px; cursor: pointer;">Sign Out</button>
-                </form>
-            </div>
-        </div>
-    </nav>
+    <?php include __DIR__ . '/../templates/navbar-company.php'; ?>
 
     <div class="main-container">
         <aside class="filter-section">
@@ -72,7 +40,9 @@ $_SESSION['user_id'] = $user_id;
 
                 <div class="profile-info">
                     <h2><?php echo $name; ?></h2>
-                    <p>Company description</p>
+                    <div id="company-description">
+                        <p>Company description</p>
+                    </div>
                 </div>
             </div>
 
@@ -134,6 +104,10 @@ $_SESSION['user_id'] = $user_id;
         </aside>
 
         <section class="job-listings">
+            <div class="search-container">
+                <img src="../../../public/images/search-icon.svg" alt="Search Icon" class="search-icon">
+                <input type="text" class="search-input" placeholder="Discover jobs...">
+            </div>
             <div class="sort-bar">
                 <hr class="sort-line">
                 <div class="sort-options">

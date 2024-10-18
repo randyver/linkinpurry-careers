@@ -10,6 +10,8 @@ if (!isset($_SESSION['user_id'])) {
     $isLoggedIn = true;
 }
 
+$home = true;
+
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +27,7 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 
 <body>
-    <?php include __DIR__ . '/../templates/navbar.php'; ?>
+    <?php include __DIR__ . '/../templates/navbar-jobseeker.php'; ?>
 
     <!-- Main Content -->
     <div class="main-container">
@@ -93,6 +95,10 @@ if (!isset($_SESSION['user_id'])) {
         </aside>
 
         <section class="job-listings">
+            <div class="search-container">
+                <img src="../../../public/images/search-icon.svg" alt="Search Icon" class="search-icon">
+                <input type="text" class="search-input" placeholder="Discover jobs...">
+            </div>
             <div class="sort-bar">
                 <hr class="sort-line">
                 <div class="sort-options">
@@ -130,18 +136,18 @@ if (!isset($_SESSION['user_id'])) {
                             </div>
                         </div>
                     </a> -->
-                </div>
+            </div>
 
-                <footer class="footer">
-                    <div class="footer-links">
-                        <a href="#">About</a>
-                        <a href="#">More</a>
-                    </div>
-                    <div class="footer-logo">
-                        <img src="../../../public/images/logo-icon-text.svg" alt="LinkedInPurry Logo">
-                        <span>LinkinPurry © 2024</span>
-                    </div>
-                </footer>
+            <footer class="footer">
+                <div class="footer-links">
+                    <a href="#">About</a>
+                    <a href="#">More</a>
+                </div>
+                <div class="footer-logo">
+                    <img src="../../../public/images/logo-icon-text.svg" alt="LinkedInPurry Logo">
+                    <span>LinkinPurry © 2024</span>
+                </div>
+            </footer>
         </aside>
     </div>
     <script src="../../../public/js/home-jobseeker.js"></script>
