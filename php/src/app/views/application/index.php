@@ -22,44 +22,46 @@
                 </a>
             </div>
 
-          
-          <!-- content -->
-          <div class="application-content">
-              <!-- intro -->
-              <div class="intro">
-                <!-- job id -->
-                  <h1>Fill in your application</h1>
-                  <p>You’re one step closer to your dream job!</p>
-              </div>
-              
-              <!-- form -->
-              <form class="application-form" method="POST" enctype="multipart/form-data">
-                  <div class="file-upload">
-                      <!-- Upload CV -->
-                      <div class="upload-container">
-                          <label class="upload-button" for="upload-cv">
-                              <img src="../../../public/images/upload.svg" alt="upload">
-                              <p id="cv-name">Upload CV</p>
-                          </label>
-                          <input type="file" id="upload-cv" name="cv" accept=".pdf, .doc, .docx" style="display: none;" onchange="handleFileUpload('cv')">
-                          <button id="cv-remove" class="remove-button" style="display:none;" onclick="removeFile('cv')">&times;</button>
-                      </div>
+            <!-- content -->
+            <div class="application-content">
+                <!-- intro -->
+                <div class="intro">
+                    <h1>Fill in your application</h1>
+                    <p>You’re one step closer to your dream job!</p>
+                    <!-- application exist, jika = 0 tampilkan pesan belum melamar, jika > 0 tampilkan pesan sudah melamar -->
+                    <?php if ($applicationExists > 0): ?>
+                        <p style="color: red;">You have already applied for this job.</p>
+                    <?php endif; ?>
+                </div>
 
-                      <!-- Upload Introduction Video -->
-                      <div class="upload-container">
-                          <label class="upload-button" for="upload-video">
-                              <img src="../../../public/images/upload.svg" alt="upload">
-                              <p id="video-name">Upload Introduction Video</p>
-                          </label>
-                          <input type="file" id="upload-video" name="video" accept="video/*" style="display: none;" onchange="handleFileUpload('video')">
-                          <button id="video-remove" class="remove-button" style="display:none;" onclick="removeFile('video')">&times;</button>
-                      </div>
-                  </div>
-                  <input type="hidden" name="user_id" value="<?= $user_id; ?>">
-                  <input type="hidden" name="job_vacancy_id" value="<?= $job_vacancy_id; ?>">
-                  <button type="submit" class="send-button">Send</button>
-              </form>
-          </div>
+                <!-- form -->
+                <form class="application-form" method="POST" enctype="multipart/form-data">
+                    <div class="file-upload">
+                        <!-- Upload CV -->
+                        <div class="upload-container">
+                            <label class="upload-button" for="upload-cv">
+                                <img src="../../../public/images/upload.svg" alt="upload">
+                                <p id="cv-name">Upload CV</p>
+                            </label>
+                            <input type="file" id="upload-cv" name="cv" accept=".pdf, .doc, .docx" style="display: none;" <?= $applicationExists > 0 ? 'disabled' : '' ?> onchange="handleFileUpload('cv')">
+                            <button id="cv-remove" class="remove-button" style="display:none;" onclick="removeFile('cv')" <?= $applicationExists > 0 ? 'disabled' : '' ?>>&times;</button>
+                        </div>
+
+                        <!-- Upload Introduction Video -->
+                        <div class="upload-container">
+                            <label class="upload-button" for="upload-video">
+                                <img src="../../../public/images/upload.svg" alt="upload">
+                                <p id="video-name">Upload Introduction Video</p>
+                            </label>
+                            <input type="file" id="upload-video" name="video" accept="video/*" style="display: none;" <?= $applicationExists > 0 ? 'disabled' : '' ?> onchange="handleFileUpload('video')">
+                            <button id="video-remove" class="remove-button" style="display:none;" onclick="removeFile('video')" <?= $applicationExists > 0 ? 'disabled' : '' ?>>&times;</button>
+                        </div>
+                    </div>
+                    <input type="hidden" name="user_id" value="<?= $user_id; ?>">
+                    <input type="hidden" name="job_vacancy_id" value="<?= $job_vacancy_id; ?>">
+                    <button type="submit" class="send-button" <?= $applicationExists > 0 ? 'disabled' : '' ?>>Send</button>
+                </form>
+            </div>
 
             <!-- message div for displaying errors or success -->
             <?php if (!empty($message)): ?>
@@ -68,7 +70,7 @@
                 </div>
             <?php endif; ?>
         </div>
-        
+
         <!-- image -->
         <div class="application-image">
             <img src="../../../public/images/application-people.png" alt="application">

@@ -21,7 +21,6 @@ body {
     margin-top: 100px;
 }
 
-/* back */
 .back-arrow {
     display: flex;
     justify-content: start;
@@ -104,6 +103,12 @@ body {
     color: #3A4A3F;
 }
 
+.upload-button:disabled {
+    background-color: #B0B0B0;
+    color: #FFFFFF;
+    cursor: not-allowed;
+}
+
 .send-button {
     background-color: #3A4A3F;
     color: #F4BF77;
@@ -121,6 +126,12 @@ body {
     background-color: #2E3E2F;
 }
 
+.send-button:disabled {
+    background-color: #B0B0B0;
+    color: #FFFFFF;
+    cursor: not-allowed;
+}
+
 .application-image img {
     width: 500px;
     height: auto;
@@ -131,13 +142,6 @@ body {
     flex-direction: row;
 }
 
-.upload-button {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-}
-
 .remove-button {
     background: none;
     border: none;
@@ -145,4 +149,9 @@ body {
     cursor: pointer;
     margin-left: 20px;
     color: #3A4A3F;
+}
+
+.remove-button:disabled {
+    color: #B0B0B0;
+    cursor: not-allowed;
 }
