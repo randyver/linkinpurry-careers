@@ -29,33 +29,37 @@ class ApplicationController {
                 $message = 'Error: CV is required.';
             }
 
-            // Upload file CV
-            if (!move_uploaded_file($_FILES['cv']['tmp_name'], $upload_dir . $cv_path)) {
-                $message = 'Failed to upload CV.';
+            // Validasi file video (wajib diupload)
+            if (empty($video_path)) {
+                $message = 'Error: Video is required.';
             }
 
-            // Upload file video jika ada
-            if ($video_path && !move_uploaded_file($_FILES['video']['tmp_name'], $upload_dir . $video_path)) {
-                $message = 'Failed to upload video.';
-            }
-
+            // Jika tidak ada pesan error, mulai proses upload file dan simpan ke database
             if (empty($message)) {
-                try {
-                    // Insert data aplikasi ke tabel Application
-                    $query = "INSERT INTO Application (user_id, job_vacancy_id, cv_path, video_path) 
-                            VALUES (:user_id, :job_vacancy_id, :cv_path, :video_path)";
-                    $stmt = $pdo->prepare($query);
-                    $stmt->execute([
-                        ':user_id' => $user_id,
-                        ':job_vacancy_id' => $job_vacancy_id,
-                        ':cv_path' => $cv_path,
-                        ':video_path' => $video_path,
-                    ]);
+                // Coba upload file setelah validasi berhasil
+                $cv_uploaded = move_uploaded_file($_FILES['cv']['tmp_name'], $upload_dir . $cv_path);
+                $video_uploaded = $video_path ? move_uploaded_file($_FILES['video']['tmp_name'], $upload_dir . $video_path) : true;
 
-                    // Set success message
-                    $message = 'Application submitted successfully.';
-                } catch (PDOException $e) {
-                    $message = 'Database Error: ' . htmlspecialchars($e->getMessage());
+                if ($cv_uploaded && $video_uploaded) {
+                    // Jika upload file berhasil, simpan ke database
+                    try {
+                        $query = 'INSERT INTO Application (job_vacancy_id, user_id, cv_path, video_path) VALUES (:job_vacancy_id, :user_id, :cv_path, :video_path)';
+                        $stmt = $pdo->prepare($query);
+                        $stmt->execute([
+                            'job_vacancy_id' => $job_vacancy_id,
+                            'user_id' => $user_id,
+                            'cv_path' => $cv_path,
+                            'video_path' => $video_path
+                        ]);
+
+                        // Jika semua berhasil
+                        $message = 'Application submitted successfully.';
+                    } catch (PDOException $e) {
+                        $message = 'Database Error: ' . htmlspecialchars($e->getMessage());
+                    }
+                } else {
+                    // Jika gagal meng-upload salah satu file
+                    $message = 'Failed to upload files.';
                 }
             }
         }
