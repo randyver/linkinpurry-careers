@@ -21,19 +21,34 @@ body {
     margin-top: 100px;
 }
 
-.back-button {
+/* back */
+.back-arrow {
     display: flex;
-    align-items: center;
-    margin-bottom: 40px;
-    cursor: pointer;
-    font-size: 20px;
-    color: #3A4A3F;
+    justify-content: start;
+    width: 60%;
+    margin-bottom: 20px;
 }
 
-.back-button img {
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
+.back-arrow a {
+    text-decoration: none;
+    color: #3A4A3F;
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.back-arrow img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.back-link {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }
 
 .application-content {

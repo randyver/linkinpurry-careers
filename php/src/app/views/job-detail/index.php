@@ -46,8 +46,11 @@
             </div>
 
             <div class="apply-button">
-                <button>Apply</button>
+                <a href="/job/<?php echo htmlspecialchars($job['job_vacancy_id']); ?>/application">
+                    <button>Apply</button>
+                </a>
             </div>
+
         </div>
     </main>
     <?php include __DIR__ . '/../templates/footer.php'; ?>
