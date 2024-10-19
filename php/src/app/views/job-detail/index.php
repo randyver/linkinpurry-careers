@@ -61,10 +61,27 @@ $home = true;
                 <img src="../../../public/images/job-vacancy.png" alt="Job Image">
             </div>
 
-            <div class="apply-button">
-                <a href="/job/<?php echo htmlspecialchars($job['job_vacancy_id']); ?>/application">
-                    <button>Apply</button>
-                </a>
+            <div class="apply-section">
+                <?php if ($application): ?>
+                    <div class="application">
+                        <div class="file">
+                            <img src="../../../public/images/detail-icon.svg" alt="Detail Icon">
+                            <a href="../../../public/uploads/<?php echo htmlspecialchars($application['cv_path']); ?>" target="_blank">See CV Attachment</a>
+                        </div>
+                        <?php if ($application['video_path']): ?>
+                            <div class="file">
+                                <img src="../../../public/images/detail-icon.svg" alt="Detail Icon">
+                                <a href="../../../public/uploads/<?php echo htmlspecialchars($application['video_path']); ?>" target="_blank">See Video Attachment</a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                <?php else: ?>
+                    <div class="apply-button">
+                        <a href="/job/<?php echo htmlspecialchars($job['job_vacancy_id']); ?>/application">
+                            <button>Apply</button>
+                        </a>
+                    </div>
+                <?php endif; ?>
             </div>
 
         </div>

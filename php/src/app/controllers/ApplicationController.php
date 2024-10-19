@@ -66,7 +66,8 @@ class ApplicationController {
                                 'video_path' => $video_path
                             ]);
     
-                            $message = 'Application submitted successfully.';
+                            header('Location: /job/' . $job_vacancy_id . '/application');
+                            exit;
                         } catch (PDOException $e) {
                             $message = 'Database Error: ' . htmlspecialchars($e->getMessage());
                         }

@@ -33,7 +33,7 @@ $home = true;
             <!-- back button -->
             <div class="back-arrow">
                 <a href="/job/<?php echo htmlspecialchars($job_vacancy_id); ?>" class="back-link">
-                    <img src="../../../public/images/arrow-left.png" alt="back">
+                    <img src="../../../public/images/arrow-left.svg" alt="back">
                     <p>Job Detail</p>
                 </a>
             </div>
