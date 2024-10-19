@@ -5,8 +5,7 @@ class JobController {
         require_once __DIR__ . '/../config/db.php';
         
         try {
-
-            // Jika user belum login, redirect ke halaman login
+            // Redirect jika belum login
             if (!isset($_SESSION['user_id'])) {
                 header('Location: /login');
                 exit;
@@ -14,7 +13,7 @@ class JobController {
 
             $pdo = Database::getConnection();
 
-            // Ambil detail pekerjaan berdasarkan job_vacancy_id
+            // Ambil detail pekerjaan
             $stmt = $pdo->prepare("
                 SELECT jv.*, c.name AS company_name, cd.location AS company_location, cd.about AS company_about 
                 FROM JobVacancy jv
@@ -29,7 +28,8 @@ class JobController {
                 throw new Exception('Job not found');
             }
 
-            $jobSeekerId = $_SESSION['user_id']; // Ambil user_id dari session
+            // Cek apakah user sudah melamar pekerjaan ini
+            $jobSeekerId = $_SESSION['user_id'];
             $stmt = $pdo->prepare("
                 SELECT * 
                 FROM Application 
@@ -45,7 +45,7 @@ class JobController {
             // Render view job detail
             View::render('job-detail/index', [
                 'job' => $job,
-                'application' => $application ?? null,
+                'application' => $application ?? null, // Mengirimkan data application
             ]);
 
         } catch (PDOException $e) {
