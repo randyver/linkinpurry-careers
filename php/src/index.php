@@ -43,6 +43,10 @@ $router->get('/get-company-description', 'CompanyHomeController@getCompanyDescri
 $router->get('/get-company-job-listings', 'CompanyHomeController@getJobListings');
 $router->post('/delete-job', 'CompanyJobController@deleteJob');
 
+// company detail job
+$router->get('/company-job/{id}', 'CompanyJobController@index');
+$router->get('/get-applicants', 'CompanyJobController@getApplicantsByStatus');
+
 // testing db
 $router->get('/test-db', 'TestDbController@index');
 $router->post('/test-db', 'TestDbController@index');
