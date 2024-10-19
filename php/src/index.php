@@ -47,6 +47,9 @@ $router->post('/delete-job', 'CompanyJobController@deleteJob');
 $router->get('/job/{id}/application', 'ApplicationController@submitApplication');
 $router->post('/job/{id}/application', 'ApplicationController@submitApplication');
 
+// history
+$router->get('/application-history', 'HistoryController@index');
+
 // testing db
 $router->get('/test-db', 'TestDbController@index');
 $router->post('/test-db', 'TestDbController@index');
