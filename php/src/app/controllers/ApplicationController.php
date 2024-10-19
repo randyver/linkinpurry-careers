@@ -44,35 +44,26 @@ class ApplicationController {
                     $message = 'Error: CV is required.';
                 }
     
-                // Validasi file video (wajib diupload)
-                if (empty($video_path)) {
-                    $message = 'Error: Video is required.';
-                }
-    
                 // Jika tidak ada pesan error, mulai proses upload file dan simpan ke database
                 if (empty($message)) {
                     $cv_uploaded = move_uploaded_file($_FILES['cv']['tmp_name'], $upload_dir . $cv_path);
                     $video_uploaded = $video_path ? move_uploaded_file($_FILES['video']['tmp_name'], $upload_dir . $video_path) : true;
     
-                    if ($cv_uploaded && $video_uploaded) {
-                        try {
-                            // Simpan data ke database
-                            $query = 'INSERT INTO Application (job_vacancy_id, user_id, cv_path, video_path) VALUES (:job_vacancy_id, :user_id, :cv_path, :video_path)';
-                            $stmt = $pdo->prepare($query);
-                            $stmt->execute([
-                                'job_vacancy_id' => $job_vacancy_id,
-                                'user_id' => $user_id,
-                                'cv_path' => $cv_path,
-                                'video_path' => $video_path
-                            ]);
-    
-                            header('Location: /job/' . $job_vacancy_id . '/application');
-                            exit;
-                        } catch (PDOException $e) {
-                            $message = 'Database Error: ' . htmlspecialchars($e->getMessage());
-                        }
-                    } else {
-                        $message = 'Failed to upload files.';
+                    try {
+                        // Simpan data ke database
+                        $query = 'INSERT INTO Application (job_vacancy_id, user_id, cv_path, video_path) VALUES (:job_vacancy_id, :user_id, :cv_path, :video_path)';
+                        $stmt = $pdo->prepare($query);
+                        $stmt->execute([
+                            'job_vacancy_id' => $job_vacancy_id,
+                            'user_id' => $user_id,
+                            'cv_path' => $cv_path,
+                            'video_path' => $video_path
+                        ]);
+
+                        header('Location: /job/' . $job_vacancy_id . '/application');
+                        exit;
+                    } catch (PDOException $e) {
+                        $message = 'Database Error: ' . htmlspecialchars($e->getMessage());
                     }
                 }
             }
