@@ -50,7 +50,7 @@ $home = true;
             <div class="job-details">
                 <h4><?php echo htmlspecialchars($job['position']); ?></h4>
                 <div class="job-meta">
-                    <p><img src="../../../public/images/clock-icon.svg" alt="Clock Icon"> Posted: <?php echo date('jS F Y', strtotime($job['created_at'])); ?></p>
+                    <p><img src="../../../public/images/calendar-icon.svg" alt="Calendar Icon"> Posted: <?php echo date('jS F Y', strtotime($job['created_at'])); ?></p>
                     <p><img src="../../../public/images/location-icon.svg" alt="Location Icon"> Location: <?php echo htmlspecialchars(ucfirst($job['location_type'])); ?></p>
                     <p><img src="../../../public/images/type-icon.svg" alt="Type Icon"> Type: <?php echo htmlspecialchars(ucfirst($job['job_type'])); ?></p>
                 </div>

@@ -1,6 +1,6 @@
 .footer {
     padding: 40px 20px;
-    font-family: 'Arial', sans-serif;
+    font-family: "Poppins", sans-serif;
     margin-top: 100px;
 }
 
@@ -45,12 +45,13 @@
 }
 
 .footer-nav-section ul li a:hover {
-    font-weight: bold;
+    color: #aaaaaa;
 }
 
 .footer-nav-section ul li a {
     text-decoration: none;
     color: #333;
+    transition: color 0.2s ease;
 }
 
 .footer-bottom {
