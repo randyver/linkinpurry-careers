@@ -1,6 +1,8 @@
 <nav class="navbar">
     <div class="navbar-left">
+        <a href="/home-jobseeker">
         <img src="../../../public/images/logo-icon-text.svg" alt="Logo" class="logo">
+        </a>
     </div>
     <div class="navbar-right">
         <?php if ($isLoggedIn): ?>
@@ -16,7 +18,7 @@
             </a>
 
             <a href="#" class="nav-item-link">
-                <?php if (isset($application) && $application == true) { ?>
+                <?php if (isset($application_history) && $application_history == true) { ?>
                     <div class="nav-item selected">
                     <?php } else { ?>
                         <div class="nav-item">

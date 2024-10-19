@@ -1,6 +1,6 @@
 <?php if (!empty($jobs)): ?>
     <?php foreach ($jobs as $job): ?>
-        <a href="#" class="recommendation-item-link">
+        <a href="/job/<?php echo htmlspecialchars($job['job_vacancy_id']); ?>" class="recommendation-item-link">
             <div class="recommendation-item">
                 <div class="recommendation-details">
                     <strong><?php echo htmlspecialchars($job['position']); ?></strong>
@@ -10,5 +10,10 @@
         </a>
     <?php endforeach; ?>
 <?php else: ?>
-    <p>No job recommendations available at the moment.</p>
+    <div class="recommendation-item">
+        <div class="recommendation-details">
+            <strong>Sorry!</strong>
+            <p>No job recommendations available at the moment.</p>
+        </div>
+    </div>
 <?php endif; ?>

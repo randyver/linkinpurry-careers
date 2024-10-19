@@ -166,17 +166,16 @@ main {
 button {
     padding: 10px 40px;
     font-size: 18px;
-    border: 2px solid #2d2d2d;
-    background-color: transparent;
+    border-color: transparent;
+    background-color: #3A4A3F;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease;
     text-decoration: none;
-    color: #2d2d2d;
+    color: #fff;
     display: inline-block;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
 button:hover {
-    background-color: #2d2d2d;
-    color: #fff;
+    background-color: #586f5f;
 }

@@ -10,28 +10,50 @@ class JobseekerHomeController
     public function getRecommendationJobs()
     {
         require_once __DIR__ . '/../config/db.php';
+
         $pdo = Database::getConnection();
+        $queryParams = [];
 
-        // Recommendation criteria: 2 most recent jobs
-        $query = 'SELECT jv.position, u.name AS company_name
-              FROM JobVacancy jv
-              JOIN Users u ON jv.company_id = u.user_id
-              WHERE jv.is_open = TRUE
-              ORDER BY jv.created_at DESC
-              LIMIT 2';
+        // Base query: Most recent open jobs with the highest number of applicants
+        $query = "
+            SELECT jv.job_vacancy_id, jv.position, u.name AS company_name, jv.created_at, COUNT(a.application_id) AS applicant_count
+            FROM JobVacancy jv
+            JOIN Users u ON jv.company_id = u.user_id
+            LEFT JOIN Application a ON jv.job_vacancy_id = a.job_vacancy_id
+            WHERE jv.is_open = TRUE
+        ";
 
+        // If user is logged in, exclude jobs they've applied for
+        if (isset($_SESSION['user_id'])) {
+            $userId = $_SESSION['user_id'];
+            $query .= " AND jv.job_vacancy_id NOT IN (
+                SELECT job_vacancy_id FROM Application WHERE user_id = :userId
+            )";
+            $queryParams[':userId'] = $userId;
+        }
+
+        $query .= "
+            GROUP BY jv.job_vacancy_id, u.name, jv.position, jv.created_at
+            ORDER BY applicant_count DESC, jv.created_at DESC
+            LIMIT 5
+        ";
+
+        // Prepare and execute the statement
         $statement = $pdo->prepare($query);
-        $statement->execute();
+        $statement->execute($queryParams);
         $jobs = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+        // Render the job recommendations view
         ob_start();
         include __DIR__ . '/../views/templates/recommendation-jobs-template.php';
         $htmlResponse = ob_get_clean();
 
+        // Send the response
         header('Content-Type: text/html');
         echo $htmlResponse;
         exit;
     }
+
 
     public function getJobListings()
     {

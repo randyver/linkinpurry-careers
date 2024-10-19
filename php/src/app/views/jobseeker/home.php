@@ -11,6 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $home = true;
+$application_history = false;
 
 ?>
 
@@ -115,7 +116,7 @@ $home = true;
 
         <aside class="recommendations-section">
             <div class="recommendation-card">
-                <h3>Jobs you may be interested in</h3>
+                <h3>Trending jobs you may be interested in</h3>
 
                 <div id="recommendation-response"></div>
 

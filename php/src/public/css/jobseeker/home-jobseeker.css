@@ -396,9 +396,9 @@ body {
     display: block;
     text-decoration: none;
     color: inherit;
-    margin-bottom: 10px;
     color: #3A4A3F;
     transition: color 0.2s ease;
+    margin-bottom: 15px;
 }
 
 .recommendation-item-link:hover {
@@ -411,9 +411,9 @@ body {
 }
 
 .recommendation-details p {
-    font-size: 14px;
+    font-size: 13px;
     color: #7A7A7A;
-    margin-top: 4px;
+    margin-top: 2px;
 }
 
 .footer {
