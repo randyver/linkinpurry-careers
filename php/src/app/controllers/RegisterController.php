@@ -120,7 +120,8 @@ class RegisterController {
                             ':about' => $about,
                         ]);
     
-                        $message = "Success: Company registered.";
+                        header('Location: /login');
+                        exit;
                     }
                 } catch (PDOException $e) {
                     $message = "Database Error: " . htmlspecialchars($e->getMessage());

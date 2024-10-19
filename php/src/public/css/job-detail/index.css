@@ -146,6 +146,23 @@ main {
     margin-top: 20px;
 }
 
+.application {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.file a {
+    text-decoration: none;
+    color: #826644;
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 6px;
+    font-style: italic;
+}
+
 button {
     padding: 10px 40px;
     font-size: 18px;
