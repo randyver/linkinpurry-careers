@@ -50,6 +50,14 @@ $router->post('/job/{id}/application', 'ApplicationController@submitApplication'
 // history
 $router->get('/application-history', 'HistoryController@index');
 
+// company detail job
+$router->get('/company-job/{id}', 'CompanyJobController@index');
+$router->get('/get-applicants', 'CompanyJobController@getApplicantsByStatus');
+
+// company application
+$router->get('/manage-applicant/{application_id}', 'CompanyApplicationController@index');
+$router->post('/manage-applicant/update', 'CompanyApplicationController@update');
+
 // testing db
 $router->get('/test-db', 'TestDbController@index');
 $router->post('/test-db', 'TestDbController@index');

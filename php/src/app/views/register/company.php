@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +8,17 @@
     <link rel="stylesheet" href="../../../public/css/register/company.css">
     <link rel="icon" href="../../../public/images/logo-icon.svg" type="image/x-icon">
 </head>
+
 <body>
     <!-- logo -->
-    <img src="../../../public/images/logo-dark.png" alt="logo" class="logo">
-
+    <a href="/home-jobseeker">
+        <img src="../../../public/images/logo-dark.png" alt="logo" class="logo">
+    </a>
+    
     <main>
         <!-- image -->
         <img src="../../../public/images/job-seeker-register.png" alt="job-seeker-register">
-         
+
         <!-- form -->
         <div>
             <div class="title">
@@ -67,4 +71,5 @@
         </div>
     </main>
 </body>
+
 </html>

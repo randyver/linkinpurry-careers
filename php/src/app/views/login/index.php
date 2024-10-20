@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,12 @@
     <link rel="stylesheet" href="../../../public/css/login/index.css">
     <link rel="icon" href="../../../public/images/logo-icon.svg" type="image/x-icon">
 </head>
+
 <body>
     <!-- logo -->
-    <img src="../../../public/images/logo-dark.png" alt="logo" class="logo">
+    <a href="/home-jobseeker">
+        <img src="../../../public/images/logo-dark.png" alt="logo" class="logo">
+    </a>
 
     <main>
         <!-- form -->
@@ -48,4 +52,5 @@
         <img src="../../../public/images/login.png" alt="login">
     </main>
 </body>
+
 </html>

@@ -1,6 +1,8 @@
 <nav class="navbar">
     <div class="navbar-left">
-        <img src="../../../public/images/logo-icon-text.svg" alt="Logo" class="logo">
+        <a href="/home-company">
+            <img src="../../../public/images/logo-icon-text.svg" alt="Logo" class="logo">
+        </a>
     </div>
     <div class="navbar-right">
 
@@ -30,3 +32,4 @@
         </div>
     </div>
 </nav>
+<script src="../../../public/js/navbar.js"></script>
