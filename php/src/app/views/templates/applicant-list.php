@@ -7,7 +7,7 @@
                 <img src="../../../public/images/<?php echo htmlspecialchars(strtolower($applicant['status'])); ?>-icon.svg" alt="<?php echo htmlspecialchars($applicant['status']); ?> Icon" class="status-icon">
                 <?php echo ucfirst(htmlspecialchars($applicant['status'])); ?>
             </span>
-            <a href="#" class="details-link">
+            <a href="/manage-applicant/<?php echo htmlspecialchars($applicant['application_id']); ?>" class="details-link">
                 <img src="../../../public/images/details-icon.svg" alt="Details Icon" class="details-icon">
                 <span>Details</span>
             </a>
