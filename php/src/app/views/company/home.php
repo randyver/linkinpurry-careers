@@ -106,7 +106,7 @@ $home = true;
         <section class="job-listings">
             <div class="search-container">
                 <img src="../../../public/images/search-icon.svg" alt="Search Icon" class="search-icon">
-                <input type="text" class="search-input" placeholder="Discover jobs...">
+                <input type="text" class="search-input" placeholder="Search jobs...">
             </div>
             <div class="sort-bar">
                 <hr class="sort-line">
@@ -120,6 +120,13 @@ $home = true;
             </div>
             <div id="job-listings-response"></div>
         </section>
+    </div>
+
+    <!-- Floating Button -->
+    <div class="floating-btn">
+        <a href="/add-job">
+            <img src="../../../public/images/plus-icon.svg" alt="Add Job Icon">
+        </a>
     </div>
 
     <script src="../../../public/js/home-company.js"></script>

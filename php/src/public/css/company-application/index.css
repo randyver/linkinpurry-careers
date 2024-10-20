@@ -172,6 +172,11 @@ main {
   margin-bottom: 10px;
 }
 
+/* Hide border when in read-only mode */
+.ql-container.read-only {
+    border: none !important;
+}
+
 /* Save Button */
 .save-btn {
   background-color: #3a4a3f;
@@ -186,4 +191,66 @@ main {
 
 .save-btn:hover {
   background-color: #2e3b33;
+}
+
+/* Modal Styling */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.5); 
+}
+
+.modal-content {
+    background-color: #fbf6ef;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 800px;
+    height: auto;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.modal-content iframe {
+    width: 100%;
+    height: 70vh;
+    border: none;
+    flex-shrink: 0;
+    overflow-y: auto;
+}
+
+.modal-content video {
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    border: none;
+    flex-shrink: 0;
+    background-color: black;
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-bottom: 10px;
+    transition: color 0.2s ease;
+}
+
+.close:hover, .close:focus {
+    color: #696969;
+    text-decoration: none;
+    cursor: pointer;
 }

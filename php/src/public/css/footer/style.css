@@ -46,14 +46,14 @@
     margin: 16px 0;
 }
 
-.footer-nav-section ul li a:hover {
-    color: #aaaaaa;
-}
-
 .footer-nav-section ul li a {
     text-decoration: none;
-    color: #333;
+    color: #666;
     transition: color 0.2s ease;
+}
+
+.footer-nav-section ul li a:hover {
+    color: #aaaaaa;
 }
 
 .footer-bottom {

@@ -52,7 +52,7 @@ $name = $_SESSION['name'];
                     <div class="file">
                         <p class="label">Curriculum Vitae:</p>
                         <img src="../../../public/images/detail-icon.svg" alt="Detail Icon">
-                        <a href="../../../public/uploads/<?php echo htmlspecialchars($application['cv_path']); ?>" target="_blank">See CV Attachment</a>
+                        <a href="#" id="viewCvBtn" data-cv-path="../../../public/uploads/<?php echo htmlspecialchars($application['cv_path']); ?>">See CV Attachment</a>
                     </div>
                 <?php endif; ?>
 
@@ -60,7 +60,7 @@ $name = $_SESSION['name'];
                     <div class="file">
                         <p class="label">Introduction Video:</p>
                         <img src="../../../public/images/detail-icon.svg" alt="Detail Icon">
-                        <a href="../../../public/uploads/<?php echo htmlspecialchars($application['video_path']); ?>" target="_blank">See Video Attachment</a>
+                        <a href="#" id="viewVideoBtn" data-video-path="../../../public/uploads/<?php echo htmlspecialchars($application['video_path']); ?>">See Video Attachment</a>
                     </div>
                 <?php endif; ?>
             </div>
@@ -86,6 +86,23 @@ $name = $_SESSION['name'];
         </div>
     </main>
 
+    <div id="pdfModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <iframe id="cvPdfViewer" src=""></iframe>
+        </div>
+    </div>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <video id="videoPlayer" controls>
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
     <?php include __DIR__ . '/../templates/footer.php'; ?>
 
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
@@ -99,6 +116,10 @@ $name = $_SESSION['name'];
         });
 
         quill.root.innerHTML = <?php echo json_encode($application['status_reason'] ?? ''); ?>;
+
+        if (<?php echo $application['status'] === 'waiting' ? 'false' : 'true'; ?>) {
+            document.querySelector('.ql-container').classList.add('read-only');
+        }
     </script>
     <script src="../../../public/js/company-application.js"></script>
 </body>
