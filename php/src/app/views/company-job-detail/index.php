@@ -20,6 +20,7 @@ $name = $_SESSION['name'];
     <link rel="stylesheet" href="../../../public/css/company-job-detail/index.css">
     <link rel="stylesheet" href="../../../public/css/footer/style.css">
     <link rel="icon" href="../../../public/images/logo-icon.svg" type="image/x-icon">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 </head>
 
 <body>
@@ -59,14 +60,14 @@ $name = $_SESSION['name'];
                     <p><img src="../../../public/images/location-icon.svg" alt="Location Icon"> Location: <?php echo htmlspecialchars(ucfirst($job['location_type'])); ?></p>
                     <p><img src="../../../public/images/type-icon.svg" alt="Type Icon"> Type: <?php echo htmlspecialchars(ucfirst($job['job_type'])); ?></p>
                 </div>
-                <p>
-                    <?php echo htmlspecialchars($job['description']); ?>
-                </p>
 
-                <!-- Image section -->
-                <!-- <div class="job-image">
-                    <img src="../../../public/images/job-vacancy.png" alt="Job Image">
-                </div> -->
+                <div id="job-description" style="height: fit-content;"></div>
+
+                <?php if (!empty($job['file_path'])): ?>
+                    <div class="job-image">
+                        <img src="../../../public/uploads/attachments/<?php echo htmlspecialchars($job['file_path']); ?>" alt="Job Image">
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
         <div class="filter-bar">
@@ -119,6 +120,20 @@ $name = $_SESSION['name'];
     </main>
 
     <?php include __DIR__ . '/../templates/footer.php'; ?>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        var quill = new Quill('#job-description', {
+            theme: 'snow',
+            readOnly: true,
+            modules: {
+                toolbar: false
+            }
+        });
+
+        quill.root.innerHTML = <?php echo json_encode($job['description']); ?>;
+        document.querySelector('.ql-container').style.border = 'none';
+    </script>
     <script src="../../../public/js/company-job-detail.js"></script>
 </body>
 

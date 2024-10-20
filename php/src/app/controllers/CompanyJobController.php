@@ -18,12 +18,14 @@ class CompanyJobController
 
             // Get job details and verify if the job belongs to the logged-in company
             $stmt = $pdo->prepare("
-            SELECT jv.*, c.name AS company_name, cd.location AS company_location, cd.about AS company_about 
-            FROM JobVacancy jv
-            JOIN Users c ON jv.company_id = c.user_id
-            JOIN CompanyDetail cd ON c.user_id = cd.user_id
-            WHERE jv.job_vacancy_id = :jobId AND jv.company_id = :currentUserId
-        ");
+                SELECT jv.*, c.name AS company_name, cd.location AS company_location, cd.about AS company_about, jva.file_path 
+                FROM JobVacancy jv
+                JOIN Users c ON jv.company_id = c.user_id
+                JOIN CompanyDetail cd ON c.user_id = cd.user_id
+                LEFT JOIN JobVacancyAttachment jva ON jv.job_vacancy_id = jva.job_vacancy_id
+                WHERE jv.job_vacancy_id = :jobId AND jv.company_id = :currentUserId
+            ");
+
             $stmt->execute([
                 ':jobId' => $jobId,
                 ':currentUserId' => $currentUserId
@@ -113,7 +115,7 @@ class CompanyJobController
 
         require_once __DIR__ . '/../config/db.php';
         $pdo = Database::getConnection();
-
+        
         $query = 'SELECT job_vacancy_id FROM JobVacancy WHERE job_vacancy_id = :job_id AND company_id = :company_id';
         $statement = $pdo->prepare($query);
         $statement->execute([
@@ -129,19 +131,35 @@ class CompanyJobController
             exit;
         }
 
-        $deleteQuery = 'DELETE FROM JobVacancy WHERE job_vacancy_id = :job_id';
-        $deleteStatement = $pdo->prepare($deleteQuery);
-        $deleteStatement->execute([
+        $attachmentQuery = 'SELECT file_path FROM JobVacancyAttachment WHERE job_vacancy_id = :job_id';
+        $attachmentStmt = $pdo->prepare($attachmentQuery);
+        $attachmentStmt->execute([
             ':job_id' => $jobId
         ]);
 
-        if ($deleteStatement->rowCount() > 0) {
+        $attachments = $attachmentStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($attachments as $attachment) {
+            $filePath = __DIR__ . '/../../public/uploads/attachments/' . $attachment['file_path'];
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+
+        $deleteJobQuery = 'DELETE FROM JobVacancy WHERE job_vacancy_id = :job_id';
+        $deleteJobStmt = $pdo->prepare($deleteJobQuery);
+        $deleteJobStmt->execute([
+            ':job_id' => $jobId
+        ]);
+
+        if ($deleteJobStmt->rowCount() > 0) {
             header('HTTP/1.1 200 OK');
-            echo 'Job deleted successfully';
+            echo 'Job and its attachments deleted successfully';
         } else {
             header('HTTP/1.1 500 Internal Server Error');
             echo 'Failed to delete the job. Please try again.';
         }
+
         exit;
     }
 }

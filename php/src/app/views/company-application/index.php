@@ -52,7 +52,7 @@ $name = $_SESSION['name'];
                     <div class="file">
                         <p class="label">Curriculum Vitae:</p>
                         <img src="../../../public/images/detail-icon.svg" alt="Detail Icon">
-                        <a href="#" id="viewCvBtn" data-cv-path="../../../public/uploads/<?php echo htmlspecialchars($application['cv_path']); ?>">See CV Attachment</a>
+                        <a href="#" id="viewCvBtn" data-cv-path="../../../public/uploads/cv/<?php echo htmlspecialchars($application['cv_path']); ?>">See CV Attachment</a>
                     </div>
                 <?php endif; ?>
 
@@ -60,7 +60,7 @@ $name = $_SESSION['name'];
                     <div class="file">
                         <p class="label">Introduction Video:</p>
                         <img src="../../../public/images/detail-icon.svg" alt="Detail Icon">
-                        <a href="#" id="viewVideoBtn" data-video-path="../../../public/uploads/<?php echo htmlspecialchars($application['video_path']); ?>">See Video Attachment</a>
+                        <a href="#" id="viewVideoBtn" data-video-path="../../../public/uploads/videos/<?php echo htmlspecialchars($application['video_path']); ?>">See Video Attachment</a>
                     </div>
                 <?php endif; ?>
             </div>
@@ -111,14 +111,31 @@ $name = $_SESSION['name'];
             theme: 'snow',
             readOnly: <?php echo $application['status'] === 'waiting' ? 'false' : 'true'; ?>,
             modules: {
-                toolbar: <?php echo $application['status'] === 'waiting' ? 'true' : 'false'; ?>
+                toolbar: <?php echo $application['status'] === 'waiting' ? "[
+                    [{
+                        'header': [1, 2, 3, false]
+                    }],
+                    [{
+                        'size': ['small', false, 'large', 'huge']
+                    }],
+                    ['bold', 'italic', 'underline'],
+                    [{
+                        'list': 'ordered'
+                    }, {
+                        'list': 'bullet'
+                    }],
+                    [{
+                        'align': []
+                    }],
+                    ['clean']
+                ]" : 'false'; ?>
             }
         });
 
         quill.root.innerHTML = <?php echo json_encode($application['status_reason'] ?? ''); ?>;
 
         if (<?php echo $application['status'] === 'waiting' ? 'false' : 'true'; ?>) {
-            document.querySelector('.ql-container').classList.add('read-only');
+            document.querySelector('.ql-container').style.border = 'none';
         }
     </script>
     <script src="../../../public/js/company-application.js"></script>

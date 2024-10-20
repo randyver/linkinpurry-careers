@@ -5,7 +5,6 @@ function deleteJob(jobId) {
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
             if (xhr.status === 200) {
-                alert('Job deleted successfully');
                 window.location.href = '/home-company';
             } else if (xhr.status === 403) {
                 alert('You are not authorized to delete this job.');

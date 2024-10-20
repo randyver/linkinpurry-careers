@@ -20,7 +20,6 @@ function deleteJob(jobId) {
                 const jobCard = document.querySelector(`.job-card[data-job-id='${jobId}']`);
                 if (jobCard) {
                     jobCard.remove();
-                    alert('Job deleted successfully');
                 }
             } else if (xhr.status === 403) {
                 alert('You are not authorized to delete this job.');
