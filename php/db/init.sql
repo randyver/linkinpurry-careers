@@ -492,8 +492,8 @@ INSERT INTO JobVacancyAttachment (job_vacancy_id, file_path) VALUES
 INSERT INTO Application (user_id, job_vacancy_id, cv_path, video_path, status) VALUES
 (1, 1, '/cv/jobseeker1_cv.pdf', NULL, 'rejected'),
 (2, 1, '/cv/jobseeker2_cv.pdf', NULL, 'waiting'),
-(2, 2, '/cv/jobseeker2_cv.pdf', '/videos/jobseeker2_video.mp4', 'rejected'),
-(1, 2, '/cv/jobseeker1_cv.pdf', NULL, 'accepted'),
+(2, 2, '/cv/jobseeker2_cv.pdf', '/videos/jobseeker2_video.mp4', 'waiting'),
+(1, 2, '/cv/jobseeker1_cv.pdf', NULL, 'waiting'),
 (1, 3, '/cv/jobseeker1_cv.pdf', '/videos/jobseeker1_video.mp4', 'rejected'),
 (1, 4, '/cv/jobseeker1_cv.pdf', NULL, 'accepted'),
 (2, 5, '/cv/jobseeker2_cv.pdf', NULL, 'rejected'),
