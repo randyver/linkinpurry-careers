@@ -172,11 +172,6 @@ main {
   margin-bottom: 10px;
 }
 
-/* Hide border when in read-only mode */
-.ql-container.read-only {
-    border: none !important;
-}
-
 /* Save Button */
 .save-btn {
   background-color: #3a4a3f;

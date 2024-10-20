@@ -54,7 +54,7 @@ CREATE TABLE JobVacancyAttachment (
     attachment_id SERIAL PRIMARY KEY,
     job_vacancy_id INT NOT NULL,
     file_path VARCHAR(255) NOT NULL,
-    FOREIGN KEY (job_vacancy_id) REFERENCES JobVacancy(job_vacancy_id)
+    FOREIGN KEY (job_vacancy_id) REFERENCES JobVacancy(job_vacancy_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Application (

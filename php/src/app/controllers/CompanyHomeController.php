@@ -110,11 +110,11 @@ class CompanyHomeController
         ob_start();
         if ($page === 1 && empty($jobs)) {
             echo '<div class="job-card no-jobs">
-        <div class="job-details">
-            <h4>No jobs found</h4>
-            <p>There are currently no available job listings. Please check back later!</p>
-        </div>
-    </div>';
+                    <div class="job-details">
+                        <h4>No jobs found</h4>
+                        <p>There are currently no available job listings. Please check back later!</p>
+                    </div>
+                </div>';
         } else {
             include __DIR__ . '/../views/templates/company-job-listings-template.php';
         }

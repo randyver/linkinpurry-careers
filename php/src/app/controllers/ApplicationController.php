@@ -37,7 +37,8 @@ class ApplicationController {
                 $video_path = !empty($_FILES['video']['name']) ? $_FILES['video']['name'] : null;
     
                 // Tentukan direktori upload
-                $upload_dir = __DIR__ . '/../../public/uploads/';
+                $upload_dir_vid  = __DIR__ . '/../../public/uploads/videos/';
+                $upload_dir_cv = __DIR__ . '/../../public/uploads/cv/';
     
                 // Validasi file CV
                 if (empty($cv_path)) {
@@ -46,8 +47,8 @@ class ApplicationController {
     
                 // Jika tidak ada pesan error, mulai proses upload file dan simpan ke database
                 if (empty($message)) {
-                    $cv_uploaded = move_uploaded_file($_FILES['cv']['tmp_name'], $upload_dir . $cv_path);
-                    $video_uploaded = $video_path ? move_uploaded_file($_FILES['video']['tmp_name'], $upload_dir . $video_path) : true;
+                    $cv_uploaded = move_uploaded_file($_FILES['cv']['tmp_name'], $upload_dir_cv . $cv_path);
+                    $video_uploaded = $video_path ? move_uploaded_file($_FILES['video']['tmp_name'], $upload_dir_vid . $video_path) : true;
     
                     try {
                         // Simpan data ke database

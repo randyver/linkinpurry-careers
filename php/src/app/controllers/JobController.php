@@ -15,10 +15,11 @@ class JobController {
 
             // Ambil detail pekerjaan
             $stmt = $pdo->prepare("
-                SELECT jv.*, c.name AS company_name, cd.location AS company_location, cd.about AS company_about 
+                SELECT jv.*, c.name AS company_name, cd.location AS company_location, cd.about AS company_about, jva.file_path 
                 FROM JobVacancy jv
                 JOIN Users c ON jv.company_id = c.user_id
                 JOIN CompanyDetail cd ON c.user_id = cd.user_id
+                LEFT JOIN JobVacancyAttachment jva ON jv.job_vacancy_id = jva.job_vacancy_id
                 WHERE jv.job_vacancy_id = :jobId
             ");
             $stmt->execute([':jobId' => $jobId]);
