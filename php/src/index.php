@@ -59,6 +59,10 @@ $router->post('/manage-applicant/update', 'CompanyApplicationController@update')
 $router->get('/add-job', 'CompanyAddJobController@index');
 $router->post('/add-job/create', 'CompanyAddJobController@addJob');
 
+// company edit job
+$router->get('/edit-job/{id}', 'CompanyEditJobController@index');
+$router->post('/edit-job/{id}/update', 'CompanyEditJobController@editJob');
+
 // testing db
 $router->get('/test-db', 'TestDbController@index');
 $router->post('/test-db', 'TestDbController@index');

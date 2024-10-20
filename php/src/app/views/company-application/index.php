@@ -77,7 +77,7 @@ $name = $_SESSION['name'];
 
             <div class="reason-editor">
                 <label for="editor">Reason for Accepting/Rejecting:</label>
-                <div id="editor" style="height: 150px;"></div>
+                <div id="editor" style="height: 200px;"></div>
             </div>
 
             <?php if ($application['status'] === 'waiting'): ?>

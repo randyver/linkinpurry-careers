@@ -44,7 +44,7 @@ $name = $_SESSION['name'];
                 </div>
                 <!-- Edit and Delete icons -->
                 <div class="job-actions">
-                    <a href="/edit-job" class="edit-job-icon">
+                    <a href="/edit-job/<?php echo htmlspecialchars($job['job_vacancy_id']); ?>" class="edit-job-icon">
                         <img src="../../../public/images/edit-icon.svg" alt="Edit Icon">
                     </a>
                     <button class="delete-job-icon">
