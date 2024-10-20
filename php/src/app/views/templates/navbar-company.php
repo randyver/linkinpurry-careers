@@ -1,6 +1,6 @@
 <nav class="navbar">
     <div class="navbar-left">
-        <a href="/home-jobseeker">
+        <a href="/home-company">
             <img src="../../../public/images/logo-icon-text.svg" alt="Logo" class="logo">
         </a>
     </div>
