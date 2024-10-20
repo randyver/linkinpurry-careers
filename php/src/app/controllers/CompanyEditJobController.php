@@ -7,26 +7,21 @@ class CompanyEditJobController
         try {
             require_once __DIR__ . '/../config/db.php';
             $pdo = Database::getConnection();
+
             $stmt = $pdo->prepare("
                 SELECT jv.*, jva.file_path 
                 FROM JobVacancy jv 
                 LEFT JOIN JobVacancyAttachment jva ON jv.job_vacancy_id = jva.job_vacancy_id
-                WHERE jv.job_vacancy_id = :jobId AND jv.company_id = :companyId
+                WHERE jv.job_vacancy_id = :jobId
             ");
-            $stmt->execute([
-                ':jobId' => $jobId,
-                ':companyId' => $_SESSION['user_id']
-            ]);
+            $stmt->execute([':jobId' => $jobId]);
 
-            // Fetch the job data
             $job = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // If no job found, throw an exception
-            if (!$job) {
+            if (!$job || $job['company_id'] != $_SESSION['user_id']) {
                 throw new Exception('Job not found or you are not authorized to edit this job.');
             }
 
-            // Render the view and pass the job data
             View::render("company-edit-job/index", [
                 'job' => $job
             ]);
@@ -44,18 +39,26 @@ class CompanyEditJobController
 
         try {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $stmt = $pdo->prepare("SELECT company_id FROM JobVacancy WHERE job_vacancy_id = :jobId");
+                $stmt->execute([':jobId' => $jobId]);
+                $job = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if (!$job || $job['company_id'] != $_SESSION['user_id']) {
+                    echo json_encode(['error' => 'You are not authorized to edit this job.']);
+                    return;
+                }
+
                 $jobName = $_POST['job_name'];
                 $location = $_POST['job_location'];
                 $jobType = $_POST['job_type'];
                 $description = $_POST['description'];
 
-                // Validate form data
                 if (empty($jobName) || empty($location) || empty($jobType) || empty($description)) {
                     echo json_encode(['error' => 'All fields are required.']);
                     return;
                 }
 
-                // Check if a new file is uploaded
+                // Handle new file upload, if provided
                 if (isset($_FILES['job_image']) && $_FILES['job_image']['error'] === UPLOAD_ERR_OK) {
                     $stmt = $pdo->prepare("SELECT file_path FROM JobVacancyAttachment WHERE job_vacancy_id = :jobId");
                     $stmt->execute([':jobId' => $jobId]);
@@ -99,7 +102,6 @@ class CompanyEditJobController
                     }
                 }
 
-                // Update the job vacancy data
                 $stmt = $pdo->prepare("
                     UPDATE JobVacancy 
                     SET position = :job_name, location_type = :location, job_type = :job_type, description = :description 

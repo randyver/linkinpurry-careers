@@ -28,7 +28,6 @@ document.getElementById('editJobForm').addEventListener('submit', function (e) {
         alert('An error occurred during the request.');
     };
 
-    // Send the form data
     xhr.send(formData);
 });
 
