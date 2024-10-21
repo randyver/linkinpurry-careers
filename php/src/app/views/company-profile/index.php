@@ -10,6 +10,8 @@ if (!isset($_SESSION['user_id'])) {
     $isLoggedIn = true;
 }
 
+$companyDescription = $companyDescription ?? 'Loading...';
+$companyLocation = $companyLocation ?? 'Loading...';
 $home = false;
 
 ?>
@@ -48,9 +50,9 @@ $home = false;
             </div>
 
             <div class="company-details">
-                <h1 class="company-name">WBD Corp.</h1>
-                <p class="company-location"><img src="../../../public/images/location-icon.svg" alt="Location Icon"> Jakarta, Indonesia</p>
-                <p class="company-description">Ini adalah about dari company</p>
+                <h1 class="company-name"><?php echo $name; ?></h1>
+                <p class="company-location"><img src="../../../public/images/location-icon.svg" alt="Location Icon"><?php echo $companyLocation; ?></p>
+                <p id="company-description"><?php echo $companyDescription; ?></p>
             </div>
 
             <div class="settings-icon">
@@ -60,20 +62,6 @@ $home = false;
     </main>
 
     <?php include __DIR__ . '/../templates/footer.php'; ?>
-
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script>
-        var quill = new Quill('#job-description', {
-            theme: 'snow',
-            readOnly: true,
-            modules: {
-                toolbar: false
-            }
-        });
-
-        quill.root.innerHTML = <?php echo json_encode($job['description']); ?>;
-        document.querySelector('.ql-container').style.border = 'none';
-    </script>
 </body>
 
 </html>
