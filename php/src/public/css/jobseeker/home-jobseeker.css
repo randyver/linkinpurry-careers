@@ -18,10 +18,15 @@ body {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
+    overflow: visible;
 }
 
 .filter-section {
     width: 20%;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
 }
 
 .profile-card {
@@ -340,6 +345,19 @@ body {
     color: #7A7A7A;
 }
 
+.job-description-container {
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #3A4A3F;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    margin: 0;
+}
+
 /* Job Image Section */
 .job-image {
     margin-top: 15px;
@@ -375,6 +393,10 @@ body {
 /* Recommendation Section */
 .recommendations-section {
     width: 20%;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
 }
 
 .recommendation-card {

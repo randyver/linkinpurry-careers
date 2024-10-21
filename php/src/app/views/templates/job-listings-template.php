@@ -9,13 +9,12 @@
                 </div>
             </div>
 
-                <div class="job-view">
-                    <a href="/job/<?php echo $job['job_vacancy_id']; ?>">
-                        <button>View</button>
-                    </a>
-                </div>
-
+            <div class="job-view">
+                <a href="/job/<?php echo $job['job_vacancy_id']; ?>">
+                    <button>View</button>
+                </a>
             </div>
+        </div>
 
         <div class="job-details">
             <h4><?php echo htmlspecialchars($job['position']); ?></h4>
@@ -24,11 +23,11 @@
                 <p><img src="../../../public/images/location-icon.svg" alt="Location Icon"> Location: <?php echo htmlspecialchars(ucfirst($job['location_type'])); ?></p>
                 <p><img src="../../../public/images/type-icon.svg" alt="Type Icon"> Type: <?php echo htmlspecialchars(ucfirst($job['job_type'])); ?></p>
             </div>
-            <p><?php echo htmlspecialchars($job['description']); ?></p>
+            <!-- <div class="job-description-container"><?php echo $job['description']; ?></div> -->
         </div>
 
-        <div class="job-image">
-            <img src="../../../public/images/job-vacancy.png" alt="Job Image">
-        </div>
+        <!-- <div class="job-image">
+            <img src="../../../public/uploads/<?php echo htmlspecialchars($job['file_path']); ?>" alt="Job Image">
+        </div> -->
     </div>
 <?php endforeach; ?>

@@ -160,9 +160,9 @@ main {
 }
 
 .job-image img {
-    width: 100%;
+    max-width: 100%;
     border-radius: 4px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 /* Filter Bar Styling */

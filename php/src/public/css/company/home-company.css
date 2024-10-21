@@ -18,10 +18,15 @@ body {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
+    overflow: visible;
 }
 
 .filter-section {
     width: 20%;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
 }
 
 .profile-card {
@@ -378,4 +383,35 @@ body {
 .footer-logo span {
     font-size: 11px;
     color: #7A7A7A;
+}
+
+/* Floating Button Styling */
+.floating-btn {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    width: 50px;
+    height: 50px;
+    background-color: #ffcc4d; /* Customize button color */
+    border-radius: 4px; /* Ensure the button is circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.floating-btn a {
+    height: 25px;
+}
+
+.floating-btn img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+.floating-btn:hover {
+    background-color: #fbd87f;
 }

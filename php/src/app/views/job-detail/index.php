@@ -17,6 +17,7 @@ $application_history = false;
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +26,9 @@ $application_history = false;
     <link rel="stylesheet" href="../../../public/css/job-detail/index.css">
     <link rel="stylesheet" href="../../../public/css/footer/style.css">
     <link rel="icon" href="../../../public/images/logo-icon.svg" type="image/x-icon">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 </head>
+
 <body>
     <?php include __DIR__ . '/../templates/navbar-jobseeker.php'; ?>
 
@@ -55,12 +58,14 @@ $application_history = false;
                     <p><img src="../../../public/images/location-icon.svg" alt="Location Icon"> Location: <?php echo htmlspecialchars(ucfirst($job['location_type'])); ?></p>
                     <p><img src="../../../public/images/type-icon.svg" alt="Type Icon"> Type: <?php echo htmlspecialchars(ucfirst($job['job_type'])); ?></p>
                 </div>
-                <p><?php echo htmlspecialchars($job['description']); ?></p>
+                <div id="job-description" style="height: fit-content;"></div>
             </div>
 
-            <div class="job-image">
-                <img src="../../../public/images/job-vacancy.png" alt="Job Image">
-            </div>
+            <?php if (!empty($job['file_path'])): ?>
+                <div class="job-image">
+                    <img src="../../../public/uploads/attachments/<?php echo htmlspecialchars($job['file_path']); ?>" alt="Job Image">
+                </div>
+            <?php endif; ?>
 
             <div class="apply-section">
                 <?php if ($application): ?>
@@ -88,5 +93,19 @@ $application_history = false;
         </div>
     </main>
     <?php include __DIR__ . '/../templates/footer.php'; ?>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        var quill = new Quill('#job-description', {
+            theme: 'snow',
+            readOnly: true,
+            modules: {
+                toolbar: false
+            }
+        });
+
+        quill.root.innerHTML = <?php echo json_encode($job['description']); ?>;
+        document.querySelector('.ql-container').style.border = 'none';
+    </script>
 </body>
+
 </html>

@@ -52,7 +52,7 @@ $name = $_SESSION['name'];
                     <div class="file">
                         <p class="label">Curriculum Vitae:</p>
                         <img src="../../../public/images/detail-icon.svg" alt="Detail Icon">
-                        <a href="../../../public/uploads/<?php echo htmlspecialchars($application['cv_path']); ?>" target="_blank">See CV Attachment</a>
+                        <a href="#" id="viewCvBtn" data-cv-path="../../../public/uploads/cv/<?php echo htmlspecialchars($application['cv_path']); ?>">See CV Attachment</a>
                     </div>
                 <?php endif; ?>
 
@@ -60,7 +60,7 @@ $name = $_SESSION['name'];
                     <div class="file">
                         <p class="label">Introduction Video:</p>
                         <img src="../../../public/images/detail-icon.svg" alt="Detail Icon">
-                        <a href="../../../public/uploads/<?php echo htmlspecialchars($application['video_path']); ?>" target="_blank">See Video Attachment</a>
+                        <a href="#" id="viewVideoBtn" data-video-path="../../../public/uploads/videos/<?php echo htmlspecialchars($application['video_path']); ?>">See Video Attachment</a>
                     </div>
                 <?php endif; ?>
             </div>
@@ -77,7 +77,7 @@ $name = $_SESSION['name'];
 
             <div class="reason-editor">
                 <label for="editor">Reason for Accepting/Rejecting:</label>
-                <div id="editor" style="height: 150px;"></div>
+                <div id="editor" style="height: 200px;"></div>
             </div>
 
             <?php if ($application['status'] === 'waiting'): ?>
@@ -85,6 +85,23 @@ $name = $_SESSION['name'];
             <?php endif; ?>
         </div>
     </main>
+
+    <div id="pdfModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <iframe id="cvPdfViewer" src=""></iframe>
+        </div>
+    </div>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <video id="videoPlayer" controls>
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
 
     <?php include __DIR__ . '/../templates/footer.php'; ?>
 
@@ -94,11 +111,32 @@ $name = $_SESSION['name'];
             theme: 'snow',
             readOnly: <?php echo $application['status'] === 'waiting' ? 'false' : 'true'; ?>,
             modules: {
-                toolbar: <?php echo $application['status'] === 'waiting' ? 'true' : 'false'; ?>
+                toolbar: <?php echo $application['status'] === 'waiting' ? "[
+                    [{
+                        'header': [1, 2, 3, false]
+                    }],
+                    [{
+                        'size': ['small', false, 'large', 'huge']
+                    }],
+                    ['bold', 'italic', 'underline'],
+                    [{
+                        'list': 'ordered'
+                    }, {
+                        'list': 'bullet'
+                    }],
+                    [{
+                        'align': []
+                    }],
+                    ['clean']
+                ]" : 'false'; ?>
             }
         });
 
         quill.root.innerHTML = <?php echo json_encode($application['status_reason'] ?? ''); ?>;
+
+        if (<?php echo $application['status'] === 'waiting' ? 'false' : 'true'; ?>) {
+            document.querySelector('.ql-container').style.border = 'none';
+        }
     </script>
     <script src="../../../public/js/company-application.js"></script>
 </body>
