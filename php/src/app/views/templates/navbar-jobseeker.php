@@ -17,7 +17,7 @@
                         </div>
             </a>
 
-            <a href="#" class="nav-item-link">
+            <a href="/application-history" class="nav-item-link">
                 <?php if (isset($application_history) && $application_history == true) { ?>
                     <div class="nav-item selected">
                     <?php } else { ?>
