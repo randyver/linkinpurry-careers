@@ -35,7 +35,7 @@
             </div>
 
             <div class="dropdown-menu" id="dropdown-menu">
-                <a href="#" class="dropdown-item">View Profile</a>
+                <a href="jobseeker-profile" class="dropdown-item">View Profile</a>
                 <!-- Form untuk logout -->
                 <form action="/logout" method="POST" class="dropdown-item">
                     <button type="submit" style="background: none; border: none; padding: 0; color: red; font-size: 14px; cursor: pointer;">Sign Out</button>
