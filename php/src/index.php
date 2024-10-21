@@ -37,6 +37,8 @@ $router->get('/get-recommendation-jobs', 'JobseekerHomeController@getRecommendat
 // detail job
 $router->get('/job/{id}', 'JobController@show');
 
+// job seeker profile
+
 // company
 $router->get('/home-company', 'CompanyHomeController@index');
 $router->get('/get-company-description', 'CompanyHomeController@getCompanyDescription');
@@ -62,6 +64,9 @@ $router->post('/add-job/create', 'CompanyAddJobController@addJob');
 // company edit job
 $router->get('/edit-job/{id}', 'CompanyEditJobController@index');
 $router->post('/edit-job/{id}/update', 'CompanyEditJobController@editJob');
+
+// company profile
+$router->get('/company-profile', 'CompanyProfileController@index');
 
 // testing db
 $router->get('/test-db', 'TestDbController@index');
