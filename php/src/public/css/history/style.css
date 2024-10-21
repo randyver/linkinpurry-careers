@@ -1,33 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #fbf6ef;
 }
 
 main {
-    max-width: 800px;
-    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 h2 {
     text-align: center;
     margin-bottom: 30px;
     font-size: 28px;
-    color: #333;
+    color: #3A4A3F;
+}
+
+.job-history {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .job-card {
     border: 1px solid #ddd;
     padding: 20px;
     margin-bottom: 20px;
-    border-radius: 8px;
+    border-radius: 10px;
     background-color: #fff;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+    width: 80%;
 }
 
 .job-header {
@@ -79,6 +93,10 @@ h2 {
     text-decoration: underline;
 }
 
+.application-status {
+    margin-top: 20px;
+}
+
 .job-meta p {
     margin: 0;
     font-size: 14px;
@@ -90,10 +108,16 @@ h2 {
     vertical-align: middle;
 }
 
+.job-actions {
+    display: flex;
+    justify-content: end;
+}
+
 .btn-detail {
+    margin-top: 20px;
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #3A4A3F;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -101,5 +125,5 @@ h2 {
 }
 
 .btn-detail:hover {
-    background-color: #0056b3;
+    background-color: #7A7A7A;
 }

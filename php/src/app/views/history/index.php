@@ -29,7 +29,7 @@ $home = true;
     <?php include __DIR__ . '/../templates/navbar-jobseeker.php'; ?>
 
     <main>
-        <h2>Job Application History</h2>
+        <h2>Application History</h2>
         
         <div class="job-history">
             <?php if (empty($appliedJobs)): ?>
