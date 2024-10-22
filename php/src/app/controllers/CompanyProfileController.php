@@ -8,9 +8,11 @@ class CompanyProfileController
             exit;
         }
 
+        $companyName = $this->getCompanyName();
         $companyDescription = $this->getCompanyDescription();
         $companyLocation = $this->getCompanyLocation();
         View::render('company-profile/index', [
+            'companyName' => $companyName,
             'companyDescription' => $companyDescription,
             'companyLocation' => $companyLocation
         ]);
@@ -48,5 +50,22 @@ class CompanyProfileController
         }
 
         return $companyLocation['location'];
+    }
+
+    public function getCompanyName() {
+        $userId = $_SESSION['user_id'];
+        require_once __DIR__ . '/../config/db.php';
+        $pdo = Database::getConnection();
+
+        $query = 'SELECT name FROM Users WHERE user_id = :user_id';
+        $statement = $pdo->prepare($query);
+        $statement->execute(['user_id' => $userId]);
+        $companyName = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if (!$companyName) {
+            throw new Exception('No company name found.');
+        }
+
+        return $companyName['name'];
     }
 }
