@@ -8,9 +8,11 @@ class CompanyEditProfileController
             exit;
         }
         
+        $companyName = $this->getCompanyName();
         $companyDescription = $this->getCompanyDescription();
         $companyLocation = $this->getCompanyLocation();
         View::render('company-edit-profile/index', [
+            'companyName' => $companyName,
             'companyDescription' => $companyDescription,
             'companyLocation' => $companyLocation
         ]);
@@ -60,6 +62,23 @@ class CompanyEditProfileController
         return $companyLocation['location'];
     }
 
+    public function getCompanyName() {
+        $userId = $_SESSION['user_id'];
+        require_once __DIR__ . '/../config/db.php';
+        $pdo = Database::getConnection();
+
+        $query = 'SELECT name FROM Users WHERE user_id = :user_id';
+        $statement = $pdo->prepare($query);
+        $statement->execute(['user_id' => $userId]);
+        $companyName = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if (!$companyName) {
+            throw new Exception('No company name found.');
+        }
+
+        return $companyName['name'];
+    }
+
     public function checkCurrentPassword()
     {
         if (!isset($_SESSION['user_id'])) {
@@ -94,8 +113,8 @@ class CompanyEditProfileController
 
         $userId = $_SESSION['user_id'];
         $companyName = $_POST['company_name'];
-        $currentPassword = $_POST['current_password']; // Optional
-        $newPassword = $_POST['new_password']; 
+        $currentPassword = $_POST['current_password'];
+        $newPassword = $_POST['new_password'];
         $companyLocation = $_POST['company_location'];
         $companyDescription = $_POST['company_description'];
 
