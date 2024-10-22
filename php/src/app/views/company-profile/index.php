@@ -56,7 +56,9 @@ $home = false;
             </div>
 
             <div class="settings-icon">
-                <img src="../../../public/images/settings-icon.svg" alt="Settings Icon">
+                <a href="/company-edit-profile">
+                    <img src="../../../public/images/settings-icon.svg" alt="Settings Icon">
+                </a>
             </div>
         </div>
     </main>

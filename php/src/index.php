@@ -69,6 +69,11 @@ $router->post('/edit-job/{id}/update', 'CompanyEditJobController@editJob');
 // company profile
 $router->get('/company-profile', 'CompanyProfileController@index');
 
+// company edit profile
+$router->get('/company-edit-profile', 'CompanyEditProfileController@index');
+$router->post('/check-current-password', 'CompanyEditProfileController@checkCurrentPassword');
+$router->post('/company-update-profile', 'CompanyEditProfileController@updateProfile');
+
 // testing db
 $router->get('/test-db', 'TestDbController@index');
 $router->post('/test-db', 'TestDbController@index');

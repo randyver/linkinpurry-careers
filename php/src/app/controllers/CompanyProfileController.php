@@ -3,6 +3,11 @@
 class CompanyProfileController
 {
     public function index() {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /login');
+            exit;
+        }
+
         $companyDescription = $this->getCompanyDescription();
         $companyLocation = $this->getCompanyLocation();
         View::render('company-profile/index', [
