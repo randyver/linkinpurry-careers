@@ -37,6 +37,14 @@ $router->get('/get-recommendation-jobs', 'JobseekerHomeController@getRecommendat
 // detail job
 $router->get('/job/{id}', 'JobController@show');
 
+// job seeker profile
+$router->get('/jobseeker-profile', 'JobSeekerProfileController@index');
+
+// job seeker edit profile
+$router->get('/jobseeker-edit-profile', 'JobseekerEditProfileController@index');
+$router->post('/check-current-password', 'JobseekerEditProfileController@checkCurrentPassword');
+$router->post('/jobseeker-update-profile', 'JobseekerEditProfileController@updateProfile');
+
 // company
 $router->get('/home-company', 'CompanyHomeController@index');
 $router->get('/get-company-description', 'CompanyHomeController@getCompanyDescription');
@@ -65,6 +73,14 @@ $router->post('/add-job/create', 'CompanyAddJobController@addJob');
 // company edit job
 $router->get('/edit-job/{id}', 'CompanyEditJobController@index');
 $router->post('/edit-job/{id}/update', 'CompanyEditJobController@editJob');
+
+// company profile
+$router->get('/company-profile', 'CompanyProfileController@index');
+
+// company edit profile
+$router->get('/company-edit-profile', 'CompanyEditProfileController@index');
+$router->post('/check-current-password', 'CompanyEditProfileController@checkCurrentPassword');
+$router->post('/company-update-profile', 'CompanyEditProfileController@updateProfile');
 
 // testing db
 $router->get('/test-db', 'TestDbController@index');
