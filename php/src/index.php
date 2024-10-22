@@ -40,6 +40,11 @@ $router->get('/job/{id}', 'JobController@show');
 // job seeker profile
 $router->get('/jobseeker-profile', 'JobSeekerProfileController@index');
 
+// job seeker edit profile
+$router->get('/jobseeker-edit-profile', 'JobseekerEditProfileController@index');
+$router->post('/check-current-password', 'JobseekerEditProfileController@checkCurrentPassword');
+$router->post('/jobseeker-update-profile', 'JobseekerEditProfileController@updateProfile');
+
 // company
 $router->get('/home-company', 'CompanyHomeController@index');
 $router->get('/get-company-description', 'CompanyHomeController@getCompanyDescription');

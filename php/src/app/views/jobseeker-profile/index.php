@@ -10,6 +10,7 @@ if (!isset($_SESSION['user_id'])) {
     $isLoggedIn = true;
 }
 
+$jobseekerName = $jobseekerName ?? 'Loading...';
 $email = $email ?? 'Not available';
 $jobsAppliedNum = $jobsAppliedNum ?? 0;
 $home = false;
@@ -50,15 +51,17 @@ $home = false;
             </div>
 
             <div class="jobseeker-details">
-                <h1 class="jobseeker-name"><?php echo $name; ?></h1>
+                <h1 class="jobseeker-name"><?php echo $jobseekerName; ?></h1>
                 <p class="jobseeker-details-subtitle">Email</p>
                 <p class="jobseeker-info"><?php echo $email; ?></p>
-                <p class="jobseeker-details-subtitle">Job Applied</p>
+                <p class="jobseeker-details-subtitle">Jobs Applied</p>
                 <p class="jobseeker-info"><?php echo $jobsAppliedNum; ?></p>
             </div>
 
             <div class="settings-icon">
-                <img src="../../../public/images/settings-icon.svg" alt="Settings Icon">
+                <a href="/jobseeker-edit-profile">
+                    <img src="../../../public/images/settings-icon.svg" alt="Settings Icon">
+                </a>
             </div>
         </div>
     </main>
