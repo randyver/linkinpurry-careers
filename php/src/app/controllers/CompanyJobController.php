@@ -7,7 +7,6 @@ class CompanyJobController
         require_once __DIR__ . '/../config/db.php';
 
         try {
-            // Check if the user is logged in
             if (!isset($_SESSION['user_id'])) {
                 header('Location: /login');
                 exit;
@@ -16,30 +15,32 @@ class CompanyJobController
             $pdo = Database::getConnection();
             $currentUserId = $_SESSION['user_id'];
 
-            // Get job details and verify if the job belongs to the logged-in company
             $stmt = $pdo->prepare("
-                SELECT jv.*, c.name AS company_name, cd.location AS company_location, cd.about AS company_about, jva.file_path 
-                FROM JobVacancy jv
-                JOIN Users c ON jv.company_id = c.user_id
-                JOIN CompanyDetail cd ON c.user_id = cd.user_id
-                LEFT JOIN JobVacancyAttachment jva ON jv.job_vacancy_id = jva.job_vacancy_id
-                WHERE jv.job_vacancy_id = :jobId AND jv.company_id = :currentUserId
-            ");
-
+            SELECT jv.*, c.name AS company_name, cd.location AS company_location, cd.about AS company_about
+            FROM JobVacancy jv
+            JOIN Users c ON jv.company_id = c.user_id
+            JOIN CompanyDetail cd ON c.user_id = cd.user_id
+            WHERE jv.job_vacancy_id = :jobId AND jv.company_id = :currentUserId
+        ");
             $stmt->execute([
                 ':jobId' => $jobId,
                 ':currentUserId' => $currentUserId
             ]);
             $job = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // If job is not found or doesn't belong to the current user
             if (!$job) {
                 throw new Exception('Job not found or you do not have permission to view this job.');
             }
 
-            // Render the job details
+            $attachmentStmt = $pdo->prepare("SELECT file_path FROM JobVacancyAttachment WHERE job_vacancy_id = :jobId");
+            $attachmentStmt->execute([
+                ':jobId' => $jobId
+            ]);
+            $attachments = $attachmentStmt->fetchAll(PDO::FETCH_ASSOC);
+
             View::render('company-job-detail/index', [
-                'job' => $job
+                'job' => $job,
+                'attachments' => $attachments
             ]);
         } catch (PDOException $e) {
             echo "Database Error: " . htmlspecialchars($e->getMessage());
@@ -115,7 +116,7 @@ class CompanyJobController
 
         require_once __DIR__ . '/../config/db.php';
         $pdo = Database::getConnection();
-        
+
         $query = 'SELECT job_vacancy_id FROM JobVacancy WHERE job_vacancy_id = :job_id AND company_id = :company_id';
         $statement = $pdo->prepare($query);
         $statement->execute([

@@ -147,22 +147,55 @@ main {
     color: #7A7A7A;
 }
 
-.file-name {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #3A4A3F;
-    display: none; 
-}
-
 .file-label.active {
     background-color: #EDE5D5;
 }
 
-.file-name.active {
-    display: block;
+.file-list {
+    list-style-type: none;
+    padding-left: 0;
 }
 
-.current-attachment {
+.file-list li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #3A4A3F;
+}
+
+.remove-btn {
+    margin-left: 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.remove-existing-attachment {
+    margin-left: 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.current-attachments-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.current-attachments {
     margin-bottom: 20px;
     color: #3A4A3F;
     font-size: 14px;
@@ -171,23 +204,27 @@ main {
     text-align: center;
 }
 
-.current-attachment a {
-    display: inline-block;
+.current-attachments a {
+    display: flex;
     width: 100%;
     margin-top: 10px;
     height: fit-content;
+    justify-content: center;
+    align-items: center;
 }
 
-.current-attachment img {
-    width: 100%;
-    height: auto;
-    max-width: 600px;
+.current-attachments img {
+    width: 200px;
+    max-height: 200px;
+    max-width: 200px;
     border-radius: 4px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    margin-bottom: 5px;
+    margin-top: 10px;
 }
 
-.current-attachment img:hover {
+.current-attachments img:hover {
     transform: scale(1.05);
 }
 

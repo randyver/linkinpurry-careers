@@ -60,9 +60,17 @@ $application_history = false;
                 <div id="job-description" style="height: fit-content;"></div>
             </div>
 
-            <?php if (!empty($job['file_path'])): ?>
-                <div class="job-image">
-                    <img src="../../../public/uploads/attachments/<?php echo htmlspecialchars($job['file_path']); ?>" alt="Job Image">
+            <?php if (!empty($attachments)): ?>
+                <div class="job-attachments">
+                    <ul class="attachment-list">
+                        <?php foreach ($attachments as $attachment): ?>
+                            <li>
+                                <a href="../../../public/uploads/attachments/<?php echo htmlspecialchars($attachment['file_path']); ?>" target="_blank">
+                                    <img src="../../../public/uploads/attachments/<?php echo htmlspecialchars($attachment['file_path']); ?>" alt="Job Attachment" class="attachment-image">
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
                 </div>
             <?php endif; ?>
 
@@ -81,7 +89,7 @@ $application_history = false;
                                 <a href="../../../public/uploads/videos/<?php echo htmlspecialchars($application['video_path']); ?>" target="_blank">See Video Attachment</a>
                             </div>
                         <?php endif; ?>
-                        
+
                         <div>
                             <p>Reason:</p>
                             <div id="status-reason" style="height: fit-content;"></div>
@@ -114,16 +122,16 @@ $application_history = false;
         document.querySelector('.ql-container').style.border = 'none';
 
         <?php if (!empty($application['status_reason'])): ?>
-        var quillReason = new Quill('#status-reason', {
-            theme: 'snow',
-            readOnly: true,
-            modules: {
-                toolbar: false
-            }
-        });
+            var quillReason = new Quill('#status-reason', {
+                theme: 'snow',
+                readOnly: true,
+                modules: {
+                    toolbar: false
+                }
+            });
 
-        quillReason.root.innerHTML = <?php echo json_encode($application['status_reason']); ?>;
-        document.querySelector('#status-reason .ql-container').style.border = 'none';
+            quillReason.root.innerHTML = <?php echo json_encode($application['status_reason']); ?>;
+            document.querySelector('#status-reason .ql-container').style.border = 'none';
         <?php endif; ?>
     </script>
 </body>

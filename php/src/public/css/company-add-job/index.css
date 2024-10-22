@@ -147,19 +147,35 @@ main {
     color: #7A7A7A;
 }
 
-.file-name {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #3A4A3F;
-    display: none; 
-}
-
 .file-label.active {
     background-color: #EDE5D5;
 }
 
-.file-name.active {
-    display: block;
+.file-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.file-list li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #3A4A3F;
+}
+
+.remove-btn {
+    margin-left: 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 14px;
 }
 
 /* Submit Button */

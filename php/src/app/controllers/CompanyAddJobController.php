@@ -19,20 +19,18 @@ class CompanyAddJobController
                 $description = $_POST['description'];
                 $companyId = $_SESSION['user_id'];
 
-                // Validate the form data
                 if (empty($jobName) || empty($location) || empty($jobType) || empty($description)) {
                     echo json_encode(['error' => 'All fields are required.']);
                     return;
                 }
 
-                // Start a transaction
                 $pdo = Database::getConnection();
                 $pdo->beginTransaction();
 
                 $stmt = $pdo->prepare("
-                    INSERT INTO JobVacancy (company_id, position, location_type, job_type, description) 
-                    VALUES (:company_id, :position, :location, :job_type, :description)
-                ");
+                INSERT INTO JobVacancy (company_id, position, location_type, job_type, description) 
+                VALUES (:company_id, :position, :location, :job_type, :description)
+            ");
                 $stmt->execute([
                     ':company_id' => $companyId,
                     ':position' => $jobName,
@@ -43,40 +41,42 @@ class CompanyAddJobController
 
                 $jobVacancyId = $pdo->lastInsertId();
 
-                if (isset($_FILES['job_image']) && $_FILES['job_image']['error'] === UPLOAD_ERR_OK) {
-                    
+                if (isset($_FILES['job_images']) && $_FILES['job_images']['error'][0] === UPLOAD_ERR_OK) {
                     $uploadDirectory = __DIR__ . '/../../public/uploads/attachments/';
 
                     if (!is_dir($uploadDirectory)) {
                         mkdir($uploadDirectory, 0755, true);
                     }
 
-                    $fileTmpPath = $_FILES['job_image']['tmp_name'];
-                    $fileName = $_FILES['job_image']['name'];
-                    $fileType = $_FILES['job_image']['type'];
+                    for ($i = 0; $i < count($_FILES['job_images']['name']); $i++) {
+                        $fileTmpPath = $_FILES['job_images']['tmp_name'][$i];
+                        $fileName = $_FILES['job_images']['name'][$i];
+                        $fileType = $_FILES['job_images']['type'][$i];
 
-                    $allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
-                    if (!in_array($fileType, $allowedFileTypes)) {
-                        echo json_encode(['error' => 'Invalid file type. Only JPG, PNG, and GIF are allowed.']);
-                        return;
-                    }
+                        $allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                        if (!in_array($fileType, $allowedFileTypes)) {
+                            echo json_encode(['error' => 'Invalid file type. Only JPG, PNG, and GIF are allowed.']);
+                            $pdo->rollBack();
+                            return;
+                        }
 
-                    $newFileName = time() . "_" . basename($fileName);
-                    $destPath = $uploadDirectory . $newFileName;
+                        $newFileName = time() . "_" . basename($fileName);
+                        $destPath = $uploadDirectory . $newFileName;
 
-                    if (move_uploaded_file($fileTmpPath, $destPath)) {
-                        $stmt = $pdo->prepare("
+                        if (move_uploaded_file($fileTmpPath, $destPath)) {
+                            $stmt = $pdo->prepare("
                             INSERT INTO JobVacancyAttachment (job_vacancy_id, file_path) 
                             VALUES (:job_vacancy_id, :file_path)
                         ");
-                        $stmt->execute([
-                            ':job_vacancy_id' => $jobVacancyId,
-                            ':file_path' => $newFileName
-                        ]);
-                    } else {
-                        echo json_encode(['error' => 'There was an error uploading the file.']);
-                        $pdo->rollBack();
-                        return;
+                            $stmt->execute([
+                                ':job_vacancy_id' => $jobVacancyId,
+                                ':file_path' => $newFileName
+                            ]);
+                        } else {
+                            echo json_encode(['error' => 'There was an error uploading the files.']);
+                            $pdo->rollBack();
+                            return;
+                        }
                     }
                 }
 
