@@ -87,7 +87,6 @@ class CompanyEditProfileController
 
     public function updateProfile()
     {
-        session_start();
         if (!isset($_SESSION['user_id'])) {
             header('Location: /login');
             exit;
@@ -95,14 +94,15 @@ class CompanyEditProfileController
 
         $userId = $_SESSION['user_id'];
         $companyName = $_POST['company_name'];
-        $currentPassword = $_POST['current_password'];
-        $newPassword = $_POST['new_password'];
+        $currentPassword = $_POST['current_password']; // Optional
+        $newPassword = $_POST['new_password']; // Optional
         $companyLocation = $_POST['company_location'];
-        $companyDescription = $_POST['company_description'];
+        $companyDescription = $_POST['company_description']; // Stored in a separate table
 
         require_once __DIR__ . '/../config/db.php';
         $pdo = Database::getConnection();
 
+        // If current password is provided, verify it
         if (!empty($currentPassword)) {
             $query = 'SELECT password FROM Users WHERE user_id = :user_id';
             $statement = $pdo->prepare($query);
@@ -114,23 +114,39 @@ class CompanyEditProfileController
                 return;
             }
 
+            // If a new password is provided, hash and update it
             if (!empty($newPassword)) {
                 $newPasswordHashed = password_hash($newPassword, PASSWORD_DEFAULT);
                 $query = 'UPDATE Users SET password = :new_password WHERE user_id = :user_id';
                 $statement = $pdo->prepare($query);
-                $statement->execute(['new_password' => $newPasswordHashed, 'user_id' => $userId]);
+                if (!$statement->execute(['new_password' => $newPasswordHashed, 'user_id' => $userId])) {
+                    echo 'Failed to update password.';
+                    return;
+                }
             }
         }
 
-        $query = 'UPDATE CompanyDetail SET name = :company_name, location = :company_location, about = :company_description WHERE user_id = :user_id';
+        // Update the company name in the Users table
+        $query = 'UPDATE Users SET name = :company_name WHERE user_id = :user_id';
         $statement = $pdo->prepare($query);
-        $statement->execute([
-            'company_name' => $companyName,
+        if (!$statement->execute(['company_name' => $companyName, 'user_id' => $userId])) {
+            echo 'Failed to update company name.';
+            return;
+        }
+
+        // Update the company location and description in the CompanyDetail table
+        $query = 'UPDATE CompanyDetail SET location = :company_location, about = :company_description WHERE user_id = :user_id';
+        $statement = $pdo->prepare($query);
+        if (!$statement->execute([
             'company_location' => $companyLocation,
             'company_description' => $companyDescription,
             'user_id' => $userId
-        ]);
+        ])) {
+            echo 'Failed to update company details.';
+            return;
+        }
 
+        // Redirect back to the company profile page
         header('Location: /company-profile');
         exit;
     }
