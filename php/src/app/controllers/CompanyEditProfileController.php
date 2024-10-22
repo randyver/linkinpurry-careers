@@ -95,14 +95,13 @@ class CompanyEditProfileController
         $userId = $_SESSION['user_id'];
         $companyName = $_POST['company_name'];
         $currentPassword = $_POST['current_password']; // Optional
-        $newPassword = $_POST['new_password']; // Optional
+        $newPassword = $_POST['new_password']; 
         $companyLocation = $_POST['company_location'];
-        $companyDescription = $_POST['company_description']; // Stored in a separate table
+        $companyDescription = $_POST['company_description'];
 
         require_once __DIR__ . '/../config/db.php';
         $pdo = Database::getConnection();
 
-        // If current password is provided, verify it
         if (!empty($currentPassword)) {
             $query = 'SELECT password FROM Users WHERE user_id = :user_id';
             $statement = $pdo->prepare($query);
@@ -114,7 +113,6 @@ class CompanyEditProfileController
                 return;
             }
 
-            // If a new password is provided, hash and update it
             if (!empty($newPassword)) {
                 $newPasswordHashed = password_hash($newPassword, PASSWORD_DEFAULT);
                 $query = 'UPDATE Users SET password = :new_password WHERE user_id = :user_id';
@@ -126,7 +124,6 @@ class CompanyEditProfileController
             }
         }
 
-        // Update the company name in the Users table
         $query = 'UPDATE Users SET name = :company_name WHERE user_id = :user_id';
         $statement = $pdo->prepare($query);
         if (!$statement->execute(['company_name' => $companyName, 'user_id' => $userId])) {
@@ -134,7 +131,6 @@ class CompanyEditProfileController
             return;
         }
 
-        // Update the company location and description in the CompanyDetail table
         $query = 'UPDATE CompanyDetail SET location = :company_location, about = :company_description WHERE user_id = :user_id';
         $statement = $pdo->prepare($query);
         if (!$statement->execute([
@@ -146,7 +142,6 @@ class CompanyEditProfileController
             return;
         }
 
-        // Redirect back to the company profile page
         header('Location: /company-profile');
         exit;
     }

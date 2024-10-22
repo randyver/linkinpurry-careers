@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     form.addEventListener('submit', function (e) {
-        e.preventDefault(); // Prevent form submission
+        e.preventDefault();
 
         if (currentPasswordInput.value.trim() !== "") {
             checkCurrentPassword(currentPasswordInput.value)
@@ -30,10 +30,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function submitForm() {
         const hiddenDescriptionInput = document.getElementById('company-description-hidden');
-        hiddenDescriptionInput.value = quill.root.innerHTML; // Get the content from Quill editor
+        hiddenDescriptionInput.value = quill.root.innerHTML;
 
         isFormChanged = false;
-        form.submit(); // Finally, submit the form
+        form.submit();
     }
 
     async function checkCurrentPassword(currentPassword) {
