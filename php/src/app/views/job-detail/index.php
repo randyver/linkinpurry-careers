@@ -73,12 +73,12 @@ $application_history = false;
 
                         <div class="file">
                             <img src="../../../public/images/detail-icon.svg" alt="Detail Icon">
-                            <a href="../../../public/uploads/<?php echo htmlspecialchars($application['cv_path']); ?>" target="_blank">See CV Attachment</a>
+                            <a href="../../../public/uploads/cv/<?php echo htmlspecialchars($application['cv_path']); ?>" target="_blank">See CV Attachment</a>
                         </div>
                         <?php if ($application['video_path']): ?>
                             <div class="file">
                                 <img src="../../../public/images/detail-icon.svg" alt="Detail Icon">
-                                <a href="../../../public/uploads/<?php echo htmlspecialchars($application['video_path']); ?>" target="_blank">See Video Attachment</a>
+                                <a href="../../../public/uploads/videos/<?php echo htmlspecialchars($application['video_path']); ?>" target="_blank">See Video Attachment</a>
                             </div>
                         <?php endif; ?>
                         

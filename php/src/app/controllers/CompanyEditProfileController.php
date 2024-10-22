@@ -161,6 +161,8 @@ class CompanyEditProfileController
             return;
         }
 
+        $_SESSION['name'] = $companyName;
+
         header('Location: /company-profile');
         exit;
     }

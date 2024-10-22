@@ -105,6 +105,8 @@ class JobseekerEditProfileController
             return;
         }
 
+        $_SESSION['name'] = $jobseekerName;
+
         header('Location: /jobseeker-profile');
         exit;
     }
