@@ -10,6 +10,7 @@ if (!isset($_SESSION['user_id'])) {
     $isLoggedIn = true;
 }
 
+$companyName = $companyName ?? '';
 $companyDescription = $companyDescription ?? '';
 $companyLocation = $companyLocation ?? '';
 $home = false;
