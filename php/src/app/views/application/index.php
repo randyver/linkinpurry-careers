@@ -43,7 +43,7 @@ $application_history = false;
                 </div>
 
                 <?php if (!empty($message)): ?>
-                    <div style="color: <?= $code == 2 || $code == 0 ? 'red' : 'green' ?>; margin-bottom: 20px; font-weight:500;">
+                    <div style="color: <?= $code != 1 ? 'red' : 'green' ?>; margin-bottom: 20px; font-weight:500;">
                         <?= htmlspecialchars($message); ?>
                     </div>
                 <?php endif; ?>
@@ -55,8 +55,8 @@ $application_history = false;
                                 <img src="../../../public/images/upload.svg" alt="upload">
                                 <p id="cv-name">Upload CV</p>
                             </label>
-                            <input type="file" id="upload-cv" name="cv" accept=".pdf, .doc, .docx" style="display: none;" <?= $code == 1 || $code == 2 ? 'disabled' : '' ?> onchange="handleFileUpload('cv')">
-                            <button id="cv-remove" class="remove-button" style="display:none;" onclick="removeFile('cv')" <?= $code == 1 || $code == 2 ? 'disabled' : '' ?>>&times;</button>
+                            <input type="file" id="upload-cv" name="cv" accept=".pdf, .doc, .docx" style="display: none;" <?= $code != 0 ? 'disabled' : '' ?> onchange="handleFileUpload('cv')">
+                            <button id="cv-remove" class="remove-button" style="display:none;" onclick="removeFile('cv')" <?= $code != 0 ? 'disabled' : '' ?>>&times;</button>
                         </div>
 
                         <div class="upload-container">
@@ -64,14 +64,14 @@ $application_history = false;
                                 <img src="../../../public/images/upload.svg" alt="upload">
                                 <p id="video-name">Upload Introduction Video</p>
                             </label>
-                            <input type="file" id="upload-video" name="video" accept="video/*" style="display: none;" <?= $code == 1 || $code == 2 ? 'disabled' : '' ?> onchange="handleFileUpload('video')">
-                            <button id="video-remove" class="remove-button" style="display:none;" onclick="removeFile('video')" <?= $code == 1 || $code == 2 ? 'disabled' : '' ?>>&times;</button>
+                            <input type="file" id="upload-video" name="video" accept="video/*" style="display: none;" <?= $code != 0 ? 'disabled' : '' ?> onchange="handleFileUpload('video')">
+                            <button id="video-remove" class="remove-button" style="display:none;" onclick="removeFile('video')" <?= $code != 0 ? 'disabled' : '' ?>>&times;</button>
                         </div>
                     </div>
 
                     <input type="hidden" name="user_id" value="<?= $user_id; ?>">
                     <input type="hidden" name="job_vacancy_id" value="<?= $job_vacancy_id; ?>">
-                    <button type="submit" class="send-button" <?= $code == 1 || $code == 2 ? 'disabled' : '' ?>>Send</button>
+                    <button type="submit" class="send-button" <?= $code != 0 ? 'disabled' : '' ?>>Send</button>
                 </form>
             </div>
         </div>

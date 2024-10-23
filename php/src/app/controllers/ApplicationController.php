@@ -17,6 +17,21 @@ class ApplicationController
 
         $user_id = $_SESSION['user_id'];
 
+        $jobStatusQuery = 'SELECT is_open FROM JobVacancy WHERE job_vacancy_id = :job_vacancy_id';
+        $stmt = $pdo->prepare($jobStatusQuery);
+        $stmt->execute(['job_vacancy_id' => $job_vacancy_id]);
+        $jobStatus = $stmt->fetchColumn();
+
+        if (!$jobStatus) {
+            $message = 'This job is closed and no longer accepting applications.';
+            View::render('application/index', [
+                'job_vacancy_id' => $job_vacancy_id,
+                'message' => $message,
+                'code' => 3,
+            ]);
+            return;
+        }
+
         $checkQuery = 'SELECT COUNT(*) FROM Application WHERE job_vacancy_id = :job_vacancy_id AND user_id = :user_id';
         $stmt = $pdo->prepare($checkQuery);
         $stmt->execute([
