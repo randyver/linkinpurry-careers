@@ -95,7 +95,7 @@ $home = true;
             <footer class="small-footer">
                 <div class="small-footer-links">
                     <a href="/about">About</a>
-                    <a href="#">More</a>
+                    <a href="#">Back to Top</a>
                 </div>
                 <div class="small-footer-logo">
                     <img src="../../../public/images/logo-icon-text.svg" alt="LinkedInPurry Logo">
