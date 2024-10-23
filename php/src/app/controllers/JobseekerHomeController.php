@@ -5,8 +5,7 @@ class JobseekerHomeController
     public function __construct()
     {
         if (!isset($_SESSION['user_id'])) {
-            header('Location: jobseeker/home');
-            exit();
+            return;
         }
 
         if ($_SESSION['role'] !== 'jobseeker') {
