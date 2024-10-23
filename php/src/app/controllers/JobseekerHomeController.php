@@ -2,6 +2,17 @@
 
 class JobseekerHomeController
 {
+    public function __construct()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            return;
+        }
+
+        if ($_SESSION['role'] !== 'jobseeker') {
+            header('Location: /404');
+            exit();
+        }
+    }
     public function index()
     {
         View::render('jobseeker/home');

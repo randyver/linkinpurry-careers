@@ -2,6 +2,19 @@
 
 class CompanyHomeController
 {
+    public function __construct()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /login');
+            exit();
+        }
+
+        if ($_SESSION['role'] !== 'company') {
+            header('Location: /404');
+            exit();
+        }
+    }
+
     public function index()
     {
         View::render('company/home');

@@ -2,6 +2,18 @@
 
 class JobSeekerProfileController
 {
+    public function __construct()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /login');
+            exit();
+        }
+
+        if ($_SESSION['role'] !== 'jobseeker') {
+            header('Location: /404');
+            exit();
+        }
+    }
     public function index() {
         if (!isset($_SESSION['user_id'])) {
             header('Location: /login');
