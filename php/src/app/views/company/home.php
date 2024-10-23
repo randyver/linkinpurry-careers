@@ -51,7 +51,7 @@ $home = true;
             <div class="filter">
                 <div class="filter-group">
                     <div for="posted" class="filter-type">Posted</div>
-                    <select id="posted-month">
+                    <select id="posted-month" aria-label="Filter by posted month">
                         <option value="" disabled selected>Select month</option>
                         <option value="1">January</option>
                         <option value="2">Febuary</option>
@@ -67,7 +67,7 @@ $home = true;
                         <option value="12">December</option>
                         <option value="clear">Clear Selection</option>
                     </select>
-                    <select id="posted-year">
+                    <select id="posted-year" aria-label="Filter by posted year">
                         <option value="" disabled selected>Select year</option>
                         <option value="2023">2023</option>
                         <option value="2024">2024</option>
@@ -113,7 +113,7 @@ $home = true;
                 <hr class="sort-line">
                 <div class="sort-options">
                     <span>Sort by:</span>
-                    <select>
+                    <select aria-label="Sort jobs">
                         <option value="recent">Recent</option>
                         <option value="oldest">Oldest</option>
                     </select>

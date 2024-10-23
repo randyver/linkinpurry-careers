@@ -89,7 +89,7 @@ $name = $_SESSION['name'];
             <hr class="filter-line">
             <div class="filter-options">
                 <span>Filter by:</span>
-                <select>
+                <select aria-label="Filter by status">
                     <option value="all">All</option>
                     <option value="accepted">Accepted</option>
                     <option value="waiting">Waiting</option>
