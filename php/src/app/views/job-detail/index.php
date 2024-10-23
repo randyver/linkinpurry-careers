@@ -92,7 +92,11 @@ $application_history = false;
 
                         <div>
                             <p>Reason:</p>
-                            <div id="status-reason" style="height: fit-content;"></div>
+                            <div id="status-reason" style="height: fit-content;">
+                                <?php if (empty($application['status_reason'])): ?>
+                                    <p>-</p>
+                                <?php endif; ?>
+                            </div>
                         </div>
 
                     </div>
