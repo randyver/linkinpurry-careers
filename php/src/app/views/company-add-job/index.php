@@ -62,10 +62,11 @@ $name = $_SESSION['name'];
                 </div>
 
                 <div class="form-group form-group-file">
-                    <label class="file-label" for="job-image-upload">Upload Job Image</label>
-                    <input type="file" id="job-image-upload" name="job_image" accept="image/*">
-                    <p class="file-name" id="file-name">No file chosen</p>
+                    <label class="file-label" for="job-image-upload">Upload Job Images</label>
+                    <input type="file" id="job-image-upload" name="job_images[]" accept="image/*" multiple>
                 </div>
+
+                <ul id="file-list" class="file-list"></ul>
 
                 <div class="form-group">
                     <label for="job-description">Job Description:</label>

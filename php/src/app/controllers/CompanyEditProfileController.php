@@ -2,6 +2,18 @@
 
 class CompanyEditProfileController 
 {
+    public function __construct()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /login');
+            exit();
+        }
+
+        if ($_SESSION['role'] !== 'company') {
+            header('Location: /404');
+            exit();
+        }
+    }
     public function index() {
         if (!isset($_SESSION['user_id'])) {
             header('Location: /login');
@@ -160,6 +172,8 @@ class CompanyEditProfileController
             echo 'Failed to update company details.';
             return;
         }
+
+        $_SESSION['name'] = $companyName;
 
         header('Location: /company-profile');
         exit;

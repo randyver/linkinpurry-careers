@@ -42,13 +42,20 @@ $name = $_SESSION['name'];
                         <p><?php echo htmlspecialchars($job['company_location']); ?></p>
                     </div>
                 </div>
-                <!-- Edit and Delete icons -->
+
                 <div class="job-actions">
                     <a href="/edit-job/<?php echo htmlspecialchars($job['job_vacancy_id']); ?>" class="edit-job-icon">
                         <img src="../../../public/images/edit-icon.svg" alt="Edit Icon">
                     </a>
                     <button class="delete-job-icon">
                         <img src="../../../public/images/trash-icon.svg" alt="Delete Icon">
+                    </button>
+                    <button
+                        id="toggle-job-status-btn"
+                        class="toggle-job-status-btn <?php echo $job['is_open'] ? 'close-job-btn' : 'open-job-btn'; ?>"
+                        data-job-id="<?php echo htmlspecialchars($job['job_vacancy_id']); ?>"
+                        data-is-open="<?php echo $job['is_open'] ? 'true' : 'false'; ?>">
+                        <?php echo $job['is_open'] ? 'Close Job' : 'Open Job'; ?>
                     </button>
                 </div>
             </div>
@@ -63,9 +70,17 @@ $name = $_SESSION['name'];
 
                 <div id="job-description" style="height: fit-content;"></div>
 
-                <?php if (!empty($job['file_path'])): ?>
-                    <div class="job-image">
-                        <img src="../../../public/uploads/attachments/<?php echo htmlspecialchars($job['file_path']); ?>" alt="Job Image">
+                <?php if (!empty($attachments)): ?>
+                    <div class="job-attachments">
+                        <ul class="attachment-list">
+                            <?php foreach ($attachments as $attachment): ?>
+                                <li>
+                                    <a href="../../../public/uploads/attachments/<?php echo htmlspecialchars($attachment['file_path']); ?>" target="_blank">
+                                        <img src="../../../public/uploads/attachments/<?php echo htmlspecialchars($attachment['file_path']); ?>" alt="Job Attachment" class="attachment-image">
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
                     </div>
                 <?php endif; ?>
             </div>
@@ -84,38 +99,6 @@ $name = $_SESSION['name'];
         </div>
 
         <div class="status-rows">
-            <!-- <div class="status-row">
-                <span class="applicant-name">Job Applicant Name</span>
-                <span class="status accepted">
-                    <span class="status-label">Status:</span> <img src="../../../public/images/accepted-icon.svg" alt="Accepted Icon" class="status-icon"> Accepted
-                </span>
-                <a href="#" class="details-link">
-                    <img src="../../../public/images/details-icon.svg" alt="Details Icon" class="details-icon">
-                    <span>Details</span>
-                </a>
-            </div>
-
-            <div class="status-row">
-                <span class="applicant-name">Job Applicant Name</span>
-                <span class="status waiting">
-                    <span class="status-label">Status:</span> <img src="../../../public/images/waiting-icon.svg" alt="Waiting Icon" class="status-icon"> Waiting
-                </span>
-                <a href="#" class="details-link">
-                    <img src="../../../public/images/details-icon.svg" alt="Details Icon" class="details-icon">
-                    <span>Details</span>
-                </a>
-            </div>
-
-            <div class="status-row">
-                <span class="applicant-name">Job Applicant Name</span>
-                <span class="status rejected">
-                    <span class="status-label">Status:</span> <img src="../../../public/images/rejected-icon.svg" alt="Rejected Icon" class="status-icon"> Rejected
-                </span>
-                <a href="#" class="details-link">
-                    <img src="../../../public/images/details-icon.svg" alt="Details Icon" class="details-icon">
-                    <span>Details</span>
-                </a>
-            </div> -->
         </div>
     </main>
 

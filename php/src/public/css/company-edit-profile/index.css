@@ -97,6 +97,21 @@ main {
     color: #3A4A3F;
 }
 
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    background-color: #FBF6EF;
+    font-size: 14px;
+    color: #3A4A3F;
+    resize: vertical; /* Allows vertical resizing only */
+    min-height: 150px; /* Ensures a decent size by default */
+    line-height: 1.5; /* Improves readability for text within textarea */
+    font-family: "Poppins", sans-serif; /* Ensures the font matches */
+}
+
+
 /* Submit Button */
 .save-btn {
     background-color: #3a4a3f;

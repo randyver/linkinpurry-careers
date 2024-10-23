@@ -62,3 +62,46 @@
     font-size: 14px;
     color: #666;
 }
+
+@media (max-width: 500px) {
+    .footer {
+        margin-top: 10px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-logo img {
+        margin: 0;
+    }
+
+    .footer-logo {
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    .footer-nav {
+        flex-direction: column;
+        align-items: center;
+        margin-left: 0;
+    }
+
+    .footer-nav-section {
+        margin: 0;
+    }
+
+    .footer-nav-section ul li {
+        margin: 10px 0;
+    }
+
+    .footer-nav-section ul li a {
+        font-size: 13px;
+    }
+
+    .footer-bottom {
+        margin-top: 20px;
+    }
+}

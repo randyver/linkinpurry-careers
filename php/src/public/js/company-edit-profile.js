@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('editProfileForm');
     const currentPasswordInput = document.getElementById('current-password');
-    const backLink = document.querySelector('.back-link');
     let isFormChanged = false;
 
     form.addEventListener('input', function () {
@@ -29,9 +28,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function submitForm() {
-        const hiddenDescriptionInput = document.getElementById('company-description-hidden');
-        hiddenDescriptionInput.value = quill.root.innerHTML;
-
         isFormChanged = false;
         form.submit();
     }
@@ -59,10 +55,5 @@ document.addEventListener('DOMContentLoaded', function () {
             e.returnValue = message;
             return message;
         }
-    });
-
-    form.addEventListener('submit', function () {
-        const hiddenDescriptionInput = document.getElementById('company-description-hidden');
-        hiddenDescriptionInput.value = quill.root.innerHTML;
     });
 });

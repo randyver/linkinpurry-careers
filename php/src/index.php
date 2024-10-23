@@ -55,9 +55,14 @@ $router->post('/delete-job', 'CompanyJobController@deleteJob');
 $router->get('/job/{id}/application', 'ApplicationController@submitApplication');
 $router->post('/job/{id}/application', 'ApplicationController@submitApplication');
 
+// history
+$router->get('/application-history', 'HistoryController@index');
+
 // company detail job
 $router->get('/company-job/{id}', 'CompanyJobController@index');
 $router->get('/get-applicants', 'CompanyJobController@getApplicantsByStatus');
+$router->post('/open-job', 'CompanyJobController@openJob');
+$router->post('/close-job', 'CompanyJobController@closeJob');
 
 // company application
 $router->get('/manage-applicant/{application_id}', 'CompanyApplicationController@index');

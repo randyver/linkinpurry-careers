@@ -106,11 +106,59 @@ main {
     display: flex;
     gap: 15px;
     align-self: baseline;
+    align-items: center;
 }
 
 .job-actions img {
     width: 15px;
+    height: 15px;
     object-fit: contain;
+}
+
+.toggle-job-status-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.open-job-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.open-job-btn:hover {
+    background-color: #218838;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close-job-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.close-job-btn:hover {
+    background-color: #c82333;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-job-icon {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.edit-job-icon img {
+    display: block;
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    padding: 0;
 }
 
 .delete-job-icon {
@@ -118,6 +166,7 @@ main {
     border: none;
     cursor: pointer;
     padding: 0px;
+    height: 15px;
 }
 
 .job-details h4 {
@@ -153,16 +202,37 @@ main {
 }
 
 /* Job Image Section */
-.job-image {
-    margin-top: 15px;
-    border-radius: 4px;
-    overflow: hidden;
+.job-attachments {
+    margin-top: 20px;
 }
 
-.job-image img {
-    max-width: 100%;
+.attachment-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.attachment-list li {
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.attachment-image {
+    max-width: 400px;
+    max-height: 400px;
+    height: auto;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    object-fit: contain;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.attachment-image:hover {
+    transform: scale(1.01);
 }
 
 /* Filter Bar Styling */

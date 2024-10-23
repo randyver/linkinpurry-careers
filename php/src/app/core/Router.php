@@ -66,7 +66,7 @@ class Router
                 call_user_func_array([$controller, $action], $dynamicRoute['params']);
             } else {
                 http_response_code(404);
-                echo "404 - Not Found";
+                header('Location: /404');
             }
         }
     }

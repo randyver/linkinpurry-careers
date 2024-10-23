@@ -28,7 +28,6 @@ $home = false;
     <link rel="stylesheet" href="../../../public/css/company-edit-profile/index.css">
     <link rel="stylesheet" href="../../../public/css/footer/style.css">
     <link rel="icon" href="../../../public/images/logo-icon.svg" type="image/x-icon">
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 </head>
 
 <body>
@@ -68,43 +67,15 @@ $home = false;
 
                 <div class="form-group">
                     <label for="company-description">About:</label>
-                    <div id="editor" class="form-control" style="min-height: 200px;"><?php echo $companyDescription; ?></div>
+                    <textarea id="company-description" name="company_description" class="form-control" style="min-height: 200px;" required><?php echo htmlspecialchars($companyDescription); ?></textarea>
                 </div>
-
-                <input type="hidden" id="company-description-hidden" name="company_description">
+                
                 <button class="save-btn">Save</button>
             </form>
         </div>
     </main>
 
     <?php include __DIR__ . '/../templates/footer.php'; ?>
-
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script>
-        var quill = new Quill('#editor', {
-            theme: 'snow',
-            modules: {
-                toolbar: [
-                    [{
-                        'header': [1, 2, 3, false]
-                    }],
-                    [{
-                        'size': ['small', false, 'large', 'huge']
-                    }],
-                    ['bold', 'italic', 'underline'],
-                    [{
-                        'list': 'ordered'
-                    }, {
-                        'list': 'bullet'
-                    }],
-                    [{
-                        'align': []
-                    }],
-                    ['clean']
-                ]
-            }
-        });
-    </script>
     <script src="/public/js/company-edit-profile.js"></script>
 </body>
 

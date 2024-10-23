@@ -20,6 +20,9 @@ class RegisterController {
             // Validasi
             if (empty($name) || empty($email) || empty($password) || empty($confirmPassword)) {
                 $message = "Error: All fields are required.";
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                // Validasi format email
+                $message = "Error: Invalid email format. Please use example@example.com.";
             } elseif ($password !== $confirmPassword) {
                 $message = "Error: Passwords do not match.";
             } else {
@@ -88,6 +91,9 @@ class RegisterController {
                 $message = "Error: All fields are required.";
             } elseif ($password !== $confirmPassword) {
                 $message = "Error: Passwords do not match.";
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                // Validasi format email
+                $message = "Error: Invalid email format. Please use example@example.com.";
             } else {
                 try {
                     $pdo = Database::getConnection();

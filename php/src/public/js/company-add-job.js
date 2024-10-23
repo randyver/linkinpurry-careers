@@ -1,20 +1,39 @@
 const fileInput = document.getElementById('job-image-upload');
-const fileNameDisplay = document.getElementById('file-name');
-const fileLabel = document.querySelector('.file-label');
-const submitButton = document.querySelector('.save-btn');
+const fileList = document.getElementById('file-list');
+let selectedFiles = [];
 
 fileInput.addEventListener('change', function() {
-    if (this.files && this.files.length > 0) {
-        fileNameDisplay.textContent = this.files[0].name;
-        fileNameDisplay.classList.add('active');
-        fileLabel.classList.add('active');
-    } else {
-        fileNameDisplay.textContent = "No file chosen";
-        fileNameDisplay.classList.remove('active');
-        fileLabel.classList.remove('active');
-    }
+    const newFiles = Array.from(fileInput.files);
+    selectedFiles.push(...newFiles);
+
+    updateFileList();
 });
 
+function updateFileList() {
+    fileList.innerHTML = '';
+
+    selectedFiles.forEach((file, index) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = file.name;
+
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.classList.add('remove-btn');
+        removeButton.addEventListener('click', function() {
+            removeFile(index);
+        });
+
+        listItem.appendChild(removeButton);
+        fileList.appendChild(listItem);
+    });
+}
+
+function removeFile(index) {
+    selectedFiles.splice(index, 1);
+    updateFileList();
+}
+
+const submitButton = document.querySelector('.save-btn');
 submitButton.addEventListener('click', function(event) {
     event.preventDefault();
 
@@ -22,15 +41,17 @@ submitButton.addEventListener('click', function(event) {
     const location = document.getElementById('job-location').value;
     const jobType = document.getElementById('job-type').value;
     const description = quill.root.innerHTML;
-    const file = fileInput.files[0];
 
-    if (jobName && location && jobType && description && file) {
+    if (jobName && location && jobType && description) {
         const formData = new FormData();
         formData.append('job_name', jobName);
         formData.append('location', location);
         formData.append('job_type', jobType);
         formData.append('description', description);
-        formData.append('job_image', file);
+
+        selectedFiles.forEach(file => {
+            formData.append('job_images[]', file);
+        });
 
         const xhr = new XMLHttpRequest();
         xhr.open('POST', '/add-job/create', true);
@@ -51,6 +72,6 @@ submitButton.addEventListener('click', function(event) {
 
         xhr.send(formData);
     } else {
-        alert('Please fill out all fields and upload an image.');
+        alert('Please fill out all fields.');
     }
 });
