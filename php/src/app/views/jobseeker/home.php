@@ -24,6 +24,7 @@ $application_history = false;
     <title>Jobseeker - Home</title>
     <link rel="stylesheet" href="../../../public/css/navbar/style.css">
     <link rel="stylesheet" href="../../../public/css/jobseeker/home-jobseeker.css">
+    <link rel="stylesheet" href="/public/css/footer/style.css">
     <link rel="icon" href="../../../public/images/logo-icon.svg" type="image/x-icon">
 </head>
 
@@ -139,18 +140,19 @@ $application_history = false;
                     </a> -->
             </div>
 
-            <footer class="footer">
-                <div class="footer-links">
+            <footer class="small-footer">
+                <div class="small-footer-links">
                     <a href="#">About</a>
                     <a href="#">More</a>
                 </div>
-                <div class="footer-logo">
+                <div class="small-footer-logo">
                     <img src="../../../public/images/logo-icon-text.svg" alt="LinkedInPurry Logo">
                     <span>LinkinPurry © 2024</span>
                 </div>
             </footer>
         </aside>
     </div>
+    <?php include __DIR__ . '/../templates/footer.php'; ?>
     <script src="../../../public/js/home-jobseeker.js"></script>
 </body>
 

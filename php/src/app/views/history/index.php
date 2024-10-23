@@ -10,7 +10,8 @@ if (!isset($_SESSION['user_id'])) {
     $isLoggedIn = true;
 }
 
-$home = true;
+$home = false;
+$application_history = true;
 
 ?>
 
