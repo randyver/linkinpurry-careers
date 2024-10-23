@@ -175,4 +175,71 @@ class CompanyJobController
 
         exit;
     }
+
+    public function openJob()
+    {
+        $this->updateJobStatus(1);
+    }
+
+    public function closeJob()
+    {
+        $this->updateJobStatus(0);
+    }
+
+    private function updateJobStatus($isOpen)
+    {
+        if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'company') {
+            http_response_code(401);
+            echo json_encode(['error' => 'Unauthorized']);
+            exit;
+        }
+
+        $userId = $_SESSION['user_id'];
+
+        if (!isset($_POST['job_id'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Job ID is required']);
+            exit;
+        }
+
+        $jobId = $_POST['job_id'];
+
+        require_once __DIR__ . '/../config/db.php';
+        $pdo = Database::getConnection();
+
+        try {
+            $query = 'SELECT job_vacancy_id FROM JobVacancy WHERE job_vacancy_id = :job_id AND company_id = :company_id';
+            $statement = $pdo->prepare($query);
+            $statement->execute([
+                ':job_id' => $jobId,
+                ':company_id' => $userId
+            ]);
+
+            $job = $statement->fetch(PDO::FETCH_ASSOC);
+
+            if (!$job) {
+                http_response_code(403);
+                echo json_encode(['error' => 'Unauthorized to update this job']);
+                return;
+            }
+
+            $updateQuery = 'UPDATE JobVacancy SET is_open = :is_open WHERE job_vacancy_id = :job_id';
+            $updateStmt = $pdo->prepare($updateQuery);
+            $updateStmt->execute([
+                ':is_open' => $isOpen,
+                ':job_id' => $jobId
+            ]);
+
+            if ($updateStmt->rowCount() > 0) {
+                http_response_code(200);
+                echo json_encode(['success' => true, 'message' => 'Job status updated successfully']);
+            } else {
+                http_response_code(500);
+                echo json_encode(['error' => 'Failed to update job status']);
+            }
+        } catch (PDOException $e) {
+            http_response_code(500);
+            echo json_encode(['error' => 'Database Error: ' . $e->getMessage()]);
+        }
+    }
 }

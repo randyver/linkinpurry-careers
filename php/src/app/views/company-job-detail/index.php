@@ -42,13 +42,20 @@ $name = $_SESSION['name'];
                         <p><?php echo htmlspecialchars($job['company_location']); ?></p>
                     </div>
                 </div>
-                
+
                 <div class="job-actions">
                     <a href="/edit-job/<?php echo htmlspecialchars($job['job_vacancy_id']); ?>" class="edit-job-icon">
                         <img src="../../../public/images/edit-icon.svg" alt="Edit Icon">
                     </a>
                     <button class="delete-job-icon">
                         <img src="../../../public/images/trash-icon.svg" alt="Delete Icon">
+                    </button>
+                    <button
+                        id="toggle-job-status-btn"
+                        class="toggle-job-status-btn <?php echo $job['is_open'] ? 'close-job-btn' : 'open-job-btn'; ?>"
+                        data-job-id="<?php echo htmlspecialchars($job['job_vacancy_id']); ?>"
+                        data-is-open="<?php echo $job['is_open'] ? 'true' : 'false'; ?>">
+                        <?php echo $job['is_open'] ? 'Close Job' : 'Open Job'; ?>
                     </button>
                 </div>
             </div>
@@ -82,7 +89,7 @@ $name = $_SESSION['name'];
             <hr class="filter-line">
             <div class="filter-options">
                 <span>Filter by:</span>
-                <select>
+                <select aria-label="Filter by status">
                     <option value="all">All</option>
                     <option value="accepted">Accepted</option>
                     <option value="waiting">Waiting</option>

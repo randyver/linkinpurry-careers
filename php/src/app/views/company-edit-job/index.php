@@ -28,9 +28,9 @@ $name = $_SESSION['name'];
 
     <main class="main-section">
         <div class="back-arrow">
-            <a href="/home-company" class="back-link">
+            <a href="/company-job/<?php echo htmlspecialchars($job['job_vacancy_id']); ?>" class="back-link">
                 <img src="../../../public/images/arrow-left.svg" alt="Back Icon">
-                <span>Back to Home</span>
+                <span>Back</span>
             </a>
         </div>
 

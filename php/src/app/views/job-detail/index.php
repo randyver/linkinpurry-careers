@@ -100,12 +100,14 @@ $application_history = false;
                         </div>
 
                     </div>
-                <?php else: ?>
+                    <?php elseif ($job['is_open']): ?>
                     <div class="apply-button">
                         <a href="/job/<?php echo htmlspecialchars($job['job_vacancy_id']); ?>/application">
                             <button>Apply</button>
                         </a>
                     </div>
+                <?php else: ?>
+                    <div class="closed-message">This job is currently closed and not accepting applications.</div>
                 <?php endif; ?>
             </div>
 

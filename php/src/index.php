@@ -61,6 +61,8 @@ $router->get('/application-history', 'HistoryController@index');
 // company detail job
 $router->get('/company-job/{id}', 'CompanyJobController@index');
 $router->get('/get-applicants', 'CompanyJobController@getApplicantsByStatus');
+$router->post('/open-job', 'CompanyJobController@openJob');
+$router->post('/close-job', 'CompanyJobController@closeJob');
 
 // company application
 $router->get('/manage-applicant/{application_id}', 'CompanyApplicationController@index');
@@ -82,8 +84,8 @@ $router->get('/company-edit-profile', 'CompanyEditProfileController@index');
 $router->post('/check-current-password', 'CompanyEditProfileController@checkCurrentPassword');
 $router->post('/company-update-profile', 'CompanyEditProfileController@updateProfile');
 
-// not found
-$router->get('/404', 'NotFoundController@index');
+// about
+$router->get('/about', 'AboutController@index');
 
 // testing db
 $router->get('/test-db', 'TestDbController@index');

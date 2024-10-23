@@ -76,8 +76,7 @@ class JobseekerHomeController
                          c.name AS company_name, cd.location AS company_location
                   FROM JobVacancy jv
                   JOIN Users c ON jv.company_id = c.user_id
-                  JOIN CompanyDetail cd ON jv.company_id = cd.user_id
-                  WHERE jv.is_open = TRUE';
+                  JOIN CompanyDetail cd ON jv.company_id = cd.user_id';
 
         $params = [];
 

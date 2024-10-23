@@ -6,22 +6,21 @@
         <nav class="footer-nav">
             <div class="footer-nav-section">
                 <ul>
-                    <li><a href="#">General</a></li>
-                    <li><a href="#">About</a></li>
+                    <li>General</li>
+                    <li><a href="about">About</a></li>
                 </ul>
             </div>
             <div class="footer-nav-section">
                 <ul>
-                    <li><a href="#">Browse LinkinPurry</li>
-                    <li><a href="#">Jobs</a></li>
-                    <li><a href="#">Top Company Hub</a></li>
+                    <li>Browse LinkinPurry</li>
+                    <li><a href="/login">Sign In</a></li>
+                    <li><a href="/register">Register</a></li>
                 </ul>
             </div>
             <div class="footer-nav-section">
                 <ul>
-                    <li><a href="#">Directories</a></li>
-                    <li><a href="#">Companies</a></li>
-                    <li><a href="#">People Search</a></li>
+                    <li>Navigate</li>
+                    <li><a href="#">Top</a></li>
                 </ul>
             </div>
         </nav>

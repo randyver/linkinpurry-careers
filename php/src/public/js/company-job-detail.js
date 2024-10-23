@@ -51,3 +51,45 @@ document.addEventListener('DOMContentLoaded', function () {
 
     fetchApplicants(jobId, 'all');
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const openCloseButton = document.querySelector("#toggle-job-status-btn");
+
+    openCloseButton.addEventListener("click", function () {
+        const jobId = this.getAttribute("data-job-id");
+        const isOpen = this.getAttribute("data-is-open") === "true";
+
+        const xhr = new XMLHttpRequest();
+        const url = isOpen ? "/close-job" : "/open-job";
+        const method = "POST";
+
+        xhr.open(method, url, true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    alert(response.message);
+
+                    if (isOpen) {
+                        openCloseButton.textContent = "Open Job";
+                        openCloseButton.classList.remove("close-job-btn");
+                        openCloseButton.classList.add("open-job-btn");
+                        openCloseButton.setAttribute("data-is-open", "false");
+                    } else {
+                        openCloseButton.textContent = "Close Job";
+                        openCloseButton.classList.remove("open-job-btn");
+                        openCloseButton.classList.add("close-job-btn");
+                        openCloseButton.setAttribute("data-is-open", "true");
+                    }
+                } else {
+                    const response = JSON.parse(xhr.responseText);
+                    alert(response.error || "An error occurred");
+                }
+            }
+        };
+
+        xhr.send("job_id=" + jobId);
+    });
+});
