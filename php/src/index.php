@@ -84,8 +84,8 @@ $router->get('/company-edit-profile', 'CompanyEditProfileController@index');
 $router->post('/check-current-password', 'CompanyEditProfileController@checkCurrentPassword');
 $router->post('/company-update-profile', 'CompanyEditProfileController@updateProfile');
 
-// not found
-$router->get('/404', 'NotFoundController@index');
+// about
+$router->get('/about', 'AboutController@index');
 
 // testing db
 $router->get('/test-db', 'TestDbController@index');

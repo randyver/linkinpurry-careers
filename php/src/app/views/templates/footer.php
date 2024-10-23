@@ -7,7 +7,7 @@
             <div class="footer-nav-section">
                 <ul>
                     <li><a href="#">General</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="about">About</a></li>
                 </ul>
             </div>
             <div class="footer-nav-section">

@@ -139,10 +139,9 @@ $application_history = false;
                         </div>
                     </a> -->
             </div>
-
             <footer class="small-footer">
                 <div class="small-footer-links">
-                    <a href="#">About</a>
+                    <a href="/about">About</a>
                     <a href="#">More</a>
                 </div>
                 <div class="small-footer-logo">
