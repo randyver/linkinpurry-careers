@@ -16,7 +16,20 @@ closeModalButtons.forEach(button => {
 });
 
 function deleteJob(jobId) {
-    if (confirm('Are you sure you want to delete this job?')) {
+    showModal('Are you sure you want to delete this job?');
+
+    const confirmButton = document.createElement('button');
+    confirmButton.textContent = 'Yes';
+    confirmButton.classList.add('confirm-delete');
+
+    const cancelButton = document.createElement('button');
+    cancelButton.textContent = 'No';
+    cancelButton.classList.add('cancel-delete');
+
+    modalMessage.appendChild(confirmButton);
+    modalMessage.appendChild(cancelButton);
+
+    confirmButton.addEventListener('click', function () {
         const xhr = new XMLHttpRequest();
         xhr.open('POST', '/delete-job', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -32,7 +45,14 @@ function deleteJob(jobId) {
         };
 
         xhr.send(`job_id=${jobId}`);
-    }
+    });
+
+    cancelButton.addEventListener('click', function () {
+        responseModal.classList.remove('show');
+        responseModal.classList.add('hidden');
+        confirmButton.remove();
+        cancelButton.remove();
+    });
 }
 
 document.addEventListener('DOMContentLoaded', function() {

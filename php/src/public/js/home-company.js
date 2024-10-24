@@ -22,7 +22,43 @@ closeModalButtons.forEach(button => {
 });
 
 function deleteJob(jobId) {
-    if (confirm('Are you sure you want to delete this job?')) {
+    modalMessage.textContent = 'Are you sure you want to delete this job?';
+    generalModal.classList.remove('hidden');
+    generalModal.classList.add('show');
+
+    const confirmDelete = () => {
+        generalModal.classList.remove('show');
+        generalModal.classList.add('hidden');
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/delete-job', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const jobCard = document.querySelector(`.job-card[data-job-id='${jobId}']`);
+                if (jobCard) {
+                    jobCard.remove();
+                }
+            } else if (xhr.status === 403) {
+                modalMessage.textContent = 'You are not authorized to delete this job.';
+                generalModal.classList.remove('hidden');
+                generalModal.classList.add('show');
+            } else {
+                modalMessage.textContent = 'Failed to delete job. Please try again.';
+                generalModal.classList.remove('hidden');
+                generalModal.classList.add('show');
+            }
+        };
+        xhr.send(`job_id=${jobId}`);
+    };
+
+    const cancelDelete = () => {
+        generalModal.classList.remove('show');
+        generalModal.classList.add('hidden');
+    };
+
+    document.getElementById('confirmButton').addEventListener('click', confirmDelete, { once: true });
+    document.getElementById('cancelButton').addEventListener('click', cancelDelete, { once: true });
         const xhr = new XMLHttpRequest();
         xhr.open('POST', '/delete-job', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -44,7 +80,7 @@ function deleteJob(jobId) {
         };
         xhr.send(`job_id=${jobId}`);
     }
-}
+
 
 document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(e) {

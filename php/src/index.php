@@ -91,4 +91,7 @@ $router->get('/about', 'AboutController@index');
 $router->get('/test-db', 'TestDbController@index');
 $router->post('/test-db', 'TestDbController@index');
 
+// 404 not found
+$router->get('/404', 'NotFoundController@index');
+
 $router->dispatch($_SERVER['REQUEST_URI']);
