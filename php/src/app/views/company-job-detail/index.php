@@ -44,9 +44,11 @@ $name = $_SESSION['name'];
                 </div>
 
                 <div class="job-actions">
+                <?php if ($applicantCount > 0): ?>
                     <button class="download-csv-icon" onclick="downloadCSV(<?php echo htmlspecialchars($job['job_vacancy_id']); ?>)">
                         <img src="../../../public/images/download-icon.svg" alt="Download CSV Icon">
                     </button>
+                <?php endif; ?>
                     <a href="/edit-job/<?php echo htmlspecialchars($job['job_vacancy_id']); ?>" class="edit-job-icon">
                         <img src="../../../public/images/edit-icon.svg" alt="Edit Icon">
                     </a>

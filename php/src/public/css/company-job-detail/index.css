@@ -120,6 +120,7 @@ main {
     border: none;
     cursor: pointer;
     padding: 0px;
+}
 
 .toggle-job-status-btn {
     padding: 10px 15px;
