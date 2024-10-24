@@ -44,6 +44,9 @@ $name = $_SESSION['name'];
                 </div>
                 <!-- Edit and Delete icons -->
                 <div class="job-actions">
+                    <button class="download-csv-icon" onclick="downloadCSV(<?php echo htmlspecialchars($job['job_vacancy_id']); ?>)">
+                        <img src="../../../public/images/download-icon.svg" alt="Download CSV Icon">
+                    </button>
                     <a href="/edit-job/<?php echo htmlspecialchars($job['job_vacancy_id']); ?>" class="edit-job-icon">
                         <img src="../../../public/images/edit-icon.svg" alt="Edit Icon">
                     </a>

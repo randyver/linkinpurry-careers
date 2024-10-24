@@ -71,6 +71,9 @@ $router->post('/add-job/create', 'CompanyAddJobController@addJob');
 $router->get('/edit-job/{id}', 'CompanyEditJobController@index');
 $router->post('/edit-job/{id}/update', 'CompanyEditJobController@editJob');
 
+// company download csv
+$router->get('/download-applicants-csv', 'CompanyJobController@downloadApplicantsCSV');
+
 // company profile
 $router->get('/company-profile', 'CompanyProfileController@index');
 

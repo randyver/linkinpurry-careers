@@ -113,6 +113,13 @@ main {
     object-fit: contain;
 }
 
+.download-csv-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0px;
+}
+
 .delete-job-icon {
     background: none;
     border: none;

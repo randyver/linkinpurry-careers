@@ -16,6 +16,10 @@ function deleteJob(jobId) {
     }
 }
 
+function downloadCSV(jobId) {
+    window.location.href = `/download-applicants-csv?job_id=${jobId}`;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(e) {
         const deleteButton = e.target.closest('.delete-job-icon');
