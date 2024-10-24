@@ -152,6 +152,7 @@ $application_history = false;
         </aside>
     </div>
     <script src="../../../public/js/home-jobseeker.js"></script>
+    <script src="../../../public/js/company-navigation.js"></script>
 </body>
 
 </html>

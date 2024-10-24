@@ -1,7 +1,7 @@
 <?php foreach ($jobs as $job): ?>
     <div class="job-card">
         <div class="job-header">
-            <div class="company-info">
+            <div data-company-id="<?php echo $company['id']; ?>" class="company-info clickable">
                 <img src="../../../public/images/company-pic.png" alt="Company Logo" class="company-logo">
                 <div class="company-details">
                     <h3><?php echo htmlspecialchars($job['company_name']); ?></h3>
