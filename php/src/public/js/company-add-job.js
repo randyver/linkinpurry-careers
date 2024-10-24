@@ -34,6 +34,17 @@ function removeFile(index) {
 }
 
 const submitButton = document.querySelector('.save-btn');
+const responseModal = document.getElementById('responseModal');
+const closeModalButtons = document.querySelectorAll('.close-modal');
+const modalMessage = document.getElementById('modalMessage');
+
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        responseModal.classList.remove('show');
+        responseModal.classList.add('hidden');
+    });
+});
+
 submitButton.addEventListener('click', function(event) {
     event.preventDefault();
 
@@ -60,18 +71,23 @@ submitButton.addEventListener('click', function(event) {
             if (xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
                 if (response.success) {
-                    alert('Job posted successfully.');
-                    window.location.href = "/home-company";
+                    modalMessage.textContent = 'Job posted successfully.';
                 } else {
-                    alert('Error: ' + response.error);
+                    modalMessage.textContent = 'Error: ' + response.error;
                 }
             } else {
-                alert('An error occurred during the submission.');
+                modalMessage.textContent = 'An error occurred during the submission.';
             }
+
+            // Show modal after setting the message
+            responseModal.classList.remove('hidden');
+            responseModal.classList.add('show');
         };
 
         xhr.send(formData);
     } else {
-        alert('Please fill out all fields.');
+        modalMessage.textContent = 'Please fill out all fields.';
+        responseModal.classList.remove('hidden');
+        responseModal.classList.add('show');
     }
 });

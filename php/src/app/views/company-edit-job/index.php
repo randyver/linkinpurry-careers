@@ -94,6 +94,14 @@ $name = $_SESSION['name'];
         </div>
     </main>
 
+    <!-- Modal -->
+    <div id="generalModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <p id="modalMessage">Message goes here</p>
+        </div>
+    </div>
+
     <?php include __DIR__ . '/../templates/footer.php'; ?>
 
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>

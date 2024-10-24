@@ -48,6 +48,17 @@ if (currentAttachmentsList) {
   });
 }
 
+const generalModal = document.getElementById("generalModal");
+const modalMessage = document.getElementById("modalMessage");
+const closeModalButtons = document.querySelectorAll(".close-modal");
+
+closeModalButtons.forEach(button => {
+  button.addEventListener('click', function() {
+      generalModal.classList.remove('show');
+      generalModal.classList.add('hidden');
+  });
+});
+
 document.getElementById("editJobForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -79,18 +90,27 @@ document.getElementById("editJobForm").addEventListener("submit", function (e) {
     if (xhr.status === 200) {
       const response = JSON.parse(xhr.responseText);
       if (response.success) {
-        alert(response.message);
-        window.location.href = "/home-company";
+        // show success message
+        modalMessage.textContent = 'Job updated successfully.';
       } else {
-        alert(response.error || "Failed to update the job");
+        // show failure message
+        modalMessage.textContent = 'Failed to update the job.';
       }
     } else {
-      alert("An error occurred while processing the request");
+      // show error message
+      modalMessage.textContent = 'An error occurred while processing the request.';
     }
+    // display modal
+    generalModal.classList.remove('hidden');
+    generalModal.classList.add('show');
   };
 
   xhr.onerror = function () {
-    alert("An error occurred during the request.");
+    // show network error message
+    modalMessage.textContent = 'An error occurred during the request.';
+    // display modal
+    generalModal.classList.remove('hidden');
+    generalModal.classList.add('show');
   };
 
   xhr.send(formData);

@@ -10,6 +10,17 @@ document.getElementById("posted-year").addEventListener("change", function () {
   }
 });
 
+const generalModal = document.getElementById("generalModal");
+const modalMessage = document.getElementById("modalMessage");
+const closeModalButtons = document.querySelectorAll(".close-modal");
+
+closeModalButtons.forEach(button => {
+  button.addEventListener('click', function() {
+      generalModal.classList.remove('show');
+      generalModal.classList.add('hidden');
+  });
+});
+
 function deleteJob(jobId) {
     if (confirm('Are you sure you want to delete this job?')) {
         const xhr = new XMLHttpRequest();
@@ -22,9 +33,13 @@ function deleteJob(jobId) {
                     jobCard.remove();
                 }
             } else if (xhr.status === 403) {
-                alert('You are not authorized to delete this job.');
+                modalMessage.textContent = 'You are not authorized to delete this job.';
+                generalModal.classList.remove('hidden');
+                generalModal.classList.add('show');
             } else {
-                alert('Failed to delete job. Please try again.');
+                modalMessage.textContent = 'Failed to delete job. Please try again.';
+                generalModal.classList.remove('hidden');
+                generalModal.classList.add('show');
             }
         };
         xhr.send(`job_id=${jobId}`);

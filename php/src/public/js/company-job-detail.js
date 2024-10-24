@@ -1,17 +1,36 @@
+const responseModal = document.getElementById('responseModal');
+const modalMessage = document.getElementById('modalMessage');
+const closeModalButtons = document.querySelectorAll('.close-modal');
+
+function showModal(message) {
+    modalMessage.textContent = message;
+    responseModal.classList.remove('hidden');
+    responseModal.classList.add('show');
+}
+
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', function () {
+        responseModal.classList.remove('show');
+        responseModal.classList.add('hidden');
+    });
+});
+
 function deleteJob(jobId) {
     if (confirm('Are you sure you want to delete this job?')) {
         const xhr = new XMLHttpRequest();
         xhr.open('POST', '/delete-job', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
         xhr.onload = function () {
             if (xhr.status === 200) {
                 window.location.href = '/home-company';
             } else if (xhr.status === 403) {
-                alert('You are not authorized to delete this job.');
+                showModal('You are not authorized to delete this job.');
             } else {
-                alert('Failed to delete job. Please try again.');
+                showModal('Failed to delete job. Please try again.');
             }
         };
+
         xhr.send(`job_id=${jobId}`);
     }
 }
@@ -29,14 +48,16 @@ document.addEventListener('DOMContentLoaded', function() {
 function fetchApplicants(jobId, status) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `/get-applicants?job_id=${jobId}&status=${status}`, true);
+
     xhr.onload = function () {
         if (xhr.status === 200) {
             const statusRowsContainer = document.querySelector('.status-rows');
             statusRowsContainer.innerHTML = xhr.responseText;
         } else {
-            alert('Failed to fetch applicants. Please try again.');
+            showModal('Failed to fetch applicants. Please try again.');
         }
     };
+
     xhr.send();
 }
 
@@ -70,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
-                    alert(response.message);
+                    showModal(response.message);
 
                     if (isOpen) {
                         openCloseButton.textContent = "Open Job";
@@ -85,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 } else {
                     const response = JSON.parse(xhr.responseText);
-                    alert(response.error || "An error occurred");
+                    showModal(response.message);
                 }
             }
         };
