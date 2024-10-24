@@ -40,7 +40,7 @@ confirmButton.addEventListener('click', function() {
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
             if (xhr.status === 200) {
-                window.location.href = 'home-company';
+                window.location.href = '/home-company';
             } else if (xhr.status === 403) {
                 showOtherModal('You are not authorized to delete this job.');
             } else {

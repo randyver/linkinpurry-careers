@@ -41,7 +41,7 @@ class CompanyJobController
             $job = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (!$job) {
-                throw new Exception('Job not found or you do not have permission to view this job.');
+                header('Location: /404');
             }
 
             $attachmentStmt = $pdo->prepare("SELECT file_path FROM JobVacancyAttachment WHERE job_vacancy_id = :jobId");
