@@ -1,3 +1,4 @@
+// Variables for the delete modal
 const generalModal = document.getElementById("generalModal");
 const modalMessage = document.getElementById("modalMessage");
 const closeModalButtons = document.querySelectorAll(".close-modal");
@@ -5,20 +6,25 @@ const confirmButton = document.getElementById('confirmButton');
 const cancelButton = document.getElementById('cancelButton');
 let currentJobId = null; // variable to store the jobId to be deleted
 
-// Function to hide the modal
+// Variables for the other modal
+const otherModal = document.getElementById("otherModal");
+const otherModalMessage = document.getElementById("otherModalMessage");
+const closeOtherModalButtons = document.querySelectorAll(".close-other-modal");
+
+// Function to hide the delete modal
 function closeModal() {
     generalModal.classList.remove('show');
     generalModal.classList.add('hidden');
     currentJobId = null; // reset jobId
 }
 
-// Close modal when the close button or No button is clicked
-closeModalButtons.forEach(button => {
-    button.addEventListener('click', closeModal);
-});
-cancelButton.addEventListener('click', closeModal);
+// Function to hide the other modal
+function closeOtherModal() {
+    otherModal.classList.remove('show');
+    otherModal.classList.add('hidden');
+}
 
-// Function to show modal and confirm deletion
+// Function to show delete confirmation modal
 function deleteJob(jobId) {
     modalMessage.textContent = 'Are you sure you want to delete this job?';
     generalModal.classList.remove('hidden');
@@ -40,20 +46,16 @@ confirmButton.addEventListener('click', function() {
                 }
                 closeModal(); // hide modal after job is deleted
             } else if (xhr.status === 403) {
-                modalMessage.textContent = 'You are not authorized to delete this job.';
-                generalModal.classList.remove('hidden');
-                generalModal.classList.add('show');
+                showOtherModal('You are not authorized to delete this job.');
             } else {
-                modalMessage.textContent = 'Failed to delete job. Please try again.';
-                generalModal.classList.remove('hidden');
-                generalModal.classList.add('show');
+                showOtherModal('Failed to delete job. Please try again.');
             }
         };
         xhr.send(`job_id=${currentJobId}`);
     }
 });
 
-// Event listener for the delete button click on job cards
+// Event listener for delete button click on job cards
 document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(e) {
         const deleteButton = e.target.closest('.delete-job-icon');
@@ -64,6 +66,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Show other modal for general messages
+function showOtherModal(message) {
+    otherModalMessage.textContent = message;
+    otherModal.classList.remove('hidden');
+    otherModal.classList.add('show');
+}
+
+// Close modals when the close button is clicked
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', closeModal);
+});
+closeOtherModalButtons.forEach(button => {
+    button.addEventListener('click', closeOtherModal);
+});
+
+// Fetch applicants function with other modal for status messages
 function fetchApplicants(jobId, status) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `/get-applicants?job_id=${jobId}&status=${status}`, true);
@@ -73,7 +91,7 @@ function fetchApplicants(jobId, status) {
             const statusRowsContainer = document.querySelector('.status-rows');
             statusRowsContainer.innerHTML = xhr.responseText;
         } else {
-            showModal('Failed to fetch applicants. Please try again.');
+            showOtherModal('Failed to fetch applicants. Please try again.');
         }
     };
 
@@ -92,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchApplicants(jobId, 'all');
 });
 
+// Handling the open/close job status with other modal
 document.addEventListener("DOMContentLoaded", function () {
     const openCloseButton = document.querySelector("#toggle-job-status-btn");
 
@@ -110,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
-                    showModal(response.message);
+                    showOtherModal(response.message);
 
                     if (isOpen) {
                         openCloseButton.textContent = "Open Job";
@@ -125,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 } else {
                     const response = JSON.parse(xhr.responseText);
-                    showModal(response.message);
+                    showOtherModal(response.message);
                 }
             }
         };

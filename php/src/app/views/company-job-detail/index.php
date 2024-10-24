@@ -102,7 +102,7 @@ $name = $_SESSION['name'];
         </div>
     </main>
 
-    <!-- Modal -->
+    <!-- Modal for Deletion -->
     <div id="generalModal" class="modal hidden">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
@@ -113,7 +113,15 @@ $name = $_SESSION['name'];
             </div>
         </div>
     </div>
-     
+
+    <!-- Modal for Other Messages -->
+    <div id="otherModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-other-modal">&times;</span>
+            <p id="otherModalMessage"></p>
+        </div>
+    </div>
+ 
     <?php include __DIR__ . '/../templates/footer.php'; ?>
 
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
