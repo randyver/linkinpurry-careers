@@ -1,66 +1,65 @@
-const responseModal = document.getElementById('responseModal');
-const modalMessage = document.getElementById('modalMessage');
-const closeModalButtons = document.querySelectorAll('.close-modal');
+const generalModal = document.getElementById("generalModal");
+const modalMessage = document.getElementById("modalMessage");
+const closeModalButtons = document.querySelectorAll(".close-modal");
+const confirmButton = document.getElementById('confirmButton');
+const cancelButton = document.getElementById('cancelButton');
+let currentJobId = null; // variable to store the jobId to be deleted
 
-function showModal(message) {
-    modalMessage.textContent = message;
-    responseModal.classList.remove('hidden');
-    responseModal.classList.add('show');
+// Function to hide the modal
+function closeModal() {
+    generalModal.classList.remove('show');
+    generalModal.classList.add('hidden');
+    currentJobId = null; // reset jobId
 }
 
+// Close modal when the close button or No button is clicked
 closeModalButtons.forEach(button => {
-    button.addEventListener('click', function () {
-        responseModal.classList.remove('show');
-        responseModal.classList.add('hidden');
-    });
+    button.addEventListener('click', closeModal);
 });
+cancelButton.addEventListener('click', closeModal);
 
+// Function to show modal and confirm deletion
 function deleteJob(jobId) {
-    showModal('Are you sure you want to delete this job?');
+    modalMessage.textContent = 'Are you sure you want to delete this job?';
+    generalModal.classList.remove('hidden');
+    generalModal.classList.add('show');
+    currentJobId = jobId; // store jobId
+}
 
-    const confirmButton = document.createElement('button');
-    confirmButton.textContent = 'Yes';
-    confirmButton.classList.add('confirm-delete');
-
-    const cancelButton = document.createElement('button');
-    cancelButton.textContent = 'No';
-    cancelButton.classList.add('cancel-delete');
-
-    modalMessage.appendChild(confirmButton);
-    modalMessage.appendChild(cancelButton);
-
-    confirmButton.addEventListener('click', function () {
+// Function to confirm the job deletion
+confirmButton.addEventListener('click', function() {
+    if (currentJobId) {
         const xhr = new XMLHttpRequest();
         xhr.open('POST', '/delete-job', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
         xhr.onload = function () {
             if (xhr.status === 200) {
-                window.location.href = '/home-company';
+                const jobCard = document.querySelector(`.job-card[data-job-id='${currentJobId}']`);
+                if (jobCard) {
+                    jobCard.remove(); // remove job card from the DOM
+                }
+                closeModal(); // hide modal after job is deleted
             } else if (xhr.status === 403) {
-                showModal('You are not authorized to delete this job.');
+                modalMessage.textContent = 'You are not authorized to delete this job.';
+                generalModal.classList.remove('hidden');
+                generalModal.classList.add('show');
             } else {
-                showModal('Failed to delete job. Please try again.');
+                modalMessage.textContent = 'Failed to delete job. Please try again.';
+                generalModal.classList.remove('hidden');
+                generalModal.classList.add('show');
             }
         };
+        xhr.send(`job_id=${currentJobId}`);
+    }
+});
 
-        xhr.send(`job_id=${jobId}`);
-    });
-
-    cancelButton.addEventListener('click', function () {
-        responseModal.classList.remove('show');
-        responseModal.classList.add('hidden');
-        confirmButton.remove();
-        cancelButton.remove();
-    });
-}
-
+// Event listener for the delete button click on job cards
 document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(e) {
         const deleteButton = e.target.closest('.delete-job-icon');
         if (deleteButton) {
             const jobId = deleteButton.closest('.job-card').dataset.jobId;
-            deleteJob(jobId);
+            deleteJob(jobId); // open the confirmation modal
         }
     });
 });

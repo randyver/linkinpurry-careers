@@ -577,6 +577,7 @@ body {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    margin-left: 10px;
 }
 
 .close-modal:hover,
@@ -592,4 +593,33 @@ body {
 
 .show {
     display: flex;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-yes, .btn-no {
+    padding: 10px 20px;
+    border: 2px solid #3A4A3F;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #3A4A3F;
+}
+
+.btn-yes {
+    border: 0px;
+    background-color: #ffcc4d;
+}
+
+.btn-no {
+    background-color: transparent;
+}
+
+.btn-yes:hover, .btn-no:hover {
+    background-color: #3A4A3F;
+    color: #ffcc4d;
 }

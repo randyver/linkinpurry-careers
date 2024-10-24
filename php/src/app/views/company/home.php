@@ -131,13 +131,17 @@ $home = true;
     </div>
 
     <!-- Modal -->
-    <div id="responseModal" class="modal hidden">
+    <div id="generalModal" class="modal hidden">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <p id="modalMessage"></p>
+            <div class="modal-buttons">
+                <button id="confirmButton" class="btn-yes">Yes</button>
+                <button id="cancelButton" class="btn-no">No</button>
+            </div>
         </div>
     </div>
-    
+
     <?php include __DIR__ . '/../templates/footer.php'; ?>
     <script src="../../../public/js/home-company.js"></script>
 </body>
