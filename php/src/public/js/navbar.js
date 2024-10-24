@@ -13,3 +13,16 @@ window.addEventListener("click", (e) => {
     dropdownMenu.style.display = "none";
   }
 });
+
+const hamburgerMenu = document.getElementById("hamburger-menu");
+const mobileDropdownMenu = document.getElementById("mobile-dropdown-menu");
+
+hamburgerMenu.addEventListener("click", () => {
+    mobileDropdownMenu.classList.toggle("show");
+});
+
+window.addEventListener("click", (e) => {
+    if (!hamburgerMenu.contains(e.target) && !mobileDropdownMenu.contains(e.target)) {
+        mobileDropdownMenu.classList.remove("show");
+    }
+});

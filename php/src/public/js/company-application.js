@@ -1,10 +1,24 @@
+const responseModal = document.getElementById('responseModal');
+const closeModalButtons = document.querySelectorAll('.close-modal-box');
+const modalMessage = document.getElementById('modalMessage');
+
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', function () {
+        responseModal.classList.remove('show');
+        responseModal.classList.add('hidden');
+    });
+});
+
 document.querySelector('.save-btn')?.addEventListener('click', function () {
-    var reasonContent = quill.root.innerHTML;
-    var status = document.getElementById('status-select').value;
+    const reasonContent = quill.root.innerHTML;
+    const status = document.getElementById('status-select').value;
     const applicationId = document.querySelector('.applicant-section').dataset.applicationId;
 
     if (status === 'waiting') {
-        alert("You cannot save while the status is 'waiting'.");
+        // Tampilkan pesan waiting
+        modalMessage.textContent = "You cannot save while the status is 'waiting'.";
+        responseModal.classList.remove('hidden');
+        responseModal.classList.add('show');
         return;
     }
 
@@ -16,11 +30,18 @@ document.querySelector('.save-btn')?.addEventListener('click', function () {
         if (xhr.status === 200) {
             window.location.reload();
         } else {
-            alert("Failed to update application");
+            // Tampilkan pesan error
+            modalMessage.textContent = "Failed to update application.";
+            responseModal.classList.remove('hidden');
+            responseModal.classList.add('show');
         }
     };
 
-    xhr.send("application_id=" + encodeURIComponent(applicationId) + "&status=" + encodeURIComponent(status) + "&reason=" + encodeURIComponent(reasonContent));
+    xhr.send(
+        "application_id=" + encodeURIComponent(applicationId) +
+        "&status=" + encodeURIComponent(status) +
+        "&reason=" + encodeURIComponent(reasonContent)
+    );
 });
 
 var pdfModal = document.getElementById("pdfModal");

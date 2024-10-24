@@ -20,6 +20,7 @@ $home = true;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company - Home</title>
     <link rel="stylesheet" href="../../../public/css/navbar/style.css">
+    <link rel="stylesheet" href="../../../public/css/footer/style.css">
     <link rel="stylesheet" href="../../../public/css/company/home-company.css">
     <link rel="icon" href="../../../public/images/logo-icon.svg" type="image/x-icon">
 </head>
@@ -39,7 +40,7 @@ $home = true;
                 </div>
 
                 <div class="profile-info">
-                    <h2><?php echo $name; ?></h2>
+                    <h2><?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?></h2>
                     <div id="company-description">
                         <p>Company description</p>
                     </div>
@@ -50,7 +51,7 @@ $home = true;
             <div class="filter">
                 <div class="filter-group">
                     <div for="posted" class="filter-type">Posted</div>
-                    <select id="posted-month">
+                    <select id="posted-month" aria-label="Filter by posted month">
                         <option value="" disabled selected>Select month</option>
                         <option value="1">January</option>
                         <option value="2">Febuary</option>
@@ -66,7 +67,7 @@ $home = true;
                         <option value="12">December</option>
                         <option value="clear">Clear Selection</option>
                     </select>
-                    <select id="posted-year">
+                    <select id="posted-year" aria-label="Filter by posted year">
                         <option value="" disabled selected>Select year</option>
                         <option value="2023">2023</option>
                         <option value="2024">2024</option>
@@ -91,12 +92,12 @@ $home = true;
                     <label><input type="checkbox" value="internship" id='filter-jobtype'> Internship</label>
                 </div>
             </div>
-            <footer class="footer">
-                <div class="footer-links">
+            <footer class="small-footer">
+                <div class="small-footer-links">
                     <a href="/about">About</a>
-                    <a href="#">More</a>
+                    <a href="#">Back to Top</a>
                 </div>
-                <div class="footer-logo">
+                <div class="small-footer-logo">
                     <img src="../../../public/images/logo-icon-text.svg" alt="LinkedInPurry Logo">
                     <span>LinkinPurry © 2024</span>
                 </div>
@@ -112,7 +113,7 @@ $home = true;
                 <hr class="sort-line">
                 <div class="sort-options">
                     <span>Sort by:</span>
-                    <select>
+                    <select aria-label="Sort jobs">
                         <option value="recent">Recent</option>
                         <option value="oldest">Oldest</option>
                     </select>
@@ -129,6 +130,19 @@ $home = true;
         </a>
     </div>
 
+    <!-- Modal -->
+    <div id="generalModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <p id="modalMessage"></p>
+            <div class="modal-buttons">
+                <button id="confirmButton" class="btn-yes">Yes</button>
+                <button id="cancelButton" class="btn-no">No</button>
+            </div>
+        </div>
+    </div>
+
+    <?php include __DIR__ . '/../templates/footer.php'; ?>
     <script src="../../../public/js/home-company.js"></script>
 </body>
 

@@ -2,12 +2,23 @@
 
 class CompanyJobController
 {
+    public function __construct()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /login');
+            exit();
+        }
+
+        if ($_SESSION['role'] !== 'company') {
+            header('Location: /404');
+            exit();
+        }
+    }
     public function index($jobId)
     {
         require_once __DIR__ . '/../config/db.php';
 
         try {
-            // Check if the user is logged in
             if (!isset($_SESSION['user_id'])) {
                 header('Location: /login');
                 exit;
@@ -16,30 +27,32 @@ class CompanyJobController
             $pdo = Database::getConnection();
             $currentUserId = $_SESSION['user_id'];
 
-            // Get job details and verify if the job belongs to the logged-in company
             $stmt = $pdo->prepare("
-                SELECT jv.*, c.name AS company_name, cd.location AS company_location, cd.about AS company_about, jva.file_path 
-                FROM JobVacancy jv
-                JOIN Users c ON jv.company_id = c.user_id
-                JOIN CompanyDetail cd ON c.user_id = cd.user_id
-                LEFT JOIN JobVacancyAttachment jva ON jv.job_vacancy_id = jva.job_vacancy_id
-                WHERE jv.job_vacancy_id = :jobId AND jv.company_id = :currentUserId
-            ");
-
+            SELECT jv.*, c.name AS company_name, cd.location AS company_location, cd.about AS company_about
+            FROM JobVacancy jv
+            JOIN Users c ON jv.company_id = c.user_id
+            JOIN CompanyDetail cd ON c.user_id = cd.user_id
+            WHERE jv.job_vacancy_id = :jobId AND jv.company_id = :currentUserId
+        ");
             $stmt->execute([
                 ':jobId' => $jobId,
                 ':currentUserId' => $currentUserId
             ]);
             $job = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // If job is not found or doesn't belong to the current user
             if (!$job) {
                 throw new Exception('Job not found or you do not have permission to view this job.');
             }
 
-            // Render the job details
+            $attachmentStmt = $pdo->prepare("SELECT file_path FROM JobVacancyAttachment WHERE job_vacancy_id = :jobId");
+            $attachmentStmt->execute([
+                ':jobId' => $jobId
+            ]);
+            $attachments = $attachmentStmt->fetchAll(PDO::FETCH_ASSOC);
+
             View::render('company-job-detail/index', [
-                'job' => $job
+                'job' => $job,
+                'attachments' => $attachments
             ]);
         } catch (PDOException $e) {
             echo "Database Error: " . htmlspecialchars($e->getMessage());
@@ -146,6 +159,30 @@ class CompanyJobController
             }
         }
 
+        $applicationFilesQuery = 'SELECT cv_path, video_path FROM Application WHERE job_vacancy_id = :job_id';
+        $applicationFilesStmt = $pdo->prepare($applicationFilesQuery);
+        $applicationFilesStmt->execute([
+            ':job_id' => $jobId
+        ]);
+
+        $applications = $applicationFilesStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($applications as $application) {
+            if (!empty($application['cv_path'])) {
+                $cvFilePath = __DIR__ . '/../../public/uploads/cv/' . $application['cv_path'];
+                if (file_exists($cvFilePath)) {
+                    unlink($cvFilePath);
+                }
+            }
+
+            if (!empty($application['video_path'])) {
+                $videoFilePath = __DIR__ . '/../../public/uploads/videos/' . $application['video_path'];
+                if (file_exists($videoFilePath)) {
+                    unlink($videoFilePath);
+                }
+            }
+        }
+
         $deleteJobQuery = 'DELETE FROM JobVacancy WHERE job_vacancy_id = :job_id';
         $deleteJobStmt = $pdo->prepare($deleteJobQuery);
         $deleteJobStmt->execute([
@@ -154,7 +191,7 @@ class CompanyJobController
 
         if ($deleteJobStmt->rowCount() > 0) {
             header('HTTP/1.1 200 OK');
-            echo 'Job and its attachments deleted successfully';
+            echo 'Job and its attachments deleted successfully, including application files.';
         } else {
             header('HTTP/1.1 500 Internal Server Error');
             echo 'Failed to delete the job. Please try again.';
@@ -210,4 +247,71 @@ class CompanyJobController
             echo 'Database Error: ' . htmlspecialchars($e->getMessage());
         }
     }    
+
+    public function openJob()
+    {
+        $this->updateJobStatus(1);
+    }
+
+    public function closeJob()
+    {
+        $this->updateJobStatus(0);
+    }
+
+    private function updateJobStatus($isOpen)
+    {
+        if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'company') {
+            http_response_code(401);
+            echo json_encode(['error' => 'Unauthorized']);
+            exit;
+        }
+
+        $userId = $_SESSION['user_id'];
+
+        if (!isset($_POST['job_id'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Job ID is required']);
+            exit;
+        }
+
+        $jobId = $_POST['job_id'];
+
+        require_once __DIR__ . '/../config/db.php';
+        $pdo = Database::getConnection();
+
+        try {
+            $query = 'SELECT job_vacancy_id FROM JobVacancy WHERE job_vacancy_id = :job_id AND company_id = :company_id';
+            $statement = $pdo->prepare($query);
+            $statement->execute([
+                ':job_id' => $jobId,
+                ':company_id' => $userId
+            ]);
+
+            $job = $statement->fetch(PDO::FETCH_ASSOC);
+
+            if (!$job) {
+                http_response_code(403);
+                echo json_encode(['error' => 'Unauthorized to update this job']);
+                return;
+            }
+
+            $updateQuery = 'UPDATE JobVacancy SET is_open = :is_open WHERE job_vacancy_id = :job_id';
+            $updateStmt = $pdo->prepare($updateQuery);
+            $updateStmt->execute([
+                ':is_open' => $isOpen,
+                ':job_id' => $jobId
+            ]);
+
+            if ($updateStmt->rowCount() > 0) {
+                http_response_code(200);
+                echo json_encode(['success' => true, 'message' => 'Job status updated successfully']);
+            } else {
+                http_response_code(500);
+                echo json_encode(['error' => 'Failed to update job status']);
+            }
+        } catch (PDOException $e) {
+            http_response_code(500);
+            echo json_encode(['error' => 'Database Error: ' . $e->getMessage()]);
+        }
+    }
 }

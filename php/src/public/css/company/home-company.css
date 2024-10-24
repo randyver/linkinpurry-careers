@@ -25,7 +25,7 @@ body {
     width: 20%;
     position: -webkit-sticky;
     position: sticky;
-    top: 20px;
+    top: 98px;
     height: fit-content;
 }
 
@@ -344,8 +344,8 @@ body {
 }
 
 
-/* Footer */
-.footer {
+/* small-footer */
+.small-footer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -353,34 +353,33 @@ body {
     margin-top: 15px;
 }
 
-.footer-links {
+.small-footer-links {
     display: flex;
     gap: 20px;
 }
 
-.footer-links a {
+.small-footer-links a {
     font-size: 11px;
     color: #7A7A7A;
     text-decoration: none;
 }
 
-.footer-links a:hover {
+.small-footer-links a:hover {
     text-decoration: underline;
 }
 
-.footer-logo {
+.small-footer-logo {
     display: flex;
     align-items: center;
 }
 
-.footer-logo img {
-    width: 110px;
-    height: 30px;
+.small-footer-logo img {
+    width: 80px;
     margin-right: 10px;
     object-fit: contain;
 }
 
-.footer-logo span {
+.small-footer-logo span {
     font-size: 11px;
     color: #7A7A7A;
 }
@@ -414,4 +413,213 @@ body {
 
 .floating-btn:hover {
     background-color: #fbd87f;
+}
+
+@media (max-width: 500px) {
+
+    .main-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .filter-section {
+        width: 100%;
+        margin-bottom: 20px;
+        position: initial;
+    }
+
+    .job-listings {
+        width: 100%;
+        padding: 0;
+    }
+
+    .job-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    .job-title {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .job-info {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .job-info p {
+        width: 100%;
+    }
+
+    .job-widget {
+        justify-content: flex-start;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .floating-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+
+    .floating-btn img {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Footer Section */
+    .small-footer {
+        display: none;
+    }
+
+    .small-footer-logo {
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .small-footer-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .small-footer-logo img {
+        width: 60px;
+    }
+
+    .search-input {
+        padding: 8px 40px 8px 40px;
+        font-size: 12px;
+    }
+
+    .search-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .sort-options select {
+        font-size: 12px;
+    }
+
+    .filter-group label {
+        font-size: 12px;
+    }
+
+    .filter-group select {
+        font-size: 12px;
+    }
+
+    .sort-options span {
+        font-size: 12px;
+    }
+
+    .job-title {
+        font-size: 12px;
+    }
+
+    .job-info p {
+        font-size: 12px;
+    }
+
+    .widget-icon-button {
+        width: 12px;
+        height: 12px;
+    }
+
+    .job-widget {
+        height: 12px;
+    }
+
+    .widget-icon {
+        width: 12px;
+    }
+}
+
+@media (min-width: 501px) {
+    .footer {
+        display: none;
+    }
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+}
+
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.show {
+    display: flex;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-yes, .btn-no {
+    padding: 10px 20px;
+    border: 2px solid #3A4A3F;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #3A4A3F;
+}
+
+.btn-yes {
+    border: 0px;
+    background-color: #ffcc4d;
+}
+
+.btn-no {
+    background-color: transparent;
+}
+
+.btn-yes:hover, .btn-no:hover {
+    background-color: #3A4A3F;
+    color: #ffcc4d;
 }

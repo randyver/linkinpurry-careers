@@ -1,3 +1,13 @@
+const closeModalButtons = document.querySelectorAll('.close-modal');
+const modalMessage = document.getElementById('modalMessage');
+
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        responseModal.classList.remove('show');
+        responseModal.classList.add('hidden');
+    });
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('editProfileForm');
     const currentPasswordInput = document.getElementById('current-password');
@@ -17,7 +27,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (isValid) {
                         submitForm();
                     } else {
-                        alert('Your current password is incorrect. Please try again.');
+                        modalMessage.textContent = 'Current password is incorrect.';
+                        responseModal.classList.remove('hidden');
+                        responseModal.classList.add('show');
                     }
                 })
                 .catch((error) => {
@@ -34,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     async function checkCurrentPassword(currentPassword) {
-        const response = await fetch('/check-current-password', {
+        const response = await fetch('/check-current-password-jobseeker', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
