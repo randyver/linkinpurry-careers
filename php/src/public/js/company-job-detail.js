@@ -40,11 +40,7 @@ confirmButton.addEventListener('click', function() {
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
             if (xhr.status === 200) {
-                const jobCard = document.querySelector(`.job-card[data-job-id='${currentJobId}']`);
-                if (jobCard) {
-                    jobCard.remove(); // remove job card from the DOM
-                }
-                closeModal(); // hide modal after job is deleted
+                window.location.href = 'home-company';
             } else if (xhr.status === 403) {
                 showOtherModal('You are not authorized to delete this job.');
             } else {

@@ -40,8 +40,12 @@ const modalMessage = document.getElementById('modalMessage');
 
 closeModalButtons.forEach(button => {
     button.addEventListener('click', function() {
-        responseModal.classList.remove('show');
-        responseModal.classList.add('hidden');
+        if (modalMessage.textContent === 'Job posted successfully.') {
+            window.location.href = '/home-company';
+        } else {
+            responseModal.classList.remove('show');
+            responseModal.classList.add('hidden');
+        }
     });
 });
 

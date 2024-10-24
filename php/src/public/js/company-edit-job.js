@@ -54,8 +54,12 @@ const closeModalButtons = document.querySelectorAll(".close-modal");
 
 closeModalButtons.forEach(button => {
   button.addEventListener('click', function() {
-      generalModal.classList.remove('show');
-      generalModal.classList.add('hidden');
+    if (modalMessage.textContent === 'Job updated successfully.') {
+        window.location.href = '/home-company';
+    } else {
+        generalModal.classList.remove('show');
+        generalModal.classList.add('hidden');
+    }
   });
 });
 

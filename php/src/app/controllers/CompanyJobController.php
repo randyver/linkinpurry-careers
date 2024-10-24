@@ -128,7 +128,7 @@ class CompanyJobController
 
         require_once __DIR__ . '/../config/db.php';
         $pdo = Database::getConnection();
-
+        
         $query = 'SELECT job_vacancy_id FROM JobVacancy WHERE job_vacancy_id = :job_id AND company_id = :company_id';
         $statement = $pdo->prepare($query);
         $statement->execute([
@@ -159,6 +159,30 @@ class CompanyJobController
             }
         }
 
+        $applicationFilesQuery = 'SELECT cv_path, video_path FROM Application WHERE job_vacancy_id = :job_id';
+        $applicationFilesStmt = $pdo->prepare($applicationFilesQuery);
+        $applicationFilesStmt->execute([
+            ':job_id' => $jobId
+        ]);
+
+        $applications = $applicationFilesStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($applications as $application) {
+            if (!empty($application['cv_path'])) {
+                $cvFilePath = __DIR__ . '/../../public/uploads/cv/' . $application['cv_path'];
+                if (file_exists($cvFilePath)) {
+                    unlink($cvFilePath);
+                }
+            }
+
+            if (!empty($application['video_path'])) {
+                $videoFilePath = __DIR__ . '/../../public/uploads/videos/' . $application['video_path'];
+                if (file_exists($videoFilePath)) {
+                    unlink($videoFilePath);
+                }
+            }
+        }
+
         $deleteJobQuery = 'DELETE FROM JobVacancy WHERE job_vacancy_id = :job_id';
         $deleteJobStmt = $pdo->prepare($deleteJobQuery);
         $deleteJobStmt->execute([
@@ -167,7 +191,7 @@ class CompanyJobController
 
         if ($deleteJobStmt->rowCount() > 0) {
             header('HTTP/1.1 200 OK');
-            echo 'Job and its attachments deleted successfully';
+            echo 'Job and its attachments deleted successfully, including application files.';
         } else {
             header('HTTP/1.1 500 Internal Server Error');
             echo 'Failed to delete the job. Please try again.';
