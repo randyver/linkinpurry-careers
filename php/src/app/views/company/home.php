@@ -40,7 +40,7 @@ $home = true;
                 </div>
 
                 <div class="profile-info">
-                    <h2><?php echo $name; ?></h2>
+                    <h2><?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?></h2>
                     <div id="company-description">
                         <p>Company description</p>
                     </div>
