@@ -42,7 +42,7 @@ $router->get('/jobseeker-profile', 'JobSeekerProfileController@index');
 
 // job seeker edit profile
 $router->get('/jobseeker-edit-profile', 'JobseekerEditProfileController@index');
-$router->post('/check-current-password', 'JobseekerEditProfileController@checkCurrentPassword');
+$router->post('/check-current-password-jobseeker', 'JobseekerEditProfileController@checkCurrentPassword');
 $router->post('/jobseeker-update-profile', 'JobseekerEditProfileController@updateProfile');
 
 // company

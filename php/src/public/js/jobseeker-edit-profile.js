@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     async function checkCurrentPassword(currentPassword) {
-        const response = await fetch('/check-current-password', {
+        const response = await fetch('/check-current-password-jobseeker', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
