@@ -27,13 +27,14 @@ class CompanyJobController
             $pdo = Database::getConnection();
             $currentUserId = $_SESSION['user_id'];
 
+            // Fetch job details
             $stmt = $pdo->prepare("
-            SELECT jv.*, c.name AS company_name, cd.location AS company_location, cd.about AS company_about
-            FROM JobVacancy jv
-            JOIN Users c ON jv.company_id = c.user_id
-            JOIN CompanyDetail cd ON c.user_id = cd.user_id
-            WHERE jv.job_vacancy_id = :jobId AND jv.company_id = :currentUserId
-        ");
+                SELECT jv.*, c.name AS company_name, cd.location AS company_location, cd.about AS company_about
+                FROM JobVacancy jv
+                JOIN Users c ON jv.company_id = c.user_id
+                JOIN CompanyDetail cd ON c.user_id = cd.user_id
+                WHERE jv.job_vacancy_id = :jobId AND jv.company_id = :currentUserId
+            ");
             $stmt->execute([
                 ':jobId' => $jobId,
                 ':currentUserId' => $currentUserId
@@ -50,9 +51,16 @@ class CompanyJobController
             ]);
             $attachments = $attachmentStmt->fetchAll(PDO::FETCH_ASSOC);
 
+            $applicantCountStmt = $pdo->prepare("SELECT COUNT(*) AS applicant_count FROM Application WHERE job_vacancy_id = :jobId");
+            $applicantCountStmt->execute([
+                ':jobId' => $jobId
+            ]);
+            $applicantCount = $applicantCountStmt->fetchColumn();
+
             View::render('company-job-detail/index', [
                 'job' => $job,
-                'attachments' => $attachments
+                'attachments' => $attachments,
+                'applicantCount' => $applicantCount
             ]);
         } catch (PDOException $e) {
             echo "Database Error: " . htmlspecialchars($e->getMessage());
@@ -199,6 +207,54 @@ class CompanyJobController
 
         exit;
     }
+
+    public function downloadApplicantsCSV() {
+        if (!isset($_GET['job_id'])) {
+            header('HTTP/1.1 400 Bad Request');
+            echo 'Job ID is required.';
+            exit;
+        }
+    
+        $jobId = $_GET['job_id'];
+    
+        require_once __DIR__ . '/../config/db.php';
+    
+        try {
+            $pdo = Database::getConnection();
+    
+            $stmt = $pdo->prepare("
+                SELECT u.email, u.name, jv.position, a.created_at, a.cv_path, a.video_path, a.status, a.status_reason
+                FROM Users u 
+                NATURAL JOIN Application a 
+                JOIN JobVacancy jv ON a.job_vacancy_id = jv.job_vacancy_id
+                WHERE a.job_vacancy_id = :job_id
+            ");
+            $stmt->execute([':job_id' => $jobId]);
+            $applicants = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            if (!$applicants) {
+                header('HTTP/1.1 404 Not Found');
+                echo 'No applicants found.';
+                exit;
+            }
+    
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment; filename="' . $jobId . '-applicants.csv"');
+            $output = fopen('php://output', 'w');
+    
+            fputcsv($output, ['Name', 'Email', 'Position', 'Applied At', 'CV Path', 'Video Path', 'Status', 'Status Reason']);
+    
+            foreach ($applicants as $applicant) {
+                fputcsv($output, [$applicant['name'], $applicant['email'], $applicant['position'], $applicant['created_at'], $applicant['cv_path'], $applicant['video_path'], $applicant['status'], $applicant['status_reason']]);
+            }
+    
+            fclose($output);
+            exit;
+        } catch (PDOException $e) {
+            header('HTTP/1.1 500 Internal Server Error');
+            echo 'Database Error: ' . htmlspecialchars($e->getMessage());
+        }
+    }    
 
     public function openJob()
     {

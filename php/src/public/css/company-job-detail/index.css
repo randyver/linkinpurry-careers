@@ -115,6 +115,13 @@ main {
     object-fit: contain;
 }
 
+.download-csv-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0px;
+}
+
 .toggle-job-status-btn {
     padding: 10px 15px;
     border: none;
@@ -159,6 +166,7 @@ main {
     height: 15px;
     margin: 0;
     padding: 0;
+
 }
 
 .delete-job-icon {

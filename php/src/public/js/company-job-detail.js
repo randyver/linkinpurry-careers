@@ -51,6 +51,10 @@ confirmButton.addEventListener('click', function() {
     }
 });
 
+function downloadCSV(jobId) {
+    window.location.href = `/download-applicants-csv?job_id=${jobId}`;
+}
+
 // Event listener for delete button click on job cards
 document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(e) {
