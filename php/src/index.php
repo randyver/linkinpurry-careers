@@ -39,7 +39,6 @@ $router->get('/job/{id}', 'JobController@show');
 
 // company profile jobseeker pov
 $router->get('/company-profile/{companyId}', 'JobseekerCompanyProfileController@index');
-$router->get('/company-profile-jobs', 'JobseekerCompanyProfileController@getCompanyJobListings');
 
 // job seeker profile
 $router->get('/jobseeker-profile', 'JobSeekerProfileController@index');

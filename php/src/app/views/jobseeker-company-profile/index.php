@@ -77,7 +77,6 @@ $home = false;
     </main>
 
     <?php include __DIR__ . '/../templates/footer.php'; ?>
-    <script src="../../../public/js/jobseeker-company-profile.js"></script>
 </body>
 
 </html>

@@ -28,27 +28,11 @@ class JobseekerCompanyProfileController
             exit;
         }
 
-        // Get request parameters
-        $postedMonth = $_GET['posted-month'] ?? null;
-        $postedYear = $_GET['posted-year'] ?? null;
-        $locations = isset($_GET['location']) ? explode(',', $_GET['location']) : [];
-        $types = isset($_GET['type']) ? explode(',', $_GET['type']) : [];
-        $sort = $_GET['sort'] ?? 'recent';
-
         // Retrieve the company info and job listings
         $companyName = $this->getCompanyName($companyId);
         $companyDescription = $this->getCompanyDescription($companyId);
         $companyLocation = $this->getCompanyLocation($companyId);
-        
-        // Fetch jobs with the dynamic and request parameters
-        $jobs = $this->getCompanyJobListings(
-            $companyId, 
-            $postedMonth, 
-            $postedYear, 
-            $locations, 
-            $types, 
-            $sort
-        );
+        $jobs = $this->getCompanyJobListings($companyId);
 
         // Render the view
         View::render('jobseeker-company-profile/index', [
@@ -59,52 +43,13 @@ class JobseekerCompanyProfileController
         ]);
     }
 
-    public function getCompanyJobListings($companyId = null, $postedMonth = null, $postedYear = null, $locations = [], $types = [], $sort = 'recent')
-    {
-        if (!$companyId) {
-            header('HTTP/1.1 400 Bad Request');
-            echo 'Company ID is required.';
-            exit;
-        }
-
-        $jobs = $this->getCompanyJobListingsData($companyId, $postedMonth, $postedYear, $locations, $types, $sort);
-
-        return $jobs ? $jobs : [];
-    }
-
-    private function getCompanyJobListingsData($companyId, $postedMonth, $postedYear, $locations, $types, $sort)
+    private function getCompanyJobListings($companyId)
     {
         require_once __DIR__ . '/../config/db.php';
         $pdo = Database::getConnection();
 
         $query = 'SELECT * FROM JobVacancy WHERE company_id = :company_id';
         $params = ['company_id' => $companyId];
-
-        if ($postedMonth) {
-            $query .= ' AND MONTH(created_at) = :posted_month';
-            $params['posted_month'] = $postedMonth;
-        }
-
-        if ($postedYear) {
-            $query .= ' AND YEAR(created_at) = :posted_year';
-            $params['posted_year'] = $postedYear;
-        }
-
-        if (!empty($locations)) {
-            $query .= ' AND location_type IN (' . implode(',', array_fill(0, count($locations), '?')) . ')';
-            $params = array_merge($params, $locations);
-        }
-
-        if (!empty($types)) {
-            $query .= ' AND job_type IN (' . implode(',', array_fill(0, count($types), '?')) . ')';
-            $params = array_merge($params, $types);
-        }
-
-        if ($sort === 'recent') {
-            $query .= ' ORDER BY created_at DESC';
-        } else if ($sort === 'oldest') {
-            $query .= ' ORDER BY created_at ASC';
-        }
 
         $statement = $pdo->prepare($query);
         $statement->execute($params);
