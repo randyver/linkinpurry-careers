@@ -134,6 +134,9 @@ $application_history = false;
         </aside>
     </div>
     <?php include __DIR__ . '/../templates/footer.php'; ?>
+    <script src="../../../public/js/company-navigation.js"></script>
+    <?php include __DIR__ . '/../templates/footer.php'; ?>
+
     <script src="../../../public/js/home-jobseeker.js"></script>
 </body>
 
