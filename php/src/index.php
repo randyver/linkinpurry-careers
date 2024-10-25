@@ -38,7 +38,8 @@ $router->get('/get-recommendation-jobs', 'JobseekerHomeController@getRecommendat
 $router->get('/job/{id}', 'JobController@show');
 
 // company profile jobseeker pov
-$router->get('/company-profile/{id}', 'JobseekerCompanyProfileController@index');
+$router->get('/company-profile/{companyId}', 'JobseekerCompanyProfileController@index');
+$router->get('/company-profile-jobs', 'JobseekerCompanyProfileController@getCompanyJobListings');
 
 // job seeker profile
 $router->get('/jobseeker-profile', 'JobSeekerProfileController@index');

@@ -60,13 +60,14 @@ class JobseekerHomeController
         require_once __DIR__ . '/../config/db.php';
         $pdo = Database::getConnection();
 
-        // Base query
-        $query = 'SELECT jv.job_vacancy_id, jv.position, jv.description, jv.job_type, jv.location_type, jv.created_at, jv.updated_at, 
-                         c.name AS company_name, cd.location AS company_location
-                  FROM JobVacancy jv
-                  JOIN Users c ON jv.company_id = c.user_id
-                  JOIN CompanyDetail cd ON jv.company_id = cd.user_id
-                  WHERE jv.is_open = TRUE';
+        // Base query: make sure to select company_id along with other fields
+        $query = 'SELECT jv.job_vacancy_id, jv.position, jv.description, jv.job_type, jv.location_type, 
+                        jv.created_at, jv.updated_at, jv.company_id, 
+                        c.name AS company_name, cd.location AS company_location
+                FROM JobVacancy jv
+                JOIN Users c ON jv.company_id = c.user_id
+                JOIN CompanyDetail cd ON jv.company_id = cd.user_id
+                WHERE jv.is_open = TRUE';
 
         $params = [];
 
