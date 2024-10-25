@@ -23,13 +23,14 @@ main {
   flex-direction: column;
   justify-content: space-between;
   width: 80%;
+  align-items: center;
 }
 
 /* Back button */
 .back-arrow {
   display: flex;
   justify-content: start;
-  width: 80%; 
+  width: 61.5%; 
   margin-bottom: 20px;
 }
 
@@ -254,41 +255,52 @@ main {
 }
 
 .job-card {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  transition: transform 0.2s ease-in-out;
+  align-items: center; 
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+  width: 850px;
+  margin-bottom: 20px;
 }
 
-.job-card:hover {
-  transform: translateY(-5px);
+.job-title,
+.job-details {
+  display: flex;
+  flex-direction: column;
 }
 
 .job-title h2 {
-  font-size: 18px;
+  font-size: 20px;
   color: #3A4A3F;
   margin: 0;
+  font-weight: 600;
 }
 
 .job-details p {
   font-size: 14px;
   color: #322D25;
+  margin: 2px 0;
 }
 
-.view-button .button-view {
+.view-button {
+  margin-left: auto;
+}
+
+.button-view {
   background-color: #3A4A3F;
   color: white;
   padding: 10px 20px;
-  border-radius: 4px;
+  border-radius: 6px;
   text-decoration: none;
   font-weight: 600;
+  transition: background-color 0.3s;
 }
 
-.view-button .button-view:hover {
+.button-view:hover {
   background-color: #322D25;
 }

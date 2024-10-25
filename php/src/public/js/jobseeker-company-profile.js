@@ -7,17 +7,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateFiltersAndFetchJobs(resetPage = false) {
         let params = new URLSearchParams();
-
+    
         const postedMonth = document.getElementById('posted-month').value;
         if (postedMonth && postedMonth !== "Select month") {
             params.set('posted-month', postedMonth);
         }
-
+    
         const postedYear = document.getElementById('posted-year').value;
         if (postedYear && postedYear !== "Select year") {
             params.set('posted-year', postedYear);
         }
-
+    
         const locations = [];
         document.querySelectorAll('.filter-group input[id^="filter-location"]:checked').forEach(checkbox => {
             locations.push(checkbox.value);
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (locations.length > 0) {
             params.set('location', locations.join(','));
         }
-
+    
         const types = [];
         document.querySelectorAll('.filter-group input[id^="filter-jobtype"]:checked').forEach(checkbox => {
             types.push(checkbox.value);
@@ -33,21 +33,21 @@ document.addEventListener('DOMContentLoaded', function () {
         if (types.length > 0) {
             params.set('type', types.join(','));
         }
-
+    
         const sortBy = sortSelect.value;
-        if (sortBy) {
+        if (sortBy && sortBy !== "Select sorting") {
             params.set('sort', sortBy);
         }
-
+    
         if (resetPage) {
             page = 1;
             jobListingsContainer.innerHTML = '';
         }
-
+    
         params.set('page', page);
-
+    
         fetchJobListings(params.toString());
-    }
+    }    
 
     function fetchJobListings(queryString) {
         if (isFetching) return;
@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.open('GET', `/company-profile-jobs?${queryString}`, true);
         xhr.onload = function () {
             if (xhr.status === 200) {
+                console.log(xhr.responseText);
                 const jobs = JSON.parse(xhr.responseText); 
                 const newJobListings = document.createElement('div');
                 
