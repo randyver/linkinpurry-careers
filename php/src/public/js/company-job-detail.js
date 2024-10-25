@@ -18,6 +18,12 @@ function closeModal() {
     currentJobId = null; // reset jobId
 }
 
+// Close modal when the close button or No button is clicked
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', closeModal);
+});
+cancelButton.addEventListener('click', closeModal);
+
 // Function to hide the other modal
 function closeOtherModal() {
     otherModal.classList.remove('show');
