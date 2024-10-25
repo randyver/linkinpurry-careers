@@ -67,7 +67,7 @@ CREATE TABLE Application (
     status_reason TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id),
-    FOREIGN KEY (job_vacancy_id) REFERENCES JobVacancy(job_vacancy_id)
+    FOREIGN KEY (job_vacancy_id) REFERENCES JobVacancy(job_vacancy_id) ON DELETE CASCADE
 );
 
 -- DUMMY DATA

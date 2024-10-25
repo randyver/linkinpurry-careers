@@ -2,6 +2,17 @@
 
 class JobseekerHomeController
 {
+    public function __construct()
+    {
+        if (!isset($_SESSION['user_id'])) {
+            return;
+        }
+
+        if ($_SESSION['role'] !== 'jobseeker') {
+            header('Location: /404');
+            exit();
+        }
+    }
     public function index()
     {
         View::render('jobseeker/home');
@@ -60,7 +71,7 @@ class JobseekerHomeController
         require_once __DIR__ . '/../config/db.php';
         $pdo = Database::getConnection();
 
-        // Base query: make sure to select company_id along with other fields
+        // Base query
         $query = 'SELECT jv.job_vacancy_id, jv.position, jv.description, jv.job_type, jv.location_type, 
                         jv.created_at, jv.updated_at, jv.company_id, 
                         c.name AS company_name, cd.location AS company_location

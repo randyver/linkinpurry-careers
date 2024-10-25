@@ -106,10 +106,12 @@ main {
     display: flex;
     gap: 15px;
     align-self: baseline;
+    align-items: center;
 }
 
 .job-actions img {
     width: 15px;
+    height: 15px;
     object-fit: contain;
 }
 
@@ -120,11 +122,59 @@ main {
     padding: 0px;
 }
 
+.toggle-job-status-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.open-job-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.open-job-btn:hover {
+    background-color: #218838;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close-job-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.close-job-btn:hover {
+    background-color: #c82333;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-job-icon {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.edit-job-icon img {
+    display: block;
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    padding: 0;
+
+}
+
 .delete-job-icon {
     background: none;
     border: none;
     cursor: pointer;
     padding: 0px;
+    height: 15px;
 }
 
 .job-details h4 {
@@ -160,16 +210,37 @@ main {
 }
 
 /* Job Image Section */
-.job-image {
-    margin-top: 15px;
-    border-radius: 4px;
-    overflow: hidden;
+.job-attachments {
+    margin-top: 20px;
 }
 
-.job-image img {
-    max-width: 100%;
+.attachment-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.attachment-list li {
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.attachment-image {
+    max-width: 400px;
+    max-height: 400px;
+    height: auto;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    object-fit: contain;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.attachment-image:hover {
+    transform: scale(1.01);
 }
 
 /* Filter Bar Styling */
@@ -313,4 +384,129 @@ main {
     width: 16px;
     height: 16px;
     object-fit: contain;
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+}
+
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.show {
+    display: flex;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-yes, .btn-no {
+    padding: 10px 20px;
+    border: 2px solid #3A4A3F;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #3A4A3F;
+}
+
+.btn-yes {
+    border: 0px;
+    background-color: #ffcc4d;
+}
+
+.btn-no {
+    background-color: transparent;
+}
+
+.btn-yes:hover, .btn-no:hover {
+    background-color: #3A4A3F;
+    color: #ffcc4d;
+}
+
+/* Styling for the other modal */
+#otherModal {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
+
+#otherModal.hidden {
+    display: none;
+}
+
+#otherModal.show {
+    display: flex;
+}
+
+#otherModal .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 100%;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+#otherModal .close-other-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#otherModal #otherModalMessage {
+    font-size: 16px;
+    color: #333;
+    margin: 20px 0;
 }

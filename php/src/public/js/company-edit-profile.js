@@ -1,7 +1,16 @@
+const closeModalButtons = document.querySelectorAll('.close-modal');
+const modalMessage = document.getElementById('modalMessage');
+
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        responseModal.classList.remove('show');
+        responseModal.classList.add('hidden');
+    });
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('editProfileForm');
     const currentPasswordInput = document.getElementById('current-password');
-    const backLink = document.querySelector('.back-link');
     let isFormChanged = false;
 
     form.addEventListener('input', function () {
@@ -17,7 +26,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (isValid) {
                         submitForm();
                     } else {
-                        alert('Your current password is incorrect. Please try again.');
+                        // show modal
+                        modalMessage.textContent = 'Current password is incorrect.';
+                        responseModal.classList.remove('hidden');
+                        responseModal.classList.add('show');
                     }
                 })
                 .catch((error) => {
@@ -29,9 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function submitForm() {
-        const hiddenDescriptionInput = document.getElementById('company-description-hidden');
-        hiddenDescriptionInput.value = quill.root.innerHTML;
-
         isFormChanged = false;
         form.submit();
     }
@@ -59,10 +68,5 @@ document.addEventListener('DOMContentLoaded', function () {
             e.returnValue = message;
             return message;
         }
-    });
-
-    form.addEventListener('submit', function () {
-        const hiddenDescriptionInput = document.getElementById('company-description-hidden');
-        hiddenDescriptionInput.value = quill.root.innerHTML;
     });
 });

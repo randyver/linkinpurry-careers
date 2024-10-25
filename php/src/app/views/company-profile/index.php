@@ -51,9 +51,9 @@ $home = false;
             </div>
 
             <div class="company-details">
-                <h1 class="company-name"><?php echo $companyName; ?></h1>
-                <p class="company-location"><img src="../../../public/images/location-icon.svg" alt="Location Icon"><?php echo $companyLocation; ?></p>
-                <p id="company-description"><?php echo $companyDescription; ?></p>
+                <h1 class="company-name"><?php echo htmlspecialchars($companyName, ENT_QUOTES, 'UTF-8'); ?></h1>
+                <p class="company-location"><img src="../../../public/images/location-icon.svg" alt="Location Icon"><?php echo htmlspecialchars($companyLocation, ENT_QUOTES, 'UTF-8'); ?></p>
+                <p id="company-description"><?php echo htmlspecialchars($companyDescription, ENT_QUOTES, 'UTF-8'); ?></p>
             </div>
 
             <div class="settings-icon">

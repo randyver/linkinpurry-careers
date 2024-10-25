@@ -128,16 +128,37 @@ main {
 }
 
 /* Job Image Section */
-.job-image {
-    margin-top: 15px;
-    border-radius: 4px;
-    overflow: hidden;
+.job-attachments {
+    margin-top: 20px;
 }
 
-.job-image img {
-    max-width: 100%;
+.attachment-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.attachment-list li {
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.attachment-image {
+    max-width: 400px;
+    max-height: 400px;
+    height: auto;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    object-fit: contain;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.attachment-image:hover {
+    transform: scale(1.01);
 }
 
 .apply-button {
@@ -148,19 +169,43 @@ main {
 
 .application {
     display: flex;
-    flex-direction: row;
-    justify-content: end;
+    flex-direction: column;
+    align-items: flex-start;
     margin-top: 20px;
-    gap: 20px;
+    gap: 15px;
 }
 
-.file a {
+.application p {
+    font-size: 16px;
+    color: #3A4A3F;
+    font-weight: 500;
+}
+
+.application div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.application .file {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.application .file a {
     text-decoration: none;
     color: #826644;
     font-size: 16px;
     font-weight: 500;
-    margin-left: 6px;
     font-style: italic;
+}
+
+.application .file img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
 }
 
 button {
@@ -178,4 +223,14 @@ button {
 
 button:hover {
     background-color: #586f5f;
+}
+
+.closed-message {
+    font-weight: 500;
+    font-size: 15px;
+    background-color: rgb(255, 90, 90);
+    color:#fff;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 4px;
 }

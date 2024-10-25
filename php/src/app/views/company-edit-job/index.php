@@ -28,9 +28,9 @@ $name = $_SESSION['name'];
 
     <main class="main-section">
         <div class="back-arrow">
-            <a href="/home-company" class="back-link">
+            <a href="/company-job/<?php echo htmlspecialchars($job['job_vacancy_id']); ?>" class="back-link">
                 <img src="../../../public/images/arrow-left.svg" alt="Back Icon">
-                <span>Back to Home</span>
+                <span>Back</span>
             </a>
         </div>
 
@@ -62,17 +62,25 @@ $name = $_SESSION['name'];
                 </div>
 
                 <div class="form-group form-group-file">
-                    <label class="file-label" for="job-image-upload">Upload New Job Image</label>
-                    <input type="file" id="job-image-upload" name="job_image" accept="image/*">
-                    <p class="file-name" id="file-name">No file chosen!</p>
+                    <label class="file-label" for="job-image-upload">Upload Job Images</label>
+                    <input type="file" id="job-image-upload" name="job_images[]" accept="image/*" multiple>
                 </div>
-                <!-- Display the current image if it exists -->
-                <?php if (!empty($job['file_path'])): ?>
-                    <div class="current-attachment">
-                        <p>Old Attachment:</p>
-                        <a href="../../../public/uploads/attachments/<?php echo htmlspecialchars($job['file_path']); ?>" target="_blank">
-                            <img src="../../../public/uploads/attachments/<?php echo htmlspecialchars($job['file_path']); ?>" alt="Job Image" class="current-image" style="max-width: 150px; height: auto;">
-                        </a>
+
+                <ul id="file-list" class="file-list"></ul>
+                
+                <?php if (!empty($attachments)): ?>
+                    <div class="current-attachments">
+                        <p>Current Attachments:</p>
+                        <ul id="current-attachments-list" class="current-attachments-list">
+                            <?php foreach ($attachments as $attachment): ?>
+                                <li data-file-path="<?php echo htmlspecialchars($attachment['file_path']); ?>">
+                                    <a href="../../../public/uploads/attachments/<?php echo htmlspecialchars($attachment['file_path']); ?>" target="_blank">
+                                        <img src="../../../public/uploads/attachments/<?php echo htmlspecialchars($attachment['file_path']); ?>" alt="Attachment" class="current-image" style="max-width: 150px; height: auto;">
+                                    </a>
+                                    <button type="button" class="remove-existing-attachment" data-file-path="<?php echo htmlspecialchars($attachment['file_path']); ?>">Remove</button>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
                     </div>
                 <?php endif; ?>
 
@@ -85,6 +93,14 @@ $name = $_SESSION['name'];
             </form>
         </div>
     </main>
+
+    <!-- Modal -->
+    <div id="generalModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <p id="modalMessage">Message goes here</p>
+        </div>
+    </div>
 
     <?php include __DIR__ . '/../templates/footer.php'; ?>
 

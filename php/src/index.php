@@ -46,7 +46,7 @@ $router->get('/jobseeker-profile', 'JobSeekerProfileController@index');
 
 // job seeker edit profile
 $router->get('/jobseeker-edit-profile', 'JobseekerEditProfileController@index');
-$router->post('/check-current-password', 'JobseekerEditProfileController@checkCurrentPassword');
+$router->post('/check-current-password-jobseeker', 'JobseekerEditProfileController@checkCurrentPassword');
 $router->post('/jobseeker-update-profile', 'JobseekerEditProfileController@updateProfile');
 
 // company
@@ -59,9 +59,14 @@ $router->post('/delete-job', 'CompanyJobController@deleteJob');
 $router->get('/job/{id}/application', 'ApplicationController@submitApplication');
 $router->post('/job/{id}/application', 'ApplicationController@submitApplication');
 
+// history
+$router->get('/application-history', 'HistoryController@index');
+
 // company detail job
 $router->get('/company-job/{id}', 'CompanyJobController@index');
 $router->get('/get-applicants', 'CompanyJobController@getApplicantsByStatus');
+$router->post('/open-job', 'CompanyJobController@openJob');
+$router->post('/close-job', 'CompanyJobController@closeJob');
 
 // company application
 $router->get('/manage-applicant/{application_id}', 'CompanyApplicationController@index');
@@ -92,5 +97,8 @@ $router->get('/about', 'AboutController@index');
 // testing db
 $router->get('/test-db', 'TestDbController@index');
 $router->post('/test-db', 'TestDbController@index');
+
+// 404 not found
+$router->get('/404', 'NotFoundController@index');
 
 $router->dispatch($_SERVER['REQUEST_URI']);
