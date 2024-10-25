@@ -93,10 +93,6 @@ $router->post('/company-update-profile', 'CompanyEditProfileController@updatePro
 // about
 $router->get('/about', 'AboutController@index');
 
-// testing db
-$router->get('/test-db', 'TestDbController@index');
-$router->post('/test-db', 'TestDbController@index');
-
 // 404 not found
 $router->get('/404', 'NotFoundController@index');
 
