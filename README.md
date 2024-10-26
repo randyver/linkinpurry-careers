@@ -130,7 +130,7 @@ To access this web locally on your device, there are some prerequisites and inst
 ## Contributors
 
 **Kelompok 19 K02**
-<div style="display: flex; justify-content: space-around; align-items: center;">
+<div style="display: flex; flex-direction: row; justify-content: space-around; align-items: center;">
   <div style="text-align: center;">
     <img src="php/src/public/images/salsa-pic.png" alt="Salsabiila's Picture" width="150" height="150" style="border-radius: 50%;">
     <p>Salsabiila</p>
