@@ -71,57 +71,57 @@ To access this web locally on your device, there are some prerequisites and inst
 1. Home - Not Logged in
 <img src="image/landing-page.png">
 <img src="image/landing-page-lighthouse.png">
-1. Log In
+2. Log In
 <img src="image/login.png">
 <img src="image/login-lighthouse.png">
-2. Sign In
+3. Sign In
 <img src="image/signup1.png">
 <img src="image/signup1-lighthouse.png">
 <img src="image/signup2.png">
 <img src="image/signup2-lighthouse.png">
-3. Home - Jobseeker
+4. Home - Jobseeker
 <img src="image/home-jobseeker.png">
 <img src="image/home-jobseeker-lighthouse.png">
-4. Job Detail - Jobseeker
+5. Job Detail - Jobseeker
 <img src="image/job-detail-jobseeker.png">
 <img src="image/job-detail-job-seekerlighthouse.png">
-5. Applications Page
+6. Applications Page
 <img src="image/apply.png">
 <img src="image/apply-lighthouse.png">
-6. Application History
+7. Application History
 <img src="image/history.png">
 <img src="image/history-lighthouse.png">
-7. Profile - Job Seeker
+8. Profile - Job Seeker
 <img src="image/profile-jobseeker.png">
 <img src="image/profile-jobseeker-lighthouse.png">
-8. Edit Profile - Job Seeker
+9. Edit Profile - Job Seeker
 <img src="image/edit-profile-jobseeker.png">
 <img src="image/edit-profile-jobseeker-lighthouse.png">
-9. Company Profile - Job Seeker
+10. Company Profile - Job Seeker
 <img src="image/company-profile-jobseeker.png">
 <img src="image/company-profile-jobseeker-lighthouse.png">
-10. Home - Company
+11. Home - Company
 <img src="image/home-company.png">
 <img src="image/home-company-lighthouse.png">
-11. Add Job
+12. Add Job
 <img src="image/add-job.png">
 <img src="image/add-job-lighthouse.png">
-12. Job Detail - Company
+13. Job Detail - Company
 <img src="image/job-detail-company.png">
 <img src="image/job-detail-company-lighthouse.png">
-13. Edit Job
+14. Edit Job
 <img src="image/edit-job.png">
 <img src="image/edit-job-lighthouse.png">
-14. Application Detail
+15. Application Detail
 <img src="image/application-detail.png">
 <img src="image/application-detail-lighthouse.png">
-14. Profile - Company
+16. Profile - Company
 <img src="image/profile-company.png">
 <img src="image/profile-company-lighthouse.png">
-15. Edit Profile - Company
+17. Edit Profile - Company
 <img src="image/edit-profile-company.png">
 <img src="image/edit-profile-company-lighthouse.png">
-16. About
+18. About
 <img src="image/about.png">
 <img src="image/about-lighthouse.png">
 
