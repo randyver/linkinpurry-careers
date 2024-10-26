@@ -127,7 +127,9 @@ To access this web locally on your device, there are some prerequisites and inst
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<table>
+## Contributors
+
+<table border="0">
   <tr>
     <td style="text-align: center;">
       <img src="php/src/public/images/salsa-pic.png" alt="Salsabiila's Picture" width="150" height="150" style="border-radius: 50%;">
