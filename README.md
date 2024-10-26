@@ -20,7 +20,9 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
+    <li><a href="#results">Results</a></li>
     <li><a href="#contributors">Contributors</a></li>
+    <li><a href="#tasks-allocation">Tasks Allocation</a></li>
   </ol>
 </details>
 
@@ -65,14 +67,139 @@ To access this web locally on your device, there are some prerequisites and inst
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Results
+1. Home - Not Logged in
+<img src="image/landing-page.png">
+<img src="image/landing-page-lighthouse.png">
+1. Log In
+<img src="image/login.png">
+<img src="image/login-lighthouse.png">
+2. Sign In
+<img src="image/signup1.png">
+<img src="image/signup1-lighthouse.png">
+<img src="image/signup2.png">
+<img src="image/signup2-lighthouse.png">
+3. Home - Jobseeker
+<img src="image/home-jobseeker.png">
+<img src="image/home-jobseeker-lighthouse.png">
+4. Job Detail - Jobseeker
+<img src="image/job-detail-jobseeker.png">
+<img src="image/job-detail-job-seekerlighthouse.png">
+5. Applications Page
+<img src="image/apply.png">
+<img src="image/apply-lighthouse.png">
+6. Application History
+<img src="image/history.png">
+<img src="image/history-lighthouse.png">
+7. Profile - Job Seeker
+<img src="image/profile-jobseeker.png">
+<img src="image/profile-jobseeker-lighthouse.png">
+8. Edit Profile - Job Seeker
+<img src="image/edit-profile-jobseeker.png">
+<img src="image/edit-profile-jobseeker-lighthouse.png">
+9. Company Profile - Job Seeker
+<img src="image/company-profile-jobseeker.png">
+<img src="image/company-profile-jobseeker-lighthouse.png">
+10. Home - Company
+<img src="image/home-company.png">
+<img src="image/home-company-lighthouse.png">
+11. Add Job
+<img src="image/add-job.png">
+<img src="image/add-job-lighthouse.png">
+12. Job Detail - Company
+<img src="image/job-detail-company.png">
+<img src="image/job-detail-company-lighthouse.png">
+13. Edit Job
+<img src="image/edit-job.png">
+<img src="image/edit-job-lighthouse.png">
+14. Application Detail
+<img src="image/application-detail.png">
+<img src="image/application-detail-lighthouse.png">
+14. Profile - Company
+<img src="image/profile-company.png">
+<img src="image/profile-company-lighthouse.png">
+15. Edit Profile - Company
+<img src="image/edit-profile-company.png">
+<img src="image/edit-profile-company-lighthouse.png">
+16. About
+<img src="image/about.png">
+<img src="image/about-lighthouse.png">
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Contributors
 
 **Kelompok 19 K02**
-| **NIM** | **Nama Anggota** |
-|:---:|:---:|
-| 13522062 | Salsabiila |
-| 13522067 | Randy Verdian |
-| 13522073 | Juan Alfred Widjaya |
+<div style="display: flex; justify-content: space-around; align-items: center;">
+  <div style="text-align: center;">
+    <img src="php/src/public/images/salsa-pic.png" alt="Salsabiila's Picture" width="150" height="150" style="border-radius: 50%;">
+    <p>Salsabiila</p>
+    <p>13522062</p>
+  </div>
+  <div style="text-align: center;">
+    <img src="php/src/public/images/randy-pic.png" alt="Randy Verdian's Picture" width="150" height="150" style="border-radius: 50%;">
+    <p>Randy Verdian</p>
+    <p>13522067</p>
+  </div>
+  <div style="text-align: center;">
+    <img src="php/src/public/images/juan-pic.png" alt="Juan Alfred Widjaya's Picture" width="150" height="150" style="border-radius: 50%;">
+    <p>Juan Alfred Widjaya</p>
+    <p>13522073</p>
+  </div>
+</div>
 
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Tasks Allocation
+1. **Server-side**  
+   - Login: 13522067  
+   - Register: 13522067  
+   - Navbar: 13522073  
+   - Footer: 13522067  
+   - About: 13522062  
+
+    Company 
+   - Home: 13522073  
+   - Add Job: 13522073  
+   - Job Detail: 13522073  
+   - Edit Job: 13522073  
+   - Application Detail: 13522073  
+   - Profile: 13522062  
+   - Edit Profile: 13522062  
+
+    Job Seeker 
+   - Home: 13522073  
+   - Job Detail: 13522067  
+   - Company Profile: 13522062  
+   - Application Page: 13522067  
+   - Application History: 13522067  
+   - Profile: 13522062  
+   - Edit Profile: 13522062
+
+2. **Client-side**
+   - Login: 13522067  
+   - Register: 13522067  
+   - Navbar: 13522073  
+   - Footer: 13522067  
+   - About: 13522062  
+
+    Company  
+   - Home: 13522073  
+   - Add Job: 13522073  
+   - Job Detail: 13522073  
+   - Edit Job: 13522073  
+   - Application Detail: 13522073  
+   - Profile: 13522062  
+   - Edit Profile: 13522062  
+
+    Job Seeker  
+   - Home: 13522073  
+   - Job Detail: 13522067  
+   - Company Profile: 13522062  
+   - Application Page: 13522067  
+   - Application History: 13522067  
+   - Profile: 13522062  
+   - Edit Profile: 13522062
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
