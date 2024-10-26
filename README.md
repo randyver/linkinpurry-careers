@@ -127,25 +127,25 @@ To access this web locally on your device, there are some prerequisites and inst
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Contributors
-
-<div style="display: flex; flex-direction: row; justify-content: space-around; align-items: center; text-align: center;">
-  <div style="margin: 0 20px;">
-    <img src="php/src/public/images/salsa-pic.png" alt="Salsabiila's Picture" width="150" height="150" style="border-radius: 50%;">
-    <p>Salsabiila</p>
-    <p>13522062</p>
-  </div>
-  <div style="margin: 0 20px;">
-    <img src="php/src/public/images/randy-pic.png" alt="Randy Verdian's Picture" width="150" height="150" style="border-radius: 50%;">
-    <p>Randy Verdian</p>
-    <p>13522067</p>
-  </div>
-  <div style="margin: 0 20px;">
-    <img src="php/src/public/images/juan-pic.png" alt="Juan Alfred Widjaya's Picture" width="150" height="150" style="border-radius: 50%;">
-    <p>Juan Alfred Widjaya</p>
-    <p>13522073</p>
-  </div>
-</div>
+<table>
+  <tr>
+    <td style="text-align: center;">
+      <img src="php/src/public/images/salsa-pic.png" alt="Salsabiila's Picture" width="150" height="150" style="border-radius: 50%;">
+      <p>Salsabiila</p>
+      <p>13522062</p>
+    </td>
+    <td style="text-align: center;">
+      <img src="php/src/public/images/randy-pic.png" alt="Randy Verdian's Picture" width="150" height="150" style="border-radius: 50%;">
+      <p>Randy Verdian</p>
+      <p>13522067</p>
+    </td>
+    <td style="text-align: center;">
+      <img src="php/src/public/images/juan-pic.png" alt="Juan Alfred Widjaya's Picture" width="150" height="150" style="border-radius: 50%;">
+      <p>Juan Alfred Widjaya</p>
+      <p>13522073</p>
+    </td>
+  </tr>
+</table>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
